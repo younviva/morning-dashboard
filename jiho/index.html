@@ -810,6 +810,33 @@ body.theme-rian .word-top h2{color:#7d2c53}
   .reward-cap{font-size:.69rem}
 }
 
+/* ============ 보상 도감 탭 상단 · 남은 보상 시간 ============ */
+.bank-hero{border:1px solid #f2e6c9;background:linear-gradient(135deg,#fffdf4,#fff7ea 46%,#fdf2ff);
+  box-shadow:0 12px 28px -20px rgba(150,110,20,.55),inset 0 1px 0 #fff}
+.bh-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.bh-head h2{font-size:1.02rem;font-weight:900;color:#8a6a1e;letter-spacing:-.02em}
+.bh-badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 11px;font-size:.74rem;font-weight:900;
+  background:#f4efe4;color:#a3926a;border:1px solid #ece3d2;white-space:nowrap}
+.bh-badge.on{background:#fff3d6;border-color:#ffe2ab;color:#8a6a1e}
+.bh-badge.hot{background:#8b5cf6;border-color:#8b5cf6;color:#fff}
+.bh-total{display:flex;align-items:baseline;gap:4px;margin-top:8px;font-family:var(--clock-font)}
+.bh-total b{font-size:clamp(2.3rem,6.6vw,3rem);font-weight:900;line-height:1;color:#e08a00;font-variant-numeric:tabular-nums}
+.bh-total .u{font-size:1.15rem;font-weight:900;color:#b07a00}
+.bh-total small{font-size:.92rem;font-weight:850;color:#9b8a63;margin-left:6px}
+.bh-cap{margin:6px 0 0;font-size:.74rem;font-weight:800;color:#a8916a;letter-spacing:-.01em}
+.bank-hero .reward-bar{margin:13px 0 5px}
+.bank-hero .rb-seg{height:36px}
+.bh-chips{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:11px}
+.bh-chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #f0e5cd;border-radius:999px;
+  padding:5px 10px;font-size:.73rem;font-weight:850;color:#8a7450;white-space:nowrap}
+.bh-go{margin-left:auto;border:1px solid #ffe2ab;background:#fff8e6;border-radius:11px;padding:8px 12px;cursor:pointer;
+  font-size:.75rem;font-weight:900;color:#a5761c;letter-spacing:-.01em;transition:background .16s}
+.bh-go:active{background:#fdf1d6}
+@media (max-width:620px){
+  .bank-hero .rb-seg{height:30px}
+  .bh-go{margin-left:0;width:100%;min-height:44px}
+}
+
 /* 시간표 공부 줄 */
 .tt-stwrap{display:flex;flex-direction:column;gap:3px;align-items:center}
 .tt-st{display:inline-flex;align-items:center;gap:4px;background:#f2f7ff;border:1px solid #e6eefb;border-radius:8px;padding:3px 7px;font-weight:800;color:#2c4778;font-size:.73rem;white-space:nowrap}
@@ -1053,6 +1080,22 @@ body.theme-rian .word-top h2{color:#7d2c53}
 
   <!-- ================= 보상 도감 ================= -->
   <section class="view" id="view-rewards" role="tabpanel" aria-labelledby="tabrewards">
+    <section class="card bank-hero" id="rwBankCard" aria-labelledby="rwBankTitle">
+      <div class="bh-head">
+        <h2 id="rwBankTitle">🏦 남은 보상 시간</h2>
+        <span class="bh-badge" id="rwBankBadge">공부 루틴을 하면 쌓여요</span>
+      </div>
+      <div class="bh-total" aria-live="polite"><b id="rwBankMin">0</b><span class="u">분</span><small id="rwBankLong"></small></div>
+      <p class="bh-cap" id="rwBankCap">게임 시간으로 쓸 수 있는 시간이에요 · 안 쓴 시간은 내일도 그대로 남아요</p>
+      <div class="reward-bar" id="rwBankBar" aria-hidden="true"></div>
+      <div class="reward-ticks" id="rwBankTicks" aria-hidden="true"></div>
+      <div class="bh-chips">
+        <span class="bh-chip" id="rwBankToday">오늘 +0분</span>
+        <span class="bh-chip" id="rwBankUsed">지금까지 0분 사용</span>
+        <button class="bh-go" data-goto="jiho">📚 오늘 탭에서 적립하기</button>
+      </div>
+    </section>
+
     <section class="card">
       <div class="rw-head">
         <img class="avatar" data-avatar="1" alt="지호">
@@ -1585,7 +1628,7 @@ function goTab(name) {
   });
   $$('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
   if (name === 'timetable') renderTable();
-  if (name === 'rewards') { renderRewards(); renderWeekRecord(); }
+  if (name === 'rewards') { renderRewards(); renderWeekRecord(); renderBankHero(); }
   try { history.replaceState(null, '', '#' + name); } catch (e) {}
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1767,8 +1810,7 @@ function rewardTickLabel(v, unit) {
   if (v % 60 === 0) return v + '분·' + hm;
   return v + '분';
 }
-function renderRewardTicks(segs, unit) {
-  const t = $('#rewardTicks');
+function renderTicksInto(t, segs, unit) {
   if (!t) return;
   const step = unit || 30;
   const dense = segs > 6;               /* 칸이 많으면 눈금은 한 칸씩 건너뛴다 */
@@ -1780,6 +1822,9 @@ function renderRewardTicks(segs, unit) {
     html += '<span' + cls + ' style="left:' + (i / segs * 100) + '%">' + (show ? rewardTickLabel(v, step) : '') + '</span>';
   }
   t.innerHTML = html;
+}
+function renderRewardTicks(segs, unit) {
+  renderTicksInto($('#rewardTicks'), segs, unit);
 }
 
 function renderReward(animate) {
@@ -1878,6 +1923,63 @@ function renderReward(animate) {
   if (note) note.textContent = bank.used > 0
     ? '지금까지 게임 시간 ' + bank.used + '분을 썼어요 · 오늘 안 쓴 시간은 내일도 그대로 남아요'
     : '보너스는 누를 때마다 30분씩 쌓여요 · 오늘 안 쓴 시간은 내일도 그대로 남아요';
+
+  /* 🏆 보상 도감 탭 상단의 "남은 보상 시간" 요약도 같은 잔액으로 맞춘다 */
+  renderBankHero(animate);
+}
+
+/* ---------------- 보상 도감 탭 상단 요약 ---------------- */
+function renderBankHero(animate) {
+  const card = $('#rwBankCard');
+  if (!card) return;
+  const bank = bankData();
+  const bal = bankBalance();
+  const todayMin = bankTodayEarn();
+
+  const minEl = $('#rwBankMin'), longEl = $('#rwBankLong'), badge = $('#rwBankBadge');
+  const todayEl = $('#rwBankToday'), usedEl = $('#rwBankUsed'), capEl = $('#rwBankCap');
+  if (minEl) minEl.textContent = bal;
+  if (longEl) longEl.textContent = rewardLongText(bal);
+  if (todayEl) todayEl.textContent = '오늘 +' + todayMin + '분';
+  if (usedEl) usedEl.textContent = '지금까지 ' + bank.used + '분 사용';
+  if (capEl) capEl.textContent = bal > 0
+    ? '게임 시간으로 쓸 수 있는 시간이에요 · 안 쓴 시간은 내일도 그대로 남아요'
+    : '아직 저금통이 비었어요 · 공부 루틴을 모두 하면 1시간이 쌓여요';
+  if (badge) {
+    badge.classList.toggle('hot', bal >= 180);
+    badge.classList.toggle('on', bal > 0 && bal < 180);
+    badge.textContent = bal >= 180
+      ? '🔥 ' + Math.floor(bal / 60) + '시간 모았어요'
+      : (bal > 0 ? '게임 시간으로 쓸 수 있어요' : '공부 루틴을 하면 쌓여요');
+  }
+
+  /* 저금통 상자와 같은 30분 칸 막대 (4시간이 넘으면 1시간 칸) */
+  const unit = bal > 240 ? 60 : 30;
+  const filled = Math.ceil(bal / unit);
+  const segs = Math.max(4, filled);
+  const bar = $('#rwBankBar');
+  if (bar) {
+    if (bar.children.length !== segs || bar.dataset.unit !== String(unit)) {
+      bar.dataset.unit = String(unit);
+      bar.innerHTML = '';
+      for (let i = 0; i < segs; i++) {
+        const s = document.createElement('span');
+        s.className = 'rb-seg' + (i >= 4 ? ' over' : '');
+        s.appendChild(document.createElement('i')).className = 'rb-fill';
+        bar.appendChild(s);
+      }
+    }
+    [...bar.children].forEach((s, i) => {
+      const on = i < filled;
+      const f = s.querySelector('.rb-fill');
+      s.classList.toggle('on', on);
+      if (f) {
+        f.style.transitionDelay = (animate && on) ? Math.min(i * 60, 300) + 'ms' : '0ms';
+        f.style.transform = 'scaleX(' + (on ? 1 : 0) + ')';
+      }
+    });
+    renderTicksInto($('#rwBankTicks'), segs, unit);
+  }
 }
 
 function addBonus(key, dir, ev) {
