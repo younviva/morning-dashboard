@@ -845,6 +845,77 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .tt-st.read{background:#eefaf3;color:#0b7a45;border-color:#d6f0e2}
 .tt-st.eng{background:#fff6e6;color:#a56500;border-color:#ffe9c4}
 
+/* ============ 지호 전용 추가 스타일 (2026-11-26) ============
+   영어 수업(아이비 화상영어·캣츠잉글리쉬 라이브클래스) 일정 카드.
+   part2_styles.css 뒤에 붙는다. 다른 아이 페이지에는 쓰이지 않는다. */
+
+/* 오늘의 스케줄 — 영어 수업 단계 */
+.sched-step.eng-step{background:#f4f9ff;border-color:#d7e7ff;box-shadow:0 4px 14px rgba(47,107,255,.10)}
+.sched-step.eng-step small{color:#4a7ad8}
+
+/* 오늘 탭 아래 — 다음 영어 일정 한 줄 */
+.eng-next{margin-top:8px;font-size:.78rem;font-weight:800;color:#2b4a86;background:#f2f7ff;border:1px dashed #cfe0fb;border-radius:11px;padding:9px 12px;line-height:1.5}
+
+/* 시간표 영어 칩 */
+.tt-act .a.ivy{background:#e6f0ff;color:#1a46b8;box-shadow:inset 0 0 0 1px #d3e3ff}
+.tt-act .a.cats{background:#e9faf1;color:#0a7442;box-shadow:inset 0 0 0 1px #cbeedb}
+.tt-next{display:inline-flex;align-items:center;gap:3px;font-size:.66rem;font-weight:800;color:#8a9ab6;background:#f7faff;border:1px dashed #dbe6fb;border-radius:8px;padding:3px 6px;white-space:nowrap}
+.tt-note.eng-note{background:#f4f9ff;border-color:#d5e6ff;color:#2b4a86}
+.tt-note.eng-note b{color:#1f4fd8}
+
+/* ============ 이번 달 일정 달력 ============ */
+.ecal-card{margin-top:14px}
+.ecal-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.ecal-month{font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:900;letter-spacing:-.03em;color:#1f4fd8}
+.ecal-nav{display:flex;gap:6px;align-items:center;margin-left:auto}
+.ecal-btn{border:1px solid #d7e4fb;background:#fff;color:#2554d8;font-weight:900;border-radius:11px;padding:8px 12px;cursor:pointer;font-size:.85rem;transition:.15s;min-width:44px;min-height:44px}
+.ecal-btn:hover{background:#f2f7ff;border-color:#bcd4fb}
+.ecal-btn.today-btn{background:#eef4ff}
+.ecal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:clamp(3px,.7vw,7px);max-width:1020px;margin:0 auto}
+.ecal-dow{text-align:center;font-size:.74rem;font-weight:900;padding:6px 0;border-radius:9px;color:#7d8ca8}
+.ecal-dow.sun{color:#e04d6b}
+.ecal-dow.sat{color:#4d7fe0}
+.ecal-cell{
+  position:relative;min-height:clamp(62px,8vw,90px);border-radius:13px;background:#fff;
+  border:1.5px solid #e9f0fc;padding:20px 4px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;
+  overflow:hidden;transition:transform .15s,box-shadow .2s;
+}
+.ecal-cell.blank{background:transparent;border-color:transparent}
+.ecal-cell.sun{background:#fffafb;border-color:#ffeef2}
+.ecal-cell.sat{background:#fafcff;border-color:#eaf2ff}
+.ecal-cell .dnum{position:absolute;top:4px;left:6px;font-size:clamp(.8rem,1.5vw,1rem);font-weight:900;color:#4b5a78;letter-spacing:-.02em;line-height:1}
+.ecal-cell.sun .dnum{color:#e04d6b}
+.ecal-cell.sat .dnum{color:#4d7fe0}
+.ecal-cell .ecal-evs{display:flex;flex-wrap:wrap;gap:1px;align-items:center;justify-content:center;margin-top:1px}
+.ecal-cell .ecal-ev{font-size:clamp(.95rem,2.2vw,1.6rem);line-height:1.05}
+.ecal-cell .ecal-names{display:flex;flex-direction:column;align-items:center;gap:0;width:100%;min-width:0}
+.ecal-cell .ecal-name{font-size:clamp(.54rem,1vw,.7rem);font-weight:900;color:#1a46b8;line-height:1.2;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
+.ecal-cell .ecal-name.cats{color:#0a7442}
+.ecal-cell.today{
+  border-color:#2f6bff;background:linear-gradient(165deg,#fff,#eef5ff);padding-top:26px;
+  box-shadow:0 0 0 3px rgba(47,107,255,.16), 0 10px 24px rgba(31,79,216,.14);z-index:2;
+}
+.ecal-cell.today .dnum{position:static;align-self:stretch;text-align:left;padding-left:1px;color:#1f4fd8;font-weight:900}
+.ecal-cell.today .dnum::after{content:'오늘';margin-left:5px;font-size:.58rem;font-weight:900;color:#2f6bff}
+.ecal-legend{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px dashed #e0eaf9}
+.ecal-legend .lg{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:800;color:#5b7db8;background:#f5f9ff;border:1px solid #e2ecfb;border-radius:999px;padding:5px 10px}
+.ecal-foot{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.ecal-sum{font-size:.76rem;font-weight:800;color:#7d8ca8}
+.ecal-next{font-size:.78rem;font-weight:800;color:#0a7442;background:#eefaf3;border:1px dashed #c4e9d6;border-radius:999px;padding:5px 11px}
+.ecal-next b{color:#08663a}
+
+@media(max-width:560px){
+  .ecal-cell{min-height:64px;padding:16px 2px 2px;border-radius:11px}
+  .ecal-cell .dnum{top:2px;left:4px;font-size:.72rem}
+  .ecal-cell .ecal-names{display:none}
+  .ecal-cell .ecal-ev{font-size:.8rem;line-height:1.1}
+  .ecal-grid{gap:3px}
+  .ecal-cell.today{padding-top:20px}
+  .ecal-cell.today .dnum{position:absolute;top:2px;left:4px;align-self:auto;text-align:left}
+  .ecal-cell.today .dnum::after{display:none}
+  .ecal-btn{padding:8px 10px;font-size:.8rem}
+  .eng-next{font-size:.74rem}
+}
 
 </style>
 </head>
@@ -929,6 +1000,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
           <div class="prep-chips" id="jihoTodayPrep"></div>
         </div>
         <div class="week-note" id="jihoWeekPrep"></div>
+        <div class="eng-next" id="jihoEngNext"></div>
       </section>
     </div>
 
@@ -1075,6 +1147,28 @@ body.theme-rian .word-top h2{color:#7d2c53}
         </table>
       </div>
       <div class="tt-note">💡 방과후 주산은 월요일, 피아노는 수·금요일이에요. 📚 공부 칸은 집에 와서 하는 숙제 같은 공부 루틴이에요.</div>
+      <div class="tt-note eng-note">💻 아이비 화상영어는 <b>매주 목요일 집에서</b>, 🐱 캣츠잉글리쉬 라이브클래스는 <b>2주에 한 번 수요일</b>이에요.</div>
+    </section>
+
+    <section class="card ecal-card" id="jihoCalCard">
+      <div class="card-head">
+        <h2>🗓️ 이번 달 일정</h2>
+        <span class="muted">영어 수업만 모아 보여 줘요</span>
+      </div>
+      <div class="ecal-head">
+        <span class="ecal-month" id="jihoCalTitle">2026년 11월</span>
+        <div class="ecal-nav">
+          <button class="ecal-btn" id="ecalPrev" aria-label="이전 달">◀</button>
+          <button class="ecal-btn today-btn" id="ecalToday">오늘</button>
+          <button class="ecal-btn" id="ecalNextM" aria-label="다음 달">▶</button>
+        </div>
+      </div>
+      <div class="ecal-grid" id="ecalGrid"></div>
+      <div class="ecal-legend">
+        <span class="lg">💻 매주 목 아이비 화상영어</span>
+        <span class="lg">🐱 격주 수 캣츠 라이브클래스</span>
+      </div>
+      <div class="ecal-foot" id="ecalFoot"></div>
     </section>
   </section>
 
@@ -1212,6 +1306,40 @@ const JIHO_WEEK = {
   6: { dow: '토', items: [{ e: '🛌', n: '쉬는 날', c: 'rest' }], prep: [] },
   0: { dow: '일', items: [{ e: '🛌', n: '쉬는 날', c: 'rest' }], prep: [] }
 };
+
+/* ---------------- 영어 수업 ----------------
+   · 아이비 화상영어 = 매주 목요일, 집에서 (시간은 그때그때 선생님과 맞춰요)
+   · 캣츠잉글리쉬 라이브클래스 = 2주에 한 번 수요일, 2026-11-25(수)부터 14일 간격
+     (11-25 → 12-09 → 12-23 → 2027-01-06 …) */
+const IVY = { e: '💻', n: '아이비 화상영어', c: 'ivy', note: '집에서 · 시간은 그때그때' };
+const CATS_LIVE = { e: '🐱', n: '캣츠잉글리쉬 라이브클래스', c: 'cats', note: '집에서 · 2주에 한 번' };
+const LIVE_START = new Date(2026, 10, 25);
+const LIVE_EVERY = 14;
+const DAY_MS = 86400000;
+function dayNum(d) { return Math.round((startOfDay(d) - startOfDay(LIVE_START)) / DAY_MS); }
+function isLiveDay(d) { const n = dayNum(d); return d.getDay() === 3 && n >= 0 && n % LIVE_EVERY === 0; }
+function engItems(d) {
+  const out = [];
+  if (d.getDay() === 4) out.push(IVY);
+  if (isLiveDay(d)) out.push(CATS_LIVE);
+  return out;
+}
+function dayItems(d) { return (JIHO_WEEK[d.getDay()] || { items: [] }).items.concat(engItems(d)); }
+function nextLiveDay(from) {
+  const base = startOfDay(from || simNow());
+  for (let i = 0; i < 400; i++) {
+    const d = new Date(base.getTime() + i * DAY_MS);
+    if (isLiveDay(d)) return d;
+  }
+  return null;
+}
+function fmtMD(d) { return (d.getMonth() + 1) + '월 ' + d.getDate() + '일'; }
+function weekDate(now, dow) {
+  const t = startOfDay(now);
+  const cur = t.getDay() === 0 ? 7 : t.getDay();
+  const target = dow === 0 ? 7 : dow;
+  return new Date(t.getTime() + (target - cur) * DAY_MS);
+}
 
 /* ---------------- 공부 루틴 (월~일) ---------------- */
 const SUBJ = {
@@ -2140,8 +2268,18 @@ function renderJihoToday() {
   $('#jihoTodayDow').textContent = DOW[dow] + '요일';
   const flag = $('#jihoPrepFlag');
   flag.hidden = !w.prep.length;
-  const flow = w.items.map(it => '<div class="sched-step"><span class="e">' + it.e + '</span><div><b>' + it.n + '</b><small>' + (it.c === 'jusan' ? '방과후' : (it.c === 'piano' ? '학원' : (it.c === 'rest' ? '온종일' : '학원'))) + '</small></div></div>');
+  const items = dayItems(now);
+  const flow = items.map(it => '<div class="sched-step' + (it.c === 'ivy' || it.c === 'cats' ? ' eng-step' : '') + '"><span class="e">' + it.e + '</span><div><b>' + it.n + '</b><small>' + (it.note || (it.c === 'jusan' ? '방과후' : (it.c === 'piano' ? '학원' : (it.c === 'rest' ? '온종일' : '학원')))) + '</small></div></div>');
   $('#jihoTodayFlow').innerHTML = flow.join('<span class="sched-arrow">→</span>');
+  const nl = nextLiveDay(now);
+  const engNext = $('#jihoEngNext');
+  if (engNext) {
+    if (!nl) engNext.textContent = '💻 매주 목요일 아이비 화상영어 · 🐱 캣츠 라이브클래스는 2주에 한 번';
+    else {
+      const gap = Math.round((startOfDay(nl) - startOfDay(now)) / DAY_MS);
+      engNext.textContent = '💻 목요일마다 아이비 화상영어 · 🐱 캣츠 라이브클래스 ' + (gap === 0 ? '오늘!' : fmtMD(nl) + '(' + DOW[nl.getDay()] + ') · ' + gap + '일 뒤');
+    }
+  }
   $('#jihoTodayPrep').innerHTML = w.prep.length
     ? w.prep.map(p => '<span class="prep-chip"><span class="e">' + p.e + '</span>' + p.n + '</span>').join('')
     : '<span class="prep-none">👍 오늘은 준비물이 없어요. 가방만 챙기면 끝!</span>';
@@ -2158,7 +2296,16 @@ function renderTable() {
   ).join('');
   const cells = order.map(d => {
     const w = JIHO_WEEK[d];
-    const acts = w.items.map(i => '<span class="a ' + (i.c || '') + '">' + i.e + ' ' + i.n + '</span>').join('');
+    let acts = w.items.map(i => '<span class="a ' + (i.c || '') + '">' + i.e + ' ' + i.n + '</span>').join('');
+    if (d === 4) acts += '<span class="a ivy">💻 아이비 화상영어</span>';
+    if (d === 3) {
+      const wd = weekDate(now, 3);
+      if (isLiveDay(wd)) acts += '<span class="a cats">🐱 캣츠 라이브클래스</span>';
+      else {
+        const nl = nextLiveDay(wd);
+        acts += '<span class="tt-next">🐱 다음 라이브 ' + (nl ? fmtMD(nl) : '') + '</span>';
+      }
+    }
     const prep = w.prep.map(p => '<div class="tt-prep">' + p.e + ' ' + p.n + '</div>').join('');
     return '<td class="' + (d === now.getDay() ? 'today' : '') + '"><div class="tt-act">' + acts + '</div>' + prep + '</td>';
   }).join('');
@@ -2177,6 +2324,67 @@ function renderStudyRow() {
     return '<td class="' + (d === now.getDay() ? 'today' : '') + '"><div class="tt-stwrap">' + chips + '</div></td>';
   }).join('');
 }
+
+/* ---------------- 이번 달 일정 달력 (영어 수업) ---------------- */
+let calMonth = null; /* { y, m } — null 이면 이번 달을 따라간다 */
+function calBase() {
+  const n = simNow();
+  return calMonth || { y: n.getFullYear(), m: n.getMonth() };
+}
+function calShift(k) {
+  const b = calBase();
+  const d = new Date(b.y, b.m + k, 1);
+  calMonth = { y: d.getFullYear(), m: d.getMonth() };
+  renderCalendar();
+}
+function renderCalendar() {
+  const grid = $('#ecalGrid');
+  if (!grid) return;
+  const b = calBase(), y = b.y, m = b.m;
+  const title = $('#jihoCalTitle');
+  if (title) title.textContent = y + '년 ' + (m + 1) + '월';
+  const todayKey = dk(simNow());
+  const dow = DOW.map((d, i) => '<div class="ecal-dow' + (i === 0 ? ' sun' : (i === 6 ? ' sat' : '')) + '">' + d + '</div>').join('');
+  let cells = '';
+  const pad = new Date(y, m, 1).getDay();
+  for (let i = 0; i < pad; i++) cells += '<div class="ecal-cell blank"></div>';
+  const days = new Date(y, m + 1, 0).getDate();
+  for (let d = 1; d <= days; d++) {
+    const dt = new Date(y, m, d), key = dk(dt);
+    const ev = engItems(dt);
+    const cls = ['ecal-cell'];
+    if (dt.getDay() === 0) cls.push('sun');
+    if (dt.getDay() === 6) cls.push('sat');
+    if (key === todayKey) cls.push('today');
+    const evs = ev.map(it => '<span class="ecal-ev" title="' + it.n + '">' + it.e + '</span>').join('');
+    const names = ev.map(it => '<span class="ecal-name ' + it.c + '">' + (it.c === 'ivy' ? '화상영어' : '라이브') + '</span>').join('');
+    cells += '<div class="' + cls.join(' ') + '" data-d="' + key + '"><span class="dnum">' + d + '</span>' +
+      '<span class="ecal-evs">' + evs + '</span><span class="ecal-names">' + names + '</span></div>';
+  }
+  grid.innerHTML = dow + cells;
+
+  /* 이번 달 몇 번 하는지 + 다음 라이브클래스 */
+  let ivy = 0, live = 0;
+  for (let d = 1; d <= days; d++) {
+    const dt = new Date(y, m, d);
+    if (dt.getDay() === 4) ivy++;
+    if (isLiveDay(dt)) live++;
+  }
+  const nl = nextLiveDay(simNow());
+  const foot = $('#ecalFoot');
+  if (foot) {
+    const todayLive = isLiveDay(simNow());
+    const after = todayLive ? nextLiveDay(new Date(startOfDay(simNow()).getTime() + DAY_MS)) : nl;
+    const gap = after ? Math.round((startOfDay(after) - startOfDay(simNow())) / DAY_MS) : 0;
+    const nextTxt = after ? (todayLive
+      ? '<span class="ecal-next">🐱 오늘 라이브클래스! 다음은 <b>' + fmtMD(after) + '(' + DOW[after.getDay()] + ')</b> · ' + gap + '일 뒤</span>'
+      : '<span class="ecal-next">다음 라이브클래스 <b>' + fmtMD(after) + '(' + DOW[after.getDay()] + ')</b> · ' + gap + '일 뒤</span>') : '';
+    foot.innerHTML = '<span class="ecal-sum">이번 달 · 💻 화상영어 ' + ivy + '회 · 🐱 라이브클래스 ' + live + '회</span>' + nextTxt;
+  }
+}
+$('#ecalPrev') && $('#ecalPrev').addEventListener('click', () => calShift(-1));
+$('#ecalNextM') && $('#ecalNextM').addEventListener('click', () => calShift(1));
+$('#ecalToday') && $('#ecalToday').addEventListener('click', () => { calMonth = null; renderCalendar(); });
 
 /* ---------------- 루틴 카드 ---------------- */
 function routineCardHTML(i) {
@@ -2844,6 +3052,7 @@ function renderAll() {
   renderStudy();
   renderWord();
   renderTable();
+  renderCalendar();
   renderRewards();
   renderWeekRecord();
   renderHanja();
@@ -2902,7 +3111,10 @@ window.__JRM = {
   reward: { todayEarn: rewardTodayEarn, balance: bankBalance, bank: bankData, spend: spendBank, undo: undoSpend,
             bonus: todayBonus, add: addBonus, render: renderReward, base: BASE_REWARD_MIN, step: BONUS_STEP_MIN, defs: BONUS_DEFS, steps: SPEND_STEPS },
   word: { list: VOCAB, today: wordTodayIndex, current: wordCurrent, render: renderWord, speak: speakWord },
-  simNow: simNow, doneCount: doneCount
+  simNow: simNow, doneCount: doneCount,
+  eng: { ivy: IVY, live: CATS_LIVE, isLiveDay: isLiveDay, next: nextLiveDay, items: engItems,
+         dayItems: dayItems, weekDate: weekDate, render: renderCalendar, shift: calShift, start: LIVE_START,
+         reset: () => { calMonth = null; renderCalendar(); } }
 };
 })();
 </script>
