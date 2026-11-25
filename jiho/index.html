@@ -1733,11 +1733,25 @@ function syncBank() {
   const prev = parseInt(b.earn[k], 10) || 0;
   if (cur === prev) return false;
   if (cur > 0) b.earn[k] = cur; else delete b.earn[k];
-  /* 적립을 취소해 이미 쓴 시간보다 적어지면 사용 기록을 줄여 음수 잔액이 남지 않게 한다 */
-  const over = bankEarned() - b.used;
-  if (over < 0) b.used = Math.max(0, b.used + over);
+  clampBank();
   save();
   return true;
+}
+/* 적립을 취소해 이미 쓴 시간보다 적어지면 음수 잔액이 남지 않게 맞추고,
+   되돌리기 기록도 실제로 남은 사용분 안에서만 유지한다. */
+function clampBank() {
+  const b = bankData();
+  const over = bankEarned() - b.used;
+  if (over < 0) b.used = Math.max(0, b.used + over);
+  let acc = 0;
+  const keep = [];
+  for (let i = b.log.length - 1; i >= 0; i--) {
+    const m = parseInt(b.log[i].m, 10) || 0;
+    if (acc + m > b.used) break;
+    acc += m;
+    keep.unshift(b.log[i]);
+  }
+  b.log = keep;
 }
 function rewardLongText(m) {
   if (m < 60) return '';
@@ -2620,6 +2634,7 @@ $('#btnResetToday').addEventListener('click', () => {
   delete state.study[k];
   delete state.bonus[k];
   delete bankData().earn[k];
+  clampBank();
   save(); renderAll(); toast(todayMin > 0 ? '오늘 루틴을 초기화했어요 · 저금통엔 ' + bankBalance() + '분 남았어요' : '오늘 루틴을 초기화했어요');
 });
 $('#btnResetAll').addEventListener('click', () => {
