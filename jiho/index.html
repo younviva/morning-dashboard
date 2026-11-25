@@ -749,6 +749,10 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .reward-total .u{font-size:1rem;font-weight:900;color:#b07a00}
 .reward-total small{font-size:.8rem;font-weight:800;color:#9b8a63;margin-left:4px}
 .reward-over{font-size:.72rem;font-weight:900;color:#fff;background:#8b5cf6;border-radius:999px;padding:3px 9px;margin-left:5px}
+.reward-day{display:inline-flex;align-items:center;gap:5px;background:#fff3d6;border:1px solid #ffe2ab;border-radius:999px;padding:5px 11px;font-size:.75rem;font-weight:900;color:#8a6a1e;white-space:nowrap}
+.reward-day b{color:#d97706;font-size:.86rem;font-variant-numeric:tabular-nums}
+.reward-cap{margin:5px 0 0;font-size:.72rem;font-weight:800;color:#a8916a;letter-spacing:-.01em}
+#rewardTotal{margin-top:7px}
 .reward-bar{display:flex;gap:5px;margin:12px 0 5px}
 .rb-seg{flex:1 1 0;height:32px;border-radius:8px;background:#efe9de;overflow:hidden;position:relative;box-shadow:inset 0 1px 3px rgba(120,90,20,.1)}
 .rb-fill{position:absolute;inset:0;transform-origin:left center;transform:scaleX(0);background:linear-gradient(180deg,#ffd766,#f5a524);
@@ -784,11 +788,26 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .bonus-minus:disabled{opacity:.32;cursor:default}
 .bonus-minus:active:not(:disabled){transform:translateY(2px)}
 .reward-note{margin:9px 0 0;font-size:.69rem;font-weight:750;color:#b0a58c}
+/* 🎮 게임 시간 쓰기 */
+.spend-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.spend-row [hidden]{display:none!important}
+.spend-btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:56px;padding:10px 8px;cursor:pointer;
+  border-radius:15px;border:1.5px solid #cfe3ff;background:linear-gradient(160deg,#f8fbff,#eaf3ff);color:#1d4e8f;
+  font-weight:900;font-size:.95rem;letter-spacing:-.02em;white-space:nowrap;
+  box-shadow:0 3px 0 #dbe8fa;transition:transform .1s,box-shadow .16s,opacity .2s,background .2s}
+.spend-btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #dbe8fa}
+.spend-btn:disabled{opacity:.42;cursor:default;box-shadow:none;background:#f6f7fa;border-color:#e8ebf2;color:#8d97a8}
+.spend-btn.pop{animation:bnPop .38s ease}
+.spend-undo{grid-column:1 / -1;min-height:46px;padding:9px 10px;border-radius:13px;cursor:pointer;
+  border:1px dashed #e0d3b8;background:#fffdf6;color:#8a7450;font-weight:900;font-size:.84rem;letter-spacing:-.02em;transition:background .16s}
+.spend-undo:active{background:#fdf6e6}
 @media (max-width:620px){
   .reward-top h3{font-size:.86rem}
   .bonus-btn{min-height:64px;font-size:1rem}
   .bonus-minus{flex-basis:60px;width:60px}
   .rb-seg{height:28px}
+  .spend-btn{min-height:58px;font-size:.92rem}
+  .reward-cap{font-size:.69rem}
 }
 
 /* 시간표 공부 줄 */
@@ -957,9 +976,11 @@ body.theme-rian .word-top h2{color:#7d2c53}
 
       <div class="reward-box" id="rewardBox">
         <div class="reward-top">
-          <h3>🎁 오늘 모은 보상 시간</h3>
-          <div class="reward-total" id="rewardTotal" aria-live="polite"><b id="rewardMin">0</b><span class="u">분</span><small id="rewardLong"></small><span class="reward-over" id="rewardOver" hidden></span></div>
+          <h3>🏦 지호 보상 저금통</h3>
+          <span class="reward-day">오늘 모은 <b id="rewardTodayEarn">+0분</b></span>
         </div>
+        <div class="reward-total" id="rewardTotal" aria-live="polite"><b id="rewardMin">0</b><span class="u">분</span><small id="rewardLong"></small><span class="reward-over" id="rewardOver" hidden></span></div>
+        <p class="reward-cap" id="rewardCap">지금 쓸 수 있는 시간이에요 · 오늘 안 쓴 시간은 내일도 그대로 남아요</p>
         <div class="reward-bar" id="rewardBar" aria-hidden="true"></div>
         <div class="reward-ticks" id="rewardTicks" aria-hidden="true"></div>
         <div class="reward-base" id="rewardBase"><span class="rb-e">📚</span><span class="rb-t">공부 루틴을 모두 하면 +60분(1시간)</span></div>
@@ -973,7 +994,12 @@ body.theme-rian .word-top h2{color:#7d2c53}
             <button class="bonus-minus" data-bonus-sub="read" aria-label="독서 더 하기 보상 30분 취소" disabled>−</button>
           </div>
         </div>
-        <p class="reward-note">버튼을 누를 때마다 30분씩 쌓여요 · 오늘 하루만 저장돼요</p>
+        <div class="spend-row">
+          <button class="spend-btn" data-spend="30" aria-label="게임 시간 30분 쓰기">🎮 -30분 사용</button>
+          <button class="spend-btn" data-spend="60" aria-label="게임 시간 1시간 쓰기">🎮 -1시간 사용</button>
+          <button class="spend-undo" id="rewardUndo" hidden>↩️ 방금 쓴 시간 되돌리기</button>
+        </div>
+        <p class="reward-note" id="rewardNote">보너스는 누를 때마다 30분씩 쌓여요 · 쓴 만큼만 빠지고 나머지는 저금통에 남아요</p>
       </div>
     </article>
 
@@ -1076,7 +1102,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
 
     <div class="set-sec">
       <h3>🧹 초기화</h3>
-      <p class="hint">오늘의 아침 루틴·공부 루틴 체크와 모은 배지가 처음 상태로 돌아가요.</p>
+      <p class="hint">오늘의 아침 루틴·공부 루틴 체크와 모은 배지가 처음 상태로 돌아가요. 「오늘 루틴만 초기화」는 어제까지 저금통에 쌓아 둔 보상 시간을 지우지 않아요.</p>
       <div class="set-actions">
         <button class="btn-danger" id="btnResetToday">오늘 루틴만 초기화</button>
         <button class="btn-danger" id="btnResetAll">전부 초기화</button>
@@ -1462,7 +1488,7 @@ $('#hanjaToday') && $('#hanjaToday').addEventListener('click', () => { SFX.tap()
 
 /* ---------------- 상태 저장 ---------------- */
 function defState() {
-  return { sound: true, routines: {}, rewards: [], awarded: {}, study: {}, bonus: {} };
+  return { sound: true, routines: {}, rewards: [], awarded: {}, study: {}, bonus: {}, bank: { earn: {}, used: 0, log: [] } };
 }
 let state = defState();
 try {
@@ -1476,6 +1502,7 @@ try {
       state.awarded = p.awarded || {};
       state.study = (p.study && typeof p.study === 'object') ? p.study : {};
       state.bonus = (p.bonus && typeof p.bonus === 'object') ? p.bonus : {};
+      state.bank = (p.bank && typeof p.bank === 'object') ? p.bank : { earn: {}, used: 0, log: [] };
     }
   }
 } catch (e) { /* 저장소를 못 쓰는 환경도 그냥 동작 */ }
@@ -1636,7 +1663,7 @@ function toggleStudy(idx, ev) {
     document.querySelectorAll('[data-sk="jiho"][data-sidx="' + idx + '"]').forEach(el => {
       el.classList.add('pop'); setTimeout(() => el.classList.remove('pop'), 430);
     });
-    if (arr.every(Boolean)) { setTimeout(() => SFX.all(), 140); toast('오늘 공부 루틴 완료! 보상 1시간 받았어요 🎁'); renderReward(true); }
+    if (arr.every(Boolean)) { setTimeout(() => SFX.all(), 140); toast('오늘 공부 루틴 완료! 보상 1시간이 저금통에 쌓였어요 🎁'); renderReward(true); }
   }
 }
 document.addEventListener('click', e => {
@@ -1645,13 +1672,15 @@ document.addEventListener('click', e => {
   toggleStudy(+c.dataset.sidx, e);
 });
 
-/* ---------------- 보상 시간 (공부 미션 보상) ---------------- */
+/* ---------------- 보상 저금통 (공부 미션 보상 누적) ---------------- */
 const BASE_REWARD_MIN = 60;          /* 기본 공부 미션 모두 완료 = +1시간 */
 const BONUS_STEP_MIN = 30;           /* 보너스 1번 = +30분 */
 const BONUS_DEFS = [
   { k: 'cats', e: '📖', n: '캣츠잉글리쉬 원서 읽기' },
   { k: 'read', e: '📚', n: '독서 더 하기' }
 ];
+const SPEND_STEPS = [30, 60];        /* 🎮 쓰기 버튼 = 30분 · 1시간 */
+const LOG_MAX = 30;                  /* 되돌리기용 사용 기록 개수 */
 
 function todayBonus() {
   const k = TODAY_KEY();
@@ -1661,7 +1690,7 @@ function todayBonus() {
     const n = parseInt(b[d.k], 10);
     b[d.k] = isNaN(n) ? 0 : Math.max(0, Math.min(99, n));
   });
-  /* 오래된 날짜 기록은 정리(최근 14일만 유지) */
+  /* 오래된 날짜 기록은 정리(최근 14일만 유지) — 적립분은 저금통 장부에 따로 남는다 */
   const keys = Object.keys(state.bonus).sort();
   if (keys.length > 14) keys.slice(0, keys.length - 14).forEach(x => { if (x !== k) delete state.bonus[x]; });
   return b;
@@ -1671,26 +1700,70 @@ function studyAllDone() {
   const items = todayStudyItems();
   return items.length > 0 && studyDoneCount() === items.length;
 }
-function rewardTotal() {
+/* 오늘 새로 모은 시간 (기본 60분 + 보너스 30분 × 횟수) */
+function rewardTodayEarn() {
   const b = todayBonus();
   return (studyAllDone() ? BASE_REWARD_MIN : 0)
     + BONUS_DEFS.reduce((s, d) => s + b[d.k] * BONUS_STEP_MIN, 0);
+}
+
+/* 저금통 장부: earn = 날짜별 적립분, used = 지금까지 쓴 시간 합계, log = 되돌리기용 사용 기록 */
+function bankData() {
+  if (!state.bank || typeof state.bank !== 'object' || Array.isArray(state.bank)) state.bank = {};
+  const b = state.bank;
+  if (!b.earn || typeof b.earn !== 'object' || Array.isArray(b.earn)) b.earn = {};
+  b.used = Math.max(0, parseInt(b.used, 10) || 0);
+  if (!Array.isArray(b.log)) b.log = [];
+  b.log = b.log.filter(x => x && typeof x === 'object').slice(-LOG_MAX);
+  return b;
+}
+function bankEarned() {
+  const e = bankData().earn;
+  return Object.keys(e).reduce((s, k) => s + (parseInt(e[k], 10) || 0), 0);
+}
+function bankBalance() { return Math.max(0, bankEarned() - bankData().used); }
+function bankTodayEarn() { return parseInt(bankData().earn[TODAY_KEY()], 10) || 0; }
+
+/* 오늘 적립분이 바뀌면(체크·체크 해제·보너스·날짜 변경) 장부를 그때그때 맞춘다.
+   날짜별 적립분을 지우지 않고 쌓아 두므로, 날짜가 바뀌어도 잔액이 사라지지 않는다. */
+function syncBank() {
+  const b = bankData();
+  const k = TODAY_KEY();
+  const cur = rewardTodayEarn();
+  const prev = parseInt(b.earn[k], 10) || 0;
+  if (cur === prev) return false;
+  if (cur > 0) b.earn[k] = cur; else delete b.earn[k];
+  /* 적립을 취소해 이미 쓴 시간보다 적어지면 사용 기록을 줄여 음수 잔액이 남지 않게 한다 */
+  const over = bankEarned() - b.used;
+  if (over < 0) b.used = Math.max(0, b.used + over);
+  save();
+  return true;
 }
 function rewardLongText(m) {
   if (m < 60) return '';
   const h = Math.floor(m / 60), r = m % 60;
   return '(' + h + '시간' + (r ? ' ' + r + '분' : '') + ')';
 }
-
-function renderRewardTicks(segs) {
+function rewardTickLabel(v, unit) {
+  if (v === 0) return '0분';
+  const h = Math.floor(v / 60), r = v % 60;
+  const hm = h + '시간' + (r ? ' ' + r + '분' : '');
+  if (unit >= 60) return h ? hm : v + '분';
+  if (v === 30) return '30분';
+  if (v % 60 === 0) return v + '분·' + hm;
+  return v + '분';
+}
+function renderRewardTicks(segs, unit) {
   const t = $('#rewardTicks');
   if (!t) return;
+  const step = unit || 30;
+  const dense = segs > 6;               /* 칸이 많으면 눈금은 한 칸씩 건너뛴다 */
   let html = '';
   for (let i = 0; i <= segs; i++) {
-    const v = i * 30;
-    const lab = v === 0 ? '0분' : (v === 30 ? '30분' : (v === 60 ? '60분·1시간' : (v === 90 ? '90분' : (v === 120 ? '120분·2시간' : v + '분'))));
+    const v = i * step;
+    const show = !dense || i === 0 || i === segs || i % 2 === 0;
     const cls = i === 0 ? ' class="first"' : (i === segs ? ' class="last"' : '');
-    html += '<span' + cls + ' style="left:' + (i / segs * 100) + '%">' + lab + '</span>';
+    html += '<span' + cls + ' style="left:' + (i / segs * 100) + '%">' + (show ? rewardTickLabel(v, step) : '') + '</span>';
   }
   t.innerHTML = html;
 }
@@ -1698,17 +1771,21 @@ function renderRewardTicks(segs) {
 function renderReward(animate) {
   const box = $('#rewardBox');
   if (!box) return;
+  syncBank();
   const b = todayBonus();
-  const total = rewardTotal();
+  const bank = bankData();
+  const bal = bankBalance();
+  const todayMin = bankTodayEarn();
   const baseOK = studyAllDone();
   const items = todayStudyItems();
 
-  const minEl = $('#rewardMin'), longEl = $('#rewardLong'), overEl = $('#rewardOver');
-  if (minEl) minEl.textContent = total;
-  if (longEl) longEl.textContent = rewardLongText(total);
+  const minEl = $('#rewardMin'), longEl = $('#rewardLong'), overEl = $('#rewardOver'), todayEl = $('#rewardTodayEarn');
+  if (minEl) minEl.textContent = bal;
+  if (longEl) longEl.textContent = rewardLongText(bal);
+  if (todayEl) todayEl.textContent = '+' + todayMin + '분';
   if (overEl) {
-    overEl.hidden = total <= 120;
-    overEl.textContent = total > 120 ? '+' + (total - 120) + '분 더!' : '';
+    overEl.hidden = bal < 180;
+    overEl.textContent = bal >= 180 ? '🔥 ' + Math.floor(bal / 60) + '시간 모았어요' : '';
   }
 
   const base = $('#rewardBase');
@@ -1717,15 +1794,18 @@ function renderReward(animate) {
     const e = base.querySelector('.rb-e'), tx = base.querySelector('.rb-t');
     if (e) e.textContent = baseOK ? '✅' : '📚';
     if (tx) tx.textContent = baseOK
-      ? '공부 루틴 완료! +60분(1시간) 받았어요'
+      ? '공부 루틴 완료! +60분(1시간) 저금통에 쌓았어요'
       : '공부 루틴 ' + items.length + '개를 모두 하면 +60분(1시간)';
   }
 
-  /* 30분 세그먼트 막대 (기본 4칸 = 120분, 넘으면 계속 늘어남) */
-  const segs = Math.max(4, Math.ceil(total / 30));
+  /* 30분 칸 막대 (기본 4칸 = 120분). 4시간이 넘으면 1시간 칸으로 바꿔 읽기 쉽게. */
+  const unit = bal > 240 ? 60 : 30;
+  const filled = Math.ceil(bal / unit);
+  const segs = Math.max(4, filled);
   const bar = $('#rewardBar');
   let rebuilt = false;
-  if (bar && bar.children.length !== segs) {
+  if (bar && (bar.children.length !== segs || bar.dataset.unit !== String(unit))) {
+    bar.dataset.unit = String(unit);
     bar.innerHTML = '';
     for (let i = 0; i < segs; i++) {
       const s = document.createElement('span');
@@ -1740,7 +1820,6 @@ function renderReward(animate) {
     }
     rebuilt = true;
   }
-  const filled = Math.ceil(total / 30);
   const applySegs = () => {
     if (!bar) return;
     [...bar.children].forEach((s, i) => {
@@ -1755,7 +1834,7 @@ function renderReward(animate) {
   };
   if (rebuilt) requestAnimationFrame(() => requestAnimationFrame(applySegs));
   else applySegs();
-  renderRewardTicks(segs);
+  renderRewardTicks(segs, unit);
 
   BONUS_DEFS.forEach(d => {
     const n = b[d.k] || 0;
@@ -1766,6 +1845,25 @@ function renderReward(animate) {
     if (btn) btn.classList.toggle('on', n > 0);
     if (minus) minus.disabled = n <= 0;
   });
+
+  /* 🎮 사용 버튼: 잔액보다 큰 사용은 비활성화 */
+  SPEND_STEPS.forEach(min => {
+    const btn = document.querySelector('[data-spend="' + min + '"]');
+    if (btn) {
+      btn.disabled = bal < min;
+      btn.setAttribute('aria-disabled', bal < min ? 'true' : 'false');
+    }
+  });
+  const undo = $('#rewardUndo');
+  if (undo) {
+    const last = bank.log[bank.log.length - 1];
+    undo.hidden = !last;
+    if (last) undo.textContent = '↩️ 방금 쓴 ' + (parseInt(last.m, 10) || 0) + '분 되돌리기';
+  }
+  const note = $('#rewardNote');
+  if (note) note.textContent = bank.used > 0
+    ? '지금까지 게임 시간 ' + bank.used + '분을 썼어요 · 오늘 안 쓴 시간은 내일도 그대로 남아요'
+    : '보너스는 누를 때마다 30분씩 쌓여요 · 오늘 안 쓴 시간은 내일도 그대로 남아요';
 }
 
 function addBonus(key, dir, ev) {
@@ -1787,11 +1885,46 @@ function addBonus(key, dir, ev) {
   else SFX.uncheck();
 }
 
+/* 🎮 게임 시간 쓰기 — 잔액에서 빼고 사용 기록을 남긴다 */
+function spendBank(min, ev) {
+  const bal = bankBalance();
+  if (bal < min) { toast('저금통에 ' + min + '분이 모자라요'); return false; }
+  const b = bankData();
+  b.used += min;
+  b.log.push({ m: min, t: Date.now(), d: TODAY_KEY() });
+  if (b.log.length > LOG_MAX) b.log = b.log.slice(-LOG_MAX);
+  save();
+  renderReward(false);
+  const btn = document.querySelector('[data-spend="' + min + '"]');
+  if (btn) { btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop'); }
+  const x = ev && ev.clientX ? ev.clientX : window.innerWidth / 2;
+  const y = ev && ev.clientY ? ev.clientY : window.innerHeight / 2;
+  SFX.tap(); sparks(x, y);
+  toast('게임 시간 ' + min + '분 썼어요 · 남은 ' + bankBalance() + '분');
+  return true;
+}
+/* ↩️ 방금 쓴 시간 되돌리기 */
+function undoSpend() {
+  const b = bankData();
+  const last = b.log.pop();
+  if (!last) return false;
+  const m = parseInt(last.m, 10) || 0;
+  b.used = Math.max(0, b.used - m);
+  save();
+  renderReward(false);
+  SFX.uncheck();
+  toast('방금 쓴 ' + m + '분을 되돌렸어요 · 남은 ' + bankBalance() + '분');
+  return true;
+}
+
 document.addEventListener('click', e => {
   const add = e.target.closest('[data-bonus-add]');
   if (add) { addBonus(add.dataset.bonusAdd, 1, e); return; }
   const sub = e.target.closest('[data-bonus-sub]');
-  if (sub) { addBonus(sub.dataset.bonusSub, -1, e); }
+  if (sub) { addBonus(sub.dataset.bonusSub, -1, e); return; }
+  const sp = e.target.closest('[data-spend]');
+  if (sp) { spendBank(parseInt(sp.dataset.spend, 10), e); return; }
+  if (e.target.closest('#rewardUndo')) { undoSpend(); }
 });
 
 /* ---------------- 시계 & 카운트다운 ---------------- */
@@ -2475,16 +2608,22 @@ $$('#setSoundSeg button').forEach(b => b.addEventListener('click', () => {
   if (state.sound) SFX.check();
 }));
 $('#btnResetToday').addEventListener('click', () => {
-  if (!confirm('오늘의 아침·공부 루틴 체크를 모두 지울까요?')) return;
+  /* 오늘 적립분만 되돌리고, 어제까지 저금통에 쌓인 시간은 그대로 둔다 */
+  const todayMin = bankTodayEarn();
+  const keepMin = Math.max(0, bankBalance() - todayMin);
+  const msg = '오늘의 아침·공부 루틴 체크를 모두 지울까요?'
+    + (todayMin > 0 ? '\n\n오늘 모은 보상 ' + todayMin + '분도 함께 사라지고, 어제까지 저금통에 쌓인 ' + keepMin + '분은 그대로 남습니다.' : '');
+  if (!confirm(msg)) return;
   const k = TODAY_KEY();
   delete state.routines[k];
   delete state.awarded[k];
   delete state.study[k];
   delete state.bonus[k];
-  save(); renderAll(); toast('오늘 루틴을 초기화했어요');
+  delete bankData().earn[k];
+  save(); renderAll(); toast(todayMin > 0 ? '오늘 루틴을 초기화했어요 · 저금통엔 ' + bankBalance() + '분 남았어요' : '오늘 루틴을 초기화했어요');
 });
 $('#btnResetAll').addEventListener('click', () => {
-  if (!confirm('루틴 기록과 모은 배지를 모두 처음으로 되돌릴까요?')) return;
+  if (!confirm('루틴 기록·배지·저금통에 모은 보상 시간을 모두 처음으로 되돌릴까요?')) return;
   try { localStorage.removeItem(LS); } catch (e) {}
   try { localStorage.removeItem(MEAL_CACHE); } catch (e) {}
   try { sessionStorage.removeItem(WX_CACHE); } catch (e) {}
@@ -2643,7 +2782,8 @@ window.__JRM = {
   setPreview: v => { preview = v; previewBase = Date.now(); renderAll(); },
   toggle: i => toggleRoutine(i), renderAll: renderAll, rewards: REWARDS, JIHO_WEEK: JIHO_WEEK,
   study: { items: todayStudyItems, done: todayStudy, count: studyDoneCount, render: renderStudy, toggle: toggleStudy, map: STUDY },
-  reward: { total: rewardTotal, bonus: todayBonus, add: addBonus, render: renderReward, base: BASE_REWARD_MIN, step: BONUS_STEP_MIN, defs: BONUS_DEFS },
+  reward: { todayEarn: rewardTodayEarn, balance: bankBalance, bank: bankData, spend: spendBank, undo: undoSpend,
+            bonus: todayBonus, add: addBonus, render: renderReward, base: BASE_REWARD_MIN, step: BONUS_STEP_MIN, defs: BONUS_DEFS, steps: SPEND_STEPS },
   word: { list: VOCAB, today: wordTodayIndex, current: wordCurrent, render: renderWord, speak: speakWord },
   simNow: simNow, doneCount: doneCount
 };
