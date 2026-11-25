@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f7fd">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>우리 아이들 아침 대시보드</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.92em' font-size='88'%3E%E2%8F%B0%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f3f7fd; --ink:#101a2e; --ink-2:#4b5772; --line:#e7edf8; --card:#fff;
+  --shadow:0 10px 30px rgba(19,40,88,.07), 0 1px 2px rgba(19,40,88,.04);
+  --radius:26px;
+  --clock-font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--clock-font); background:var(--bg); color:var(--ink);
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:28px 20px calc(28px + env(safe-area-inset-bottom));
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:100%; max-width:560px}
+.clock{
+  text-align:center; font-size:clamp(38px,12vw,58px); font-weight:800;
+  letter-spacing:-.02em; font-variant-numeric:tabular-nums; margin:0 0 4px;
+}
+.date{text-align:center; color:var(--ink-2); font-size:15px; font-weight:600; margin:0 0 26px}
+h1{text-align:center; font-size:19px; font-weight:700; margin:0 0 18px; color:var(--ink-2)}
+.cards{display:grid; gap:14px}
+a.card{
+  display:flex; align-items:center; gap:16px; text-decoration:none; color:inherit;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:20px 22px; box-shadow:var(--shadow);
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+a.card:active{transform:scale(.985)}
+.emoji{
+  flex:0 0 auto; width:56px; height:56px; border-radius:18px;
+  display:grid; place-items:center; font-size:28px;
+}
+.jiho .emoji{background:#eaf1ff}
+.rian .emoji{background:#fff2ea}
+.t{font-size:20px; font-weight:800; letter-spacing:-.01em}
+.s{font-size:13px; color:var(--ink-2); margin-top:3px; font-weight:600}
+.arrow{margin-left:auto; color:#9aa8c2; font-size:20px}
+footer{text-align:center; margin-top:22px; font-size:12px; color:#9aa8c2; font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="clock" id="clock">--:--</p>
+  <p class="date" id="date"></p>
+  <h1>오늘 아침, 누구 걸 볼까요?</h1>
+  <div class="cards">
+    <a class="card jiho" href="jiho/">
+      <span class="emoji">🧢</span>
+      <span>
+        <span class="t">지호 모닝</span>
+        <span class="s">08:30 등교 · 급식 · 시간표 · 오늘의 한자</span>
+      </span>
+      <span class="arrow">›</span>
+    </a>
+    <a class="card rian" href="rian/">
+      <span class="emoji">🎀</span>
+      <span>
+        <span class="t">리안 모닝</span>
+        <span class="s">08:30 어린이집 · 달력 · 옷차림</span>
+      </span>
+      <span class="arrow">›</span>
+    </a>
+  </div>
+  <footer>홈 화면에 추가하면 앱처럼 열 수 있어요</footer>
+</div>
+<script>
+(function(){
+  var days=['일','월','화','수','목','금','토'];
+  function tick(){
+    var n=new Date();
+    var h=n.getHours(), m=n.getMinutes();
+    document.getElementById('clock').textContent=(h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+    document.getElementById('date').textContent=n.getFullYear()+'년 '+(n.getMonth()+1)+'월 '+n.getDate()+'일 ('+days[n.getDay()]+')';
+  }
+  tick(); setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
