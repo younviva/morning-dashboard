@@ -907,13 +907,23 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .ecal-next{font-size:.78rem;font-weight:800;color:#0a7442;background:#eefaf3;border:1px dashed #c4e9d6;border-radius:999px;padding:5px 11px}
 .ecal-next b{color:#08663a}
 
+/* 폰에서는 아이콘 아래에 한글 이름을 붙인 뱃지로 보여 준다 (아이콘만으로는 무슨 일정인지 알기 어려움) */
+.ecal-cell .ecal-mnames{display:none}
+
 @media(max-width:560px){
-  .ecal-cell{min-height:64px;padding:16px 2px 2px;border-radius:11px}
+  .ecal-cell{min-height:76px;padding:15px 1px 3px;border-radius:11px;gap:1px}
   .ecal-cell .dnum{top:2px;left:4px;font-size:.72rem}
+  .ecal-cell .ecal-evs{display:none}
   .ecal-cell .ecal-names{display:none}
-  .ecal-cell .ecal-ev{font-size:.8rem;line-height:1.1}
+  .ecal-cell .ecal-mnames{display:flex;flex-direction:column;align-items:stretch;gap:2px;width:100%;min-width:0;padding:0 1px}
+  .ecal-cell .ecal-mpill{display:flex;flex-direction:column;align-items:center;width:100%;min-width:0;padding:1px 0 2px;border-radius:6px;background:rgba(255,255,255,.72);overflow:hidden}
+  .ecal-cell .ecal-mpill.my{background:rgba(255,255,255,.78)}
+  .ecal-cell .ecal-mpill.more{background:transparent;padding:0;font-size:.6rem;font-weight:900;color:#a05a00}
+  .ecal-cell .ecal-mpill .m-ico{font-style:normal;font-size:.7rem;line-height:1.1;display:block}
+  .ecal-cell .ecal-mpill .m-nm{display:block;font-size:.47rem;line-height:1.16;font-weight:900;letter-spacing:-.035em;color:#8a5300;text-align:center;max-width:100%;word-break:keep-all;overflow-wrap:anywhere}
+  .ecal-cell .ecal-mpill.my .m-nm{color:#86198f}
   .ecal-grid{gap:3px}
-  .ecal-cell.today{padding-top:20px}
+  .ecal-cell.today{padding-top:15px}
   .ecal-cell.today .dnum{position:absolute;top:2px;left:4px;align-self:auto;text-align:left}
   .ecal-cell.today .dnum::after{display:none}
   .ecal-btn{padding:8px 10px;font-size:.8rem}
@@ -2758,8 +2768,14 @@ function renderCalendar() {
     const evs = list.map(it => '<span class="ecal-ev' + (it.my ? ' my' : '') + '" title="' + escHTML(it.my ? it.n : schTitle(it)) + '">' + (it.e || schEmoji(it.n, it.k)) + '</span>').join('')
       + (shown.length > 2 ? '<span class="ecal-more">+' + (shown.length - 2) + '</span>' : '');
     const names = list.map(it => '<span class="ecal-name ' + (it.my ? 'my' : 'sch') + '" title="' + escHTML(it.my ? it.n : schTitle(it)) + '">' + escHTML(it.my ? myShort(it.n) : schShort(it.n)) + '</span>').join('');
+    /* 폰(≤560px)에서는 아이콘만으로는 무슨 일정인지 몰라서, 아이콘 아래에 한글 이름을 붙인 뱃지로 보여 준다 */
+    const mnames = list.map(it => '<span class="ecal-mpill' + (it.my ? ' my' : ' sch') + '" title="' + escHTML(it.my ? it.n : schTitle(it)) + '">' +
+        '<i class="m-ico">' + (it.e || schEmoji(it.n, it.k)) + '</i>' +
+        '<b class="m-nm">' + escHTML(it.my ? myShort(it.n) : schShort(it.n)) + '</b></span>').join('')
+      + (shown.length > 2 ? '<span class="ecal-mpill more">+' + (shown.length - 2) + '</span>' : '');
     cells += '<div class="' + cls.join(' ') + '" data-d="' + key + '"><span class="dnum">' + d + '</span>' +
-      '<span class="ecal-evs">' + evs + '</span><span class="ecal-names">' + names + '</span></div>';
+      '<span class="ecal-evs">' + evs + '</span><span class="ecal-names">' + names + '</span>' +
+      '<span class="ecal-mnames">' + mnames + '</span></div>';
   }
   grid.innerHTML = dow + cells;
 
