@@ -3280,6 +3280,8 @@ function renderStoryPage() {
     ab.textContent = storyAuto ? '⏸ 멈추기' : '▶️ 처음부터 이어 듣기';
     ab.classList.toggle('on', storyAuto);
   }
+  const nx = s.pages[storyPage + 1];           /* 다음 장 그림을 미리 받아 둔다(넘길 때 깜빡임 없이) */
+  if (nx && nx.img) { const pre = new Image(); pre.src = nx.img; }
 }
 function storyGo(d) {
   const s = storyByKey(storyKey);
