@@ -752,19 +752,28 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .reward-day b{color:#d97706;font-size:.86rem;font-variant-numeric:tabular-nums}
 .reward-cap{margin:5px 0 0;font-size:.72rem;font-weight:800;color:#a8916a;letter-spacing:-.01em}
 #rewardTotal{margin-top:7px}
-.reward-bar{display:flex;gap:5px;margin:12px 0 5px}
-.rb-seg{flex:1 1 0;height:32px;border-radius:8px;background:#efe9de;overflow:hidden;position:relative;box-shadow:inset 0 1px 3px rgba(120,90,20,.1)}
-.rb-fill{position:absolute;inset:0;transform-origin:left center;transform:scaleX(0);background:linear-gradient(180deg,#ffd766,#f5a524);
-  transition:transform .5s cubic-bezier(.22,.9,.28,1)}
-.rb-seg.on .rb-fill{transform:scaleX(1)}
-.rb-seg.over .rb-fill{background:linear-gradient(180deg,#c4b5fd,#8b5cf6)}
-.rb-seg.on{box-shadow:0 3px 10px rgba(245,165,36,.26),inset 0 1px 3px rgba(120,90,20,.06)}
-.rb-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.63rem;font-weight:900;font-style:normal;color:#8a6a1e;opacity:0;transition:opacity .3s}
-.rb-seg.on .rb-num{opacity:.75;color:#6b4c00}
-.reward-ticks{position:relative;height:16px}
-.reward-ticks span{position:absolute;top:0;transform:translateX(-50%);font-size:.61rem;font-weight:800;color:#a2947a;white-space:nowrap}
-.reward-ticks span.first{transform:none}
-.reward-ticks span.last{transform:translateX(-100%)}
+/* 하나의 연속된 보상 시간 막대 (2026-11-26 개편)
+   · 30분 칸으로 쪼개지 않는다. 0분 ~ 4시간(240분) 목표까지 한 줄로 부드럽게 채운다.
+   · 4시간을 넘기면 막대는 가득 찬 채 보라색이 되고, 큰 숫자가 실제 시간을 보여 준다. */
+.reward-track{position:relative;margin:12px 0 0;height:34px;border-radius:999px;background:#efe9de;
+  overflow:hidden;box-shadow:inset 0 2px 5px rgba(120,90,20,.14)}
+.reward-fill{position:absolute;inset:0;transform-origin:left center;transform:scaleX(0);border-radius:999px;
+  background:linear-gradient(90deg,#ffd766 0%,#f8b12f 55%,#f59e0b 100%);
+  box-shadow:0 2px 10px rgba(245,165,36,.32);transition:transform .55s cubic-bezier(.22,.9,.28,1)}
+.reward-fill::before{content:'';position:absolute;inset:0;border-radius:inherit;
+  background-image:linear-gradient(115deg,rgba(255,255,255,.26) 0 10px,rgba(255,255,255,0) 10px 24px);
+  background-size:24px 100%;animation:rwFlow 1.8s linear infinite}
+.reward-fill::after{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0) 58%)}
+@keyframes rwFlow{from{background-position:0 0}to{background-position:24px 0}}
+.reward-track.full .reward-fill{background:linear-gradient(90deg,#a78bfa 0%,#8b5cf6 60%,#7c3aed 100%);
+  box-shadow:0 2px 12px rgba(139,92,246,.34)}
+.reward-scale{position:relative;height:15px;margin-top:5px}
+.reward-scale span{position:absolute;top:0;transform:translateX(-50%);font-size:.61rem;font-weight:800;color:#a2947a;white-space:nowrap}
+.reward-scale span.first{transform:none}
+.reward-scale span.last{transform:translateX(-100%)}
+.reward-goal{margin:3px 0 0;font-size:.72rem;font-weight:850;color:#a8916a;letter-spacing:-.01em}
+.reward-track.full ~ .reward-goal{color:#7c3aed}
 .reward-base{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:.79rem;font-weight:800;color:#8a7a58}
 .reward-base.ok{color:#0a7a42}
 .reward-base .rb-e{font-size:1rem;line-height:1}
@@ -804,7 +813,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
   .reward-top h3{font-size:.86rem}
   .bonus-btn{min-height:64px;font-size:1rem}
   .bonus-minus{flex-basis:60px;width:60px}
-  .rb-seg{height:28px}
+  .reward-track{height:30px}
   .spend-btn{min-height:58px;font-size:.92rem}
   .reward-cap{font-size:.69rem}
 }
@@ -823,8 +832,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .bh-total .u{font-size:1.15rem;font-weight:900;color:#b07a00}
 .bh-total small{font-size:.92rem;font-weight:850;color:#9b8a63;margin-left:6px}
 .bh-cap{margin:6px 0 0;font-size:.74rem;font-weight:800;color:#a8916a;letter-spacing:-.01em}
-.bank-hero .reward-bar{margin:13px 0 5px}
-.bank-hero .rb-seg{height:36px}
+.bank-hero .reward-track{margin:13px 0 0}
 .bh-chips{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:11px}
 .bh-chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #f0e5cd;border-radius:999px;
   padding:5px 10px;font-size:.73rem;font-weight:850;color:#8a7450;white-space:nowrap}
@@ -832,7 +840,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
   font-size:.75rem;font-weight:900;color:#a5761c;letter-spacing:-.01em;transition:background .16s}
 .bh-go:active{background:#fdf1d6}
 @media (max-width:620px){
-  .bank-hero .rb-seg{height:30px}
+  .bank-hero .reward-track{height:32px}
   .bh-go{margin-left:0;width:100%;min-height:44px}
 }
 
@@ -1019,7 +1027,21 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .ecal-next.sch{color:#8a5300;background:#fff8e8;border-color:#f5dfae}
 .ecal-next.sch b{color:#6d4200}
 
-/* 탭이 5개 — 좁은 화면에서는 한 줄에 다 보이게 두 줄로 접는다 */
+/* 시간표 계획 — 영어 수업 시간 배지 */
+.sp-it .sp-time{margin-left:4px;font-size:.62rem;font-weight:900;color:#b45309;background:#fff;border:1px solid #ffe2b8;border-radius:999px;padding:0 5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ecal-legend .lg.my{background:#fdf4ff;border-color:#f2ddf7;color:#a21caf}
+
+/* 달력: 우리 일정(직접 넣은 일정) — 학교 학사일정과 색으로 구분 */
+.ecal-cell.has-my{background:linear-gradient(170deg,#fff8fd,#fdf0ff);border-color:#f2d6f8}
+.ecal-cell.has-my.sun{background:#fff8fd}
+.ecal-cell.has-my .dnum{color:#9b1fa8}
+.ecal-name.my{color:#a21caf}
+.ecal-next.my{color:#a21caf;background:#fdf4ff;border-color:#f0d7f7}
+.ecal-next.my b{color:#86198f}
+
+/* 오늘의 스케줄 — 직접 넣은 일정 단계 */
+.sched-step.my{background:#fdf7ff;border-color:#f0dcf8}
+.sched-step.my small{color:#a855b8}
 @media(max-width:560px){
   body.theme-jiho .tabs{display:grid;grid-template-columns:repeat(6,1fr);border-radius:16px}
   body.theme-jiho .tab{grid-column:span 2;justify-content:center;padding:8px 2px;font-size:.78rem}
@@ -1042,7 +1064,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
   <nav class="tabs" role="tablist" aria-label="화면 선택">
     <button class="tab active" role="tab" aria-selected="true" data-tab="jiho" id="tabjiho">🌅 지호 오늘</button>
     <button class="tab" role="tab" aria-selected="false" data-tab="study" id="tabstudy">📚 공부</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="week" id="tabweek">🏫 주간학습</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="week" id="tabweek">🏫 학교 주간학습</button>
     <button class="tab" role="tab" aria-selected="false" data-tab="timetable" id="tabtimetable">🗓️ 주간 시간표</button>
     <button class="tab" role="tab" aria-selected="false" data-tab="rewards" id="tabrewards">🏆 보상 도감</button>
   </nav>
@@ -1214,8 +1236,9 @@ body.theme-rian .word-top h2{color:#7d2c53}
       </div>
       <div class="reward-total" id="rewardTotal" aria-live="polite"><b id="rewardMin">0</b><span class="u">분</span><small id="rewardLong"></small><span class="reward-over" id="rewardOver" hidden></span></div>
       <p class="reward-cap" id="rewardCap">지금 쓸 수 있는 시간이에요 · 오늘 안 쓴 시간은 내일도 그대로 남아요</p>
-      <div class="reward-bar" id="rewardBar" aria-hidden="true"></div>
-      <div class="reward-ticks" id="rewardTicks" aria-hidden="true"></div>
+      <div class="reward-track" id="rewardBar" role="progressbar" aria-valuemin="0" aria-valuemax="240" aria-valuenow="0" aria-label="쌓인 보상 시간"><span class="reward-fill"></span></div>
+      <div class="reward-scale" id="rewardTicks" aria-hidden="true"></div>
+      <p class="reward-goal" id="rewardGoal">공부 루틴을 모두 하면 1시간부터 차곡차곡 쌓여요</p>
       <div class="reward-base" id="rewardBase"><span class="rb-e">📚</span><span class="rb-t">공부 루틴을 모두 하면 +60분(1시간)</span></div>
       <div class="bonus-list">
         <div class="bonus-item">
@@ -1241,7 +1264,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
         <span class="muted">문제집 루틴 + 영어 수업</span>
       </div>
       <div class="splan" id="studyPlanGrid"></div>
-      <div class="tt-note eng-note">💻 아이비 화상영어는 <b>매주 목요일 집에서</b>, 🐱 캣츠잉글리쉬 라이브클래스는 <b>2주에 한 번 수요일</b>이에요.</div>
+      <div class="tt-note eng-note">💻 아이비 화상영어는 <b>매주 목요일 저녁 7:30</b>, 🐱 캣츠잉글리쉬 라이브클래스는 <b>2주에 한 번 수요일 저녁 7:30</b>이에요. 둘 다 집에서 해요.</div>
     </section>
 
   </section>
@@ -1250,7 +1273,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
   <section class="view" id="view-week" role="tabpanel" aria-labelledby="tabweek">
     <section class="card week-card" id="weekCard" aria-labelledby="weekTitle">
       <div class="card-head week-head">
-        <h2 id="weekTitle">🏫 주간학습안내</h2>
+        <h2 id="weekTitle">🏫 학교 주간학습안내</h2>
         <span class="week-range" id="weekRange">11월 23일 ~ 11월 27일 · 16주</span>
         <span class="pill accent" id="weekTodayPill">오늘은 목요일</span>
       </div>
@@ -1305,7 +1328,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
     <section class="card ecal-card" id="jihoCalCard">
       <div class="card-head">
         <h2>🗓️ 이번 달 일정</h2>
-        <span class="muted">학교 학사일정만 보여 줘요</span>
+        <span class="muted">학교 학사일정 + 우리 일정</span>
       </div>
       <div class="ecal-head">
         <span class="ecal-month" id="jihoCalTitle">2026년 11월</span>
@@ -1319,6 +1342,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
       <div class="ecal-legend">
         <span class="lg">🏫 학교 학사일정 (경기도교육청 NEIS)</span>
         <span class="lg">🎓 행사·방학식</span>
+        <span class="lg my">📌 우리 일정 (태권도 심사·병원·생일)</span>
       </div>
       <div class="ecal-foot" id="ecalFoot"></div>
     </section>
@@ -1333,8 +1357,9 @@ body.theme-rian .word-top h2{color:#7d2c53}
       </div>
       <div class="bh-total" aria-live="polite"><b id="rwBankMin">0</b><span class="u">분</span><small id="rwBankLong"></small></div>
       <p class="bh-cap" id="rwBankCap">게임 시간으로 쓸 수 있는 시간이에요 · 안 쓴 시간은 내일도 그대로 남아요</p>
-      <div class="reward-bar" id="rwBankBar" aria-hidden="true"></div>
-      <div class="reward-ticks" id="rwBankTicks" aria-hidden="true"></div>
+      <div class="reward-track" id="rwBankBar" role="progressbar" aria-valuemin="0" aria-valuemax="240" aria-valuenow="0" aria-label="쌓인 보상 시간"><span class="reward-fill"></span></div>
+      <div class="reward-scale" id="rwBankTicks" aria-hidden="true"></div>
+      <p class="reward-goal" id="rwBankGoal">공부 루틴을 모두 하면 1시간부터 차곡차곡 쌓여요</p>
       <div class="bh-chips">
         <span class="bh-chip" id="rwBankToday">오늘 +0분</span>
         <span class="bh-chip" id="rwBankUsed">지금까지 0분 사용</span>
@@ -1401,7 +1426,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
     <div class="set-actions">
       <button class="btn-primary" data-close="1">닫기</button>
     </div>
-    <p class="set-note">이 파일은 인터넷 없이도 열립니다. 날씨·급식·학사일정만 인터넷이 필요하고, 나머지(시간표·루틴·보상·주간학습)는 모두 이 파일 안에서 동작해요. 급식과 학사일정은 경기도교육청 나이스(NEIS) 공개 데이터에서 광주광명초등학교 자료로 가져와요.</p>
+    <p class="set-note">이 파일은 인터넷 없이도 열립니다. 날씨·급식·학사일정만 인터넷이 필요하고, 나머지(시간표·루틴·보상·학교 주간학습)는 모두 이 파일 안에서 동작해요. 급식과 학사일정은 경기도교육청 나이스(NEIS) 공개 데이터에서 광주광명초등학교 자료로 가져와요.</p>
   </div>
 </div>
 
@@ -1460,11 +1485,13 @@ const JIHO_WEEK = {
 };
 
 /* ---------------- 영어 수업 ----------------
-   · 아이비 화상영어 = 매주 목요일, 집에서 (시간은 그때그때 선생님과 맞춰요)
-   · 캣츠잉글리쉬 라이브클래스 = 2주에 한 번 수요일, 2026-11-25(수)부터 14일 간격
+   · 아이비 화상영어 = 매주 목요일 저녁 7:30(19:30), 집에서
+   · 캣츠잉글리쉬 라이브클래스 = 2주에 한 번 수요일 저녁 7:30(19:30), 2026-11-25(수)부터 14일 간격
      (11-25 → 12-09 → 12-23 → 2027-01-06 …) */
-const IVY = { e: '💻', n: '아이비 화상영어', c: 'ivy', note: '집에서 · 시간은 그때그때' };
-const CATS_LIVE = { e: '🐱', n: '캣츠잉글리쉬 라이브클래스', c: 'cats', note: '집에서 · 2주에 한 번' };
+const ENG_TIME = '19:30';
+const ENG_TIME_KR = '저녁 7:30';
+const IVY = { e: '💻', n: '아이비 화상영어', c: 'ivy', time: ENG_TIME, note: '집에서 · 저녁 7:30' };
+const CATS_LIVE = { e: '🐱', n: '캣츠잉글리쉬 라이브클래스', c: 'cats', time: ENG_TIME, note: '2주에 한 번 · 저녁 7:30' };
 const LIVE_START = new Date(2026, 10, 25);
 const LIVE_EVERY = 14;
 const DAY_MS = 86400000;
@@ -2062,7 +2089,7 @@ function renderStudySched() {
   } else {
     const nl = nextLiveDay(now);
     const gap = nl ? Math.round((startOfDay(nl) - startOfDay(now)) / DAY_MS) : 0;
-    box.innerHTML = '<span class="ss-item none"><span class="ss-e">💻</span><span class="ss-t"><b>오늘은 영어 수업이 없어요</b><small>화상영어는 매주 목요일' +
+    box.innerHTML = '<span class="ss-item none"><span class="ss-e">💻</span><span class="ss-t"><b>오늘은 영어 수업이 없어요</b><small>화상영어는 매주 목요일 저녁 7:30' +
       (nl && nl.getDay() === 3 ? ' · 🐱 다음 라이브 ' + fmtMD(nl) + '(' + DOW[nl.getDay()] + ') · ' + gap + '일 뒤' : '') +
       '</small></span></span>';
   }
@@ -2081,7 +2108,7 @@ function renderStudyPlan() {
       const sub = SUBJ[it.s] || { label: it.s, cls: '' };
       return '<span class="sp-it ' + sub.cls + '">' + it.e + ' ' + it.n + '</span>';
     });
-    const eng = engItems(dt).map(it => '<span class="sp-it ' + it.c + '">' + it.e + ' ' + it.n + '</span>');
+    const eng = engItems(dt).map(it => '<span class="sp-it ' + it.c + '">' + it.e + ' ' + it.n + '<b class="sp-time">' + it.time + '</b></span>');
     return '<div class="sp-day' + (on ? ' today' : '') + '">'
       + '<span class="sp-dow">' + DOW[d] + ' <small>' + (dt.getMonth() + 1) + '/' + dt.getDate() + '</small>' + (on ? '<em>오늘</em>' : '') + '</span>'
       + '<div class="sp-items">' + items.join('') + eng.join('') + '</div></div>';
@@ -2212,21 +2239,49 @@ function rewardTickLabel(v, unit) {
   if (v % 60 === 0) return v + '분·' + hm;
   return v + '분';
 }
-function renderTicksInto(t, segs, unit) {
-  if (!t) return;
-  const step = unit || 30;
-  const dense = segs > 6;               /* 칸이 많으면 눈금은 한 칸씩 건너뛴다 */
-  let html = '';
-  for (let i = 0; i <= segs; i++) {
-    const v = i * step;
-    const show = !dense || i === 0 || i === segs || i % 2 === 0;
-    const cls = i === 0 ? ' class="first"' : (i === segs ? ' class="last"' : '');
-    html += '<span' + cls + ' style="left:' + (i / segs * 100) + '%">' + (show ? rewardTickLabel(v, step) : '') + '</span>';
-  }
-  t.innerHTML = html;
+/* ---------------- 하나의 연속된 보상 시간 막대 ----------------
+   30분 칸으로 쪼개지 않고, 0분 ~ 4시간(240분) 목표까지 하나의 막대로 부드럽게 채운다.
+   4시간을 넘기면 막대는 가득 찬 채 보라색이 되고, 큰 숫자가 실제 시간을 보여 준다. */
+const REWARD_GOAL_MIN = 240;
+function durText(m) {
+  const v = Math.max(0, parseInt(m, 10) || 0);
+  const h = Math.floor(v / 60), r = v % 60;
+  if (h && r) return h + '시간 ' + r + '분';
+  if (h) return h + '시간';
+  return r + '분';
 }
-function renderRewardTicks(segs, unit) {
-  renderTicksInto($('#rewardTicks'), segs, unit);
+function paintRewardGauge(bar, ticks, goalEl, bal, animate) {
+  if (!bar) return;
+  const pct = Math.max(0, Math.min(1, bal / REWARD_GOAL_MIN));
+  const full = bal >= REWARD_GOAL_MIN;
+  bar.classList.toggle('full', full);
+  bar.setAttribute('role', 'progressbar');
+  bar.setAttribute('aria-valuemin', '0');
+  bar.setAttribute('aria-valuemax', String(REWARD_GOAL_MIN));
+  bar.setAttribute('aria-valuenow', String(Math.min(bal, REWARD_GOAL_MIN)));
+  bar.setAttribute('aria-valuetext', durText(bal) + ' / 목표 4시간');
+
+  let fill = bar.querySelector('.reward-fill');
+  if (!fill) { fill = document.createElement('span'); fill.className = 'reward-fill'; bar.appendChild(fill); }
+  const apply = function () { fill.style.transform = 'scaleX(' + pct + ')'; };
+  if (animate || bar.dataset.painted !== '1') requestAnimationFrame(function () { requestAnimationFrame(apply); });
+  else apply();
+  bar.dataset.painted = '1';
+
+  if (ticks) {
+    let html = '';
+    for (let h = 0; h <= 4; h++) {
+      const cls = h === 0 ? ' class="first"' : (h === 4 ? ' class="last"' : '');
+      html += '<span' + cls + ' style="left:' + (h * 25) + '%">' + (h === 0 ? '0분' : h + '시간') + '</span>';
+    }
+    ticks.innerHTML = html;
+  }
+  if (goalEl) {
+    goalEl.textContent = bal <= 0
+      ? '공부 루틴을 모두 하면 1시간부터 · 4시간까지 채워져요'
+      : (full ? '🎉 4시간 목표를 넘었어요! ' + durText(bal) + ' 모았어요'
+              : '4시간 목표까지 ' + durText(REWARD_GOAL_MIN - bal) + ' 남았어요');
+  }
 }
 
 function renderReward(animate) {
@@ -2259,43 +2314,8 @@ function renderReward(animate) {
       : '공부 루틴 ' + items.length + '개를 모두 하면 +60분(1시간)';
   }
 
-  /* 30분 칸 막대 (기본 4칸 = 120분). 4시간이 넘으면 1시간 칸으로 바꿔 읽기 쉽게. */
-  const unit = bal > 240 ? 60 : 30;
-  const filled = Math.ceil(bal / unit);
-  const segs = Math.max(4, filled);
-  const bar = $('#rewardBar');
-  let rebuilt = false;
-  if (bar && (bar.children.length !== segs || bar.dataset.unit !== String(unit))) {
-    bar.dataset.unit = String(unit);
-    bar.innerHTML = '';
-    for (let i = 0; i < segs; i++) {
-      const s = document.createElement('span');
-      s.className = 'rb-seg' + (i >= 4 ? ' over' : '');
-      const f = document.createElement('i');
-      f.className = 'rb-fill';
-      const n = document.createElement('em');
-      n.className = 'rb-num';
-      n.textContent = '';
-      s.appendChild(f); s.appendChild(n);
-      bar.appendChild(s);
-    }
-    rebuilt = true;
-  }
-  const applySegs = () => {
-    if (!bar) return;
-    [...bar.children].forEach((s, i) => {
-      const on = i < filled;
-      const f = s.querySelector('.rb-fill');
-      s.classList.toggle('on', on);
-      if (f) {
-        f.style.transitionDelay = (animate && on) ? Math.min(i * 60, 300) + 'ms' : '0ms';
-        f.style.transform = 'scaleX(' + (on ? 1 : 0) + ')';
-      }
-    });
-  };
-  if (rebuilt) requestAnimationFrame(() => requestAnimationFrame(applySegs));
-  else applySegs();
-  renderRewardTicks(segs, unit);
+  /* 하나의 연속된 막대 — 0분 ~ 4시간 목표까지 쪼개지 않고 부드럽게 채운다 */
+  paintRewardGauge($('#rewardBar'), $('#rewardTicks'), $('#rewardGoal'), bal, animate);
 
   BONUS_DEFS.forEach(d => {
     const n = b[d.k] || 0;
@@ -2355,33 +2375,8 @@ function renderBankHero(animate) {
       : (bal > 0 ? '게임 시간으로 쓸 수 있어요' : '공부 루틴을 하면 쌓여요');
   }
 
-  /* 저금통 상자와 같은 30분 칸 막대 (4시간이 넘으면 1시간 칸) */
-  const unit = bal > 240 ? 60 : 30;
-  const filled = Math.ceil(bal / unit);
-  const segs = Math.max(4, filled);
-  const bar = $('#rwBankBar');
-  if (bar) {
-    if (bar.children.length !== segs || bar.dataset.unit !== String(unit)) {
-      bar.dataset.unit = String(unit);
-      bar.innerHTML = '';
-      for (let i = 0; i < segs; i++) {
-        const s = document.createElement('span');
-        s.className = 'rb-seg' + (i >= 4 ? ' over' : '');
-        s.appendChild(document.createElement('i')).className = 'rb-fill';
-        bar.appendChild(s);
-      }
-    }
-    [...bar.children].forEach((s, i) => {
-      const on = i < filled;
-      const f = s.querySelector('.rb-fill');
-      s.classList.toggle('on', on);
-      if (f) {
-        f.style.transitionDelay = (animate && on) ? Math.min(i * 60, 300) + 'ms' : '0ms';
-        f.style.transform = 'scaleX(' + (on ? 1 : 0) + ')';
-      }
-    });
-    renderTicksInto($('#rwBankTicks'), segs, unit);
-  }
+  /* 보상 도감 히어로도 같은 단일 막대 (0분 ~ 4시간 목표) */
+  paintRewardGauge($('#rwBankBar'), $('#rwBankTicks'), $('#rwBankGoal'), bal, animate);
 }
 
 function addBonus(key, dir, ev) {
@@ -2536,8 +2531,8 @@ function renderJihoToday() {
   $('#jihoTodayDow').textContent = DOW[dow] + '요일';
   const flag = $('#jihoPrepFlag');
   flag.hidden = !w.prep.length;
-  const items = lifeItems(now);
-  const flow = items.map(it => '<div class="sched-step"><span class="e">' + it.e + '</span><div><b>' + it.n + '</b><small>' + (it.note || (it.c === 'jusan' ? '방과후' : (it.c === 'piano' ? '학원' : (it.c === 'rest' ? '온종일' : '학원')))) + '</small></div></div>');
+  const items = lifeItems(now).concat(myEventsOn(dk(now)).map(x => ({ e: x.e, n: x.n, c: 'my', note: x.note })));
+  const flow = items.map(it => '<div class="sched-step' + (it.c ? ' ' + it.c : '') + '"><span class="e">' + it.e + '</span><div><b>' + it.n + '</b><small>' + (it.note || (it.c === 'jusan' ? '방과후' : (it.c === 'piano' ? '학원' : (it.c === 'rest' ? '온종일' : '학원')))) + '</small></div></div>');
   $('#jihoTodayFlow').innerHTML = flow.join('<span class="sched-arrow">→</span>');
   $('#jihoTodayPrep').innerHTML = w.prep.length
     ? w.prep.map(p => '<span class="prep-chip"><span class="e">' + p.e + '</span>' + p.n + '</span>').join('')
@@ -2570,6 +2565,15 @@ const SCH_API = 'https://open.neis.go.kr/hub/SchoolSchedule?Type=json&pIndex=1&p
 const SCH_CACHE = 'jrm.jiho.sch.v1';
 const SCH_TTL = 6 * 60 * 60 * 1000;
 const SCH_SKIP = { '토요휴업일': true };
+/* ---------------- 우리 일정 (직접 넣은 일정) ----------------
+   학교 학사일정(NEIS)과 함께 달력에 보여 주고, 그날 「오늘의 스케줄」에도 붙인다.
+   · 새 일정은 여기에 { date, e, n, c, note } 한 줄만 추가하면 된다. */
+const MY_EVENTS = [
+  { date: '2026-11-27', e: '🥋', n: '태권도 심사', c: 'tae', note: '심사 보는 날', my: true },
+  { date: '2026-12-02', e: '🎂', n: '로기 생일', c: 'bday', note: '축하해 주세요', my: true },
+  { date: '2026-12-03', e: '🏥', n: '용인세브란스병원', c: 'hos', note: '병원 가는 날', my: true }
+];
+function myEventsOn(key) { return MY_EVENTS.filter(function (x) { return x.date === key; }); }
 let schEvents = {};   /* 'YYYY-MM-DD' -> [{ n: 이름, k: 종류 }] */
 let schState = {};    /* 'YYYY-MM' -> 'loading' | 'ok' | 'fail' */
 
@@ -2596,6 +2600,8 @@ function schEmoji(name, kind) {
   return '🏫';
 }
 function schShort(name) { return name.length > 7 ? name.slice(0, 6) + '…' : name; }
+/* 우리 일정은 달력 칸에서 조금 더 길게 보여 준다 (예: 용인세브란스병원) */
+function myShort(name) { return name.length > 10 ? name.slice(0, 9) + '…' : name; }
 function schCacheRead() {
   try {
     const c = JSON.parse(localStorage.getItem(SCH_CACHE) || 'null');
@@ -2674,7 +2680,7 @@ function loadSchoolSchedule(y, m) {
 function schLookAhead(y, m, mk) {
   if (schAhead[mk]) return;
   schAhead[mk] = true;
-  if (nextSchEvent(TODAY_KEY()) || schAheadLeft <= 0) return;
+  if (nextSchoolEvent(TODAY_KEY()) || schAheadLeft <= 0) return;
   schAheadLeft--;
   const nx = new Date(y, m + 1, 1);
   loadSchoolSchedule(nx.getFullYear(), nx.getMonth());
@@ -2696,11 +2702,23 @@ function schTitle(it) {
   const a = it.run.s.split('-').map(Number), b = it.run.e.split('-').map(Number);
   return it.n + ' · ' + (a[1]) + '월 ' + a[2] + '일 ~ ' + (b[1]) + '월 ' + b[2] + '일';
 }
-function nextSchEvent(fromKey) {
+function nextSchoolEvent(fromKey) {
   const keys = Object.keys(schEvents).filter(k => k >= fromKey && schEvents[k] && schEvents[k].length).sort();
   if (!keys.length) return null;
   const p = keys[0].split('-').map(Number);
   return { key: keys[0], ev: schEvents[keys[0]][0], dt: new Date(p[0], p[1] - 1, p[2]) };
+}
+/* 달력 아래 '다음 일정'은 우리 일정까지 함께 본다 (우리 일정을 먼저) */
+function nextSchEvent(fromKey) {
+  const keys = Object.keys(schEvents).filter(k => k >= fromKey && schEvents[k] && schEvents[k].length)
+    .concat(MY_EVENTS.map(x => x.date).filter(k => k >= fromKey));
+  const uniq = keys.filter(function (v, i, a) { return a.indexOf(v) === i; }).sort();
+  if (!uniq.length) return null;
+  const key = uniq[0];
+  const ev = myEventsOn(key)[0] || (schEvents[key] || [])[0];
+  if (!ev) return null;
+  const p = key.split('-').map(Number);
+  return { key: key, ev: ev, dt: new Date(p[0], p[1] - 1, p[2]) };
 }
 
 let calMonth = null; /* { y, m } — null 이면 이번 달을 따라간다 */
@@ -2727,10 +2745,10 @@ function renderCalendar() {
   const pad = new Date(y, m, 1).getDay();
   for (let i = 0; i < pad; i++) cells += '<div class="ecal-cell blank"></div>';
   const days = new Date(y, m + 1, 0).getDate();
-  let count = 0;
+  let count = 0, myCount = 0;
   for (let d = 1; d <= days; d++) {
     const dt = new Date(y, m, d), key = dk(dt);
-    const ev = schEvents[key] || [];
+    const ev = (schEvents[key] || []).concat(myEventsOn(key));
     /* 방학처럼 여러 날 이어지는 일정은 시작일에만 표시하고, 기간은 배경으로 은은하게 */
     const shown = [], runDay = [];
     ev.forEach(it => {
@@ -2741,16 +2759,18 @@ function renderCalendar() {
       } else shown.push(it);
     });
     count += shown.length;
+    myCount += shown.filter(it => it.my).length;
     const cls = ['ecal-cell'];
     if (dt.getDay() === 0) cls.push('sun');
     if (dt.getDay() === 6) cls.push('sat');
     if (key === todayKey) cls.push('today');
     if (shown.length) cls.push('has-ev');
+    if (shown.some(it => it.my)) cls.push('has-my');
     if (runDay.length && !shown.length) cls.push('in-run');
     const list = shown.slice(0, 2);
-    const evs = list.map(it => '<span class="ecal-ev" title="' + escHTML(schTitle(it)) + '">' + schEmoji(it.n, it.k) + '</span>').join('')
+    const evs = list.map(it => '<span class="ecal-ev' + (it.my ? ' my' : '') + '" title="' + escHTML(it.my ? it.n : schTitle(it)) + '">' + (it.e || schEmoji(it.n, it.k)) + '</span>').join('')
       + (shown.length > 2 ? '<span class="ecal-more">+' + (shown.length - 2) + '</span>' : '');
-    const names = list.map(it => '<span class="ecal-name sch" title="' + escHTML(schTitle(it)) + '">' + escHTML(schShort(it.n)) + '</span>').join('');
+    const names = list.map(it => '<span class="ecal-name ' + (it.my ? 'my' : 'sch') + '" title="' + escHTML(it.my ? it.n : schTitle(it)) + '">' + escHTML(it.my ? myShort(it.n) : schShort(it.n)) + '</span>').join('');
     cells += '<div class="' + cls.join(' ') + '" data-d="' + key + '"><span class="dnum">' + d + '</span>' +
       '<span class="ecal-evs">' + evs + '</span><span class="ecal-names">' + names + '</span></div>';
   }
@@ -2761,11 +2781,11 @@ function renderCalendar() {
     let html = '';
     const monthStart = dk(new Date(y, m, 1));
     const next = nextSchEvent(monthStart > todayKey ? monthStart : todayKey);
-    const nextTxt = next ? '<span class="ecal-next sch">🏫 다음 일정 <b>' + fmtMD(next.dt) + '(' + DOW[next.dt.getDay()] + ')</b> ' + escHTML(next.ev.n) + '</span>' : '';
+    const nextTxt = next ? '<span class="ecal-next ' + (next.ev.my ? 'my' : 'sch') + '">' + (next.ev.my ? '📌 다음 우리 일정' : '🏫 다음 일정') + ' <b>' + fmtMD(next.dt) + '(' + DOW[next.dt.getDay()] + ')</b> ' + escHTML(next.ev.n) + '</span>' : '';
     if (schState[mk] === 'loading') html = '<span class="ecal-sum">학사일정을 불러오는 중…</span>';
-    else if (schState[mk] === 'fail') html = '<span class="ecal-sum">학사일정을 불러오지 못했어요 · 인터넷 연결을 확인해 주세요</span>';
-    else if (!count) html = '<span class="ecal-sum">이 달엔 학교 행사가 없어요 · 매주 토요휴업일은 빼고 보여 줘요</span>' + nextTxt;
-    else html = '<span class="ecal-sum">이번 달 · 학교 일정 ' + count + '개</span>' + nextTxt;
+    else if (schState[mk] === 'fail') html = '<span class="ecal-sum">학사일정을 불러오지 못했어요 · 인터넷 연결을 확인해 주세요</span>' + nextTxt;
+    else if (!count) html = '<span class="ecal-sum">이 달엔 일정이 없어요 · 매주 토요휴업일은 빼고 보여 줘요</span>' + nextTxt;
+    else html = '<span class="ecal-sum">이번 달 · 일정 ' + count + '개' + (myCount ? ' (학교 ' + (count - myCount) + ' · 우리 일정 ' + myCount + ')' : '') + '</span>' + nextTxt;
     foot.innerHTML = html;
   }
 }
@@ -3590,6 +3610,7 @@ window.__JRM = {
            sched: renderStudySched, plan: renderStudyPlan, classes: engItems },
   week: { plans: WEEKPLANS, current: () => weekPlanFor(simNow()), render: renderWeek, periods: WEEK_PERIODS, dateOf: weekDateOf },
   cal: { events: () => schEvents, state: () => schState, load: loadSchoolSchedule, parse: schParseRows, skip: SCH_SKIP, base: calBase, shift: calShift },
+  my: { list: MY_EVENTS, on: myEventsOn, next: nextSchEvent },
   life: lifeItems,
   reward: { todayEarn: rewardTodayEarn, balance: bankBalance, bank: bankData, spend: spendBank, undo: undoSpend,
             bonus: todayBonus, add: addBonus, render: renderReward, base: BASE_REWARD_MIN, step: BONUS_STEP_MIN, defs: BONUS_DEFS, steps: SPEND_STEPS },
