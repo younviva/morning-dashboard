@@ -320,22 +320,24 @@ body.theme-rian .routine-card .imgwrap{background:#fff0f7}
   box-shadow:0 3px 8px rgba(19,40,88,.16);
 }
 .routine-card .chk{
-  position:absolute;top:8px;right:8px;width:27px;height:27px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.95);background:rgba(70,90,130,.22);display:grid;place-items:center;
-  color:rgba(255,255,255,.7);font-size:.85rem;font-weight:900;transition:.2s;
-  box-shadow:0 2px 8px rgba(16,30,60,.22);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  position:absolute;top:6px;right:6px;width:clamp(38px,6vw,46px);height:clamp(38px,6vw,46px);border-radius:50%;
+  border:3px solid rgba(255,255,255,.96);background:rgba(58,78,116,.26);display:grid;place-items:center;
+  color:rgba(255,255,255,.72);font-size:clamp(1.15rem,2.6vw,1.55rem);font-weight:900;transition:.22s;
+  box-shadow:0 3px 10px rgba(16,30,60,.3);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
 }
 .routine-card .meta{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;background:#fff}
 .routine-card .meta b{font-size:.95rem;font-weight:850;letter-spacing:-.015em}
 .routine-card .meta span{font-size:.72rem;font-weight:750;color:var(--ink-3)}
-.routine-card.done{border-color:#9be0bd;box-shadow:0 8px 22px rgba(16,161,80,.14)}
-body.theme-rian .routine-card.done{border-color:#ffb3d2;box-shadow:0 8px 22px rgba(224,80,138,.14)}
-.routine-card.done .chk{background:#22c55e;border-color:#fff;color:#fff;transform:scale(1.06);box-shadow:0 4px 12px rgba(16,161,80,.4)}
-body.theme-rian .routine-card.done .chk{background:#ff5f9e}
-.routine-card.done .imgwrap img{filter:saturate(.92) brightness(1.02)}
+.routine-card.done{border-color:#3fc97b;background:#f4fdf8;box-shadow:0 8px 22px rgba(16,161,80,.16), 0 0 0 3px rgba(34,197,94,.28)}
+body.theme-rian .routine-card.done{border-color:#ff8fbe;background:#fff8fc;box-shadow:0 8px 22px rgba(224,80,138,.18), 0 0 0 3px rgba(255,111,165,.3)}
+.routine-card.done .chk{background:#12b356;border-color:#fff;color:#fff;transform:scale(1.1);box-shadow:0 0 0 4px rgba(34,197,94,.28),0 6px 16px rgba(16,161,80,.45)}
+body.theme-rian .routine-card.done .chk{background:#ff5f9e;box-shadow:0 0 0 4px rgba(255,111,165,.28),0 6px 16px rgba(224,80,138,.4)}
+.routine-card.done .imgwrap img{filter:saturate(.94) brightness(1.01)}
 .routine-card .done-flag{
-  position:absolute;inset:auto 0 0 0;padding:6px;text-align:center;font-size:.72rem;font-weight:900;color:#fff;
-  background:linear-gradient(0deg,rgba(16,161,80,.92),rgba(16,161,80,0));
+  position:absolute;inset:auto 0 0 0;padding:8px 6px 9px;text-align:center;font-size:.86rem;font-weight:900;color:#fff;letter-spacing:-.01em;
+  text-shadow:0 1px 2px rgba(0,0,0,.28);
+  background:linear-gradient(0deg,rgba(16,161,80,.95),rgba(16,161,80,0));
   opacity:0;transform:translateY(8px);transition:.25s;
 }
 body.theme-rian .routine-card .done-flag{background:linear-gradient(0deg,rgba(224,80,138,.92),rgba(224,80,138,0))}
@@ -523,9 +525,6 @@ body.theme-rian .celebrate .close{background:linear-gradient(135deg,#ff9ec8,#e05
 .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:rgba(16,26,46,.92);color:#fff;font-weight:800;font-size:.85rem;padding:11px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
-/* 미리보기 표시 */
-.preview-flag{position:fixed;left:16px;bottom:16px;z-index:55;background:linear-gradient(135deg,#ffe9b8,#ffd07a);color:#7a4b00;font-weight:900;font-size:.78rem;padding:8px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(255,180,60,.35);display:none;align-items:center;gap:6px}
-.preview-flag.on{display:flex}
 
 /* 반응형 */
 @media (max-width:760px){
@@ -1049,14 +1048,11 @@ body.theme-rian .word-top h2{color:#7d2c53}
   </nav>
 
   <div class="controls">
-    <button class="ctl" id="btnPreview" aria-pressed="false" title="시계를 08:10으로 맞춰 20분 남은 상황을 확인합니다"><span class="ico">⏰</span><span class="ctl-label">08:10 미리보기</span></button>
     <button class="ctl" id="btnSound" aria-pressed="true" title="효과음 켜기/끄기"><span class="ico" id="soundIco">🔊</span><span class="ctl-label" id="soundLabel">효과음</span></button>
     <button class="ctl" id="btnFull" title="전체화면"><span class="ico">⛶</span><span class="ctl-label">전체화면</span></button>
     <button class="ctl" id="btnSettings" title="설정"><span class="ico">⚙️</span><span class="ctl-label">설정</span></button>
   </div>
 </div>
-
-<div class="preview-flag" id="previewFlag">⏰ 미리보기 모드 · 시계가 08:10이에요</div>
 
 <main>
   <!-- ================= 지호 오늘 (아침 준비·등교) ================= -->
@@ -1113,6 +1109,63 @@ body.theme-rian .word-top h2{color:#7d2c53}
           <div class="prep-chips" id="jihoTodayPrep"></div>
         </div>
         <div class="week-note" id="jihoWeekPrep"></div>
+      </section>
+    </div>
+
+    <div class="focus-row">
+    <section class="card affirm-card">
+      <div class="affirm-head"><span class="affirm-label">📣 오늘의 한마디</span></div>
+      <div class="affirm-quote">
+        <span class="affirm-emoji" id="affirmEmoji">🌟</span>
+        <p id="affirmText">나는 할 수 있어! 오늘도 멋지게 해낼 거야!</p>
+      </div>
+      <div class="affirm-foot">
+        <span class="affirm-hint">소리 내어 읽어 보세요</span>
+        <button class="affirm-btn" id="btnAffirm">확언 더 보기 🔄</button>
+      </div>
+    </section>
+
+      <section class="card word-card" id="wordCard" aria-labelledby="wordTitle">
+        <div class="word-top">
+          <h2 id="wordTitle">🔤 오늘의 영단어</h2>
+          <span class="word-pos" id="wordPos">명사</span>
+        </div>
+        <div class="word-main">
+          <div class="word-en" id="wordEn">apple</div>
+          <div class="word-side">
+            <div class="word-kr" id="wordKr">사과</div>
+            <div class="word-pron" id="wordPron"><span class="word-pron-label">[</span><span id="wordPronText">애플</span><span class="word-pron-label">]</span></div>
+          </div>
+        </div>
+        <div class="word-ex">
+          <div class="word-ex-e" id="wordExEn">I eat an apple every day.</div>
+          <div class="word-ex-k" id="wordExKr">나는 매일 사과를 먹어요.</div>
+        </div>
+        <div class="word-foot">
+          <span class="word-date" id="wordDate">11월 26일 · 1일 1단어</span>
+          <button class="word-say" id="wordSay" title="원어민 발음 듣기">🔊 발음 듣기</button>
+        </div>
+      </section>
+
+      <section class="card hanja-card" id="hanjaCard" aria-labelledby="hanjaTitle">
+        <div class="hanja-top">
+          <h2 id="hanjaTitle">✏️ 오늘의 한자</h2>
+          <span class="hanja-grade" id="hanjaGrade">6급</span>
+        </div>
+        <div class="hanja-main">
+          <div class="hanja-glyph" id="hanjaGlyph" lang="zh-Hant">天</div>
+          <div class="hanja-info">
+            <div class="hanja-hun" id="hanjaHun">하늘 <small>천</small></div>
+            <div class="hanja-words" id="hanjaWords"></div>
+          </div>
+        </div>
+        <div class="hanja-foot">
+          <button class="hanja-nav" id="hanjaPrev" title="이전 한자" aria-label="이전 한자">◀</button>
+          <span class="hanja-date" id="hanjaDate">오늘의 한자</span>
+          <button class="hanja-nav" id="hanjaNext" title="다음 한자" aria-label="다음 한자">▶</button>
+          <button class="hanja-today" id="hanjaToday" hidden>오늘로</button>
+        </div>
+        <p class="hanja-note">대한검정회 6급 → 7급 → 8급 70자 · 하루에 한 자씩</p>
       </section>
     </div>
 
@@ -1180,63 +1233,6 @@ body.theme-rian .word-top h2{color:#7d2c53}
         <button class="spend-undo" id="rewardUndo" hidden>↩️ 방금 쓴 시간 되돌리기</button>
       </div>
       <p class="reward-note" id="rewardNote">보너스는 누를 때마다 30분씩 쌓여요 · 쓴 만큼만 빠지고 나머지는 저금통에 남아요</p>
-    </div>
-
-    <div class="focus-row">
-    <section class="card affirm-card">
-      <div class="affirm-head"><span class="affirm-label">📣 오늘의 한마디</span></div>
-      <div class="affirm-quote">
-        <span class="affirm-emoji" id="affirmEmoji">🌟</span>
-        <p id="affirmText">나는 할 수 있어! 오늘도 멋지게 해낼 거야!</p>
-      </div>
-      <div class="affirm-foot">
-        <span class="affirm-hint">소리 내어 읽어 보세요</span>
-        <button class="affirm-btn" id="btnAffirm">확언 더 보기 🔄</button>
-      </div>
-    </section>
-
-      <section class="card word-card" id="wordCard" aria-labelledby="wordTitle">
-        <div class="word-top">
-          <h2 id="wordTitle">🔤 오늘의 영단어</h2>
-          <span class="word-pos" id="wordPos">명사</span>
-        </div>
-        <div class="word-main">
-          <div class="word-en" id="wordEn">apple</div>
-          <div class="word-side">
-            <div class="word-kr" id="wordKr">사과</div>
-            <div class="word-pron" id="wordPron"><span class="word-pron-label">[</span><span id="wordPronText">애플</span><span class="word-pron-label">]</span></div>
-          </div>
-        </div>
-        <div class="word-ex">
-          <div class="word-ex-e" id="wordExEn">I eat an apple every day.</div>
-          <div class="word-ex-k" id="wordExKr">나는 매일 사과를 먹어요.</div>
-        </div>
-        <div class="word-foot">
-          <span class="word-date" id="wordDate">11월 26일 · 1일 1단어</span>
-          <button class="word-say" id="wordSay" title="원어민 발음 듣기">🔊 발음 듣기</button>
-        </div>
-      </section>
-
-      <section class="card hanja-card" id="hanjaCard" aria-labelledby="hanjaTitle">
-        <div class="hanja-top">
-          <h2 id="hanjaTitle">✏️ 오늘의 한자</h2>
-          <span class="hanja-grade" id="hanjaGrade">6급</span>
-        </div>
-        <div class="hanja-main">
-          <div class="hanja-glyph" id="hanjaGlyph" lang="zh-Hant">天</div>
-          <div class="hanja-info">
-            <div class="hanja-hun" id="hanjaHun">하늘 <small>천</small></div>
-            <div class="hanja-words" id="hanjaWords"></div>
-          </div>
-        </div>
-        <div class="hanja-foot">
-          <button class="hanja-nav" id="hanjaPrev" title="이전 한자" aria-label="이전 한자">◀</button>
-          <span class="hanja-date" id="hanjaDate">오늘의 한자</span>
-          <button class="hanja-nav" id="hanjaNext" title="다음 한자" aria-label="다음 한자">▶</button>
-          <button class="hanja-today" id="hanjaToday" hidden>오늘로</button>
-        </div>
-        <p class="hanja-note">대한검정회 6급 → 7급 → 8급 70자 · 하루에 한 자씩</p>
-      </section>
     </div>
 
     <section class="card study-plan-card" id="studyPlanCard" aria-labelledby="studyPlanTitle">
@@ -1923,7 +1919,7 @@ function dk(d) { return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(
 function startOfDay(d) { const t = new Date(d); t.setHours(0, 0, 0, 0); return t; }
 const TODAY_KEY = () => dk(simNow());
 
-/* ---------------- 미리보기 시계 ---------------- */
+/* ---------------- 테스트용 시계 이동 ---------------- */
 let preview = false;
 let previewBase = 0;
 function simNow() {
@@ -2488,8 +2484,7 @@ function renderClock() {
   $('#clockSub').innerHTML = sub.join('');
 
   const g = $('#greetPill');
-  if (preview) g.textContent = '⏰ 미리보기 중';
-  else if (h < 6) g.textContent = '🌙 이른 새벽이에요';
+  if (h < 6) g.textContent = '🌙 이른 새벽이에요';
   else if (h < 9) g.textContent = '🌅 좋은 아침이에요';
   else if (h < 12) g.textContent = '☀️ 상쾌한 오전이에요';
   else if (h < 18) g.textContent = '🌤️ 좋은 오후예요';
@@ -3461,18 +3456,6 @@ $('#btnSound').addEventListener('click', () => {
   save(); setSoundUI();
   if (state.sound) SFX.check();
   toast(state.sound ? '효과음을 켰어요 🔊' : '효과음을 껐어요 🔇');
-});
-
-$('#btnPreview').addEventListener('click', () => {
-  preview = !preview;
-  previewBase = Date.now();
-  const b = $('#btnPreview');
-  b.setAttribute('aria-pressed', preview ? 'true' : 'false');
-  b.classList.toggle('off', !preview);
-  $('#previewFlag').classList.toggle('on', preview);
-  SFX.tap();
-  renderAll();
-  toast(preview ? '시계를 08:10으로 맞췄어요 — 20분 남은 상황!' : '실제 시간으로 돌아왔어요');
 });
 
 $('#btnFull').addEventListener('click', () => {
