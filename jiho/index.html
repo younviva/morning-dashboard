@@ -2226,15 +2226,6 @@ function rewardLongText(m) {
   const h = Math.floor(m / 60), r = m % 60;
   return '(' + h + '시간' + (r ? ' ' + r + '분' : '') + ')';
 }
-function rewardTickLabel(v, unit) {
-  if (v === 0) return '0분';
-  const h = Math.floor(v / 60), r = v % 60;
-  const hm = h + '시간' + (r ? ' ' + r + '분' : '');
-  if (unit >= 60) return h ? hm : v + '분';
-  if (v === 30) return '30분';
-  if (v % 60 === 0) return v + '분·' + hm;
-  return v + '분';
-}
 /* ---------------- 하나의 연속된 보상 시간 막대 ----------------
    30분 칸으로 쪼개지 않고, 0분 ~ 4시간(240분) 목표까지 하나의 막대로 부드럽게 채운다.
    4시간을 넘기면 막대는 가득 찬 채 보라색이 되고, 큰 숫자가 실제 시간을 보여 준다. */
