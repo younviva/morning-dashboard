@@ -752,19 +752,24 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .reward-day b{color:#d97706;font-size:.86rem;font-variant-numeric:tabular-nums}
 .reward-cap{margin:5px 0 0;font-size:.72rem;font-weight:800;color:#a8916a;letter-spacing:-.01em}
 #rewardTotal{margin-top:7px}
-.reward-bar{display:flex;gap:5px;margin:12px 0 5px}
-.rb-seg{flex:1 1 0;height:32px;border-radius:8px;background:#efe9de;overflow:hidden;position:relative;box-shadow:inset 0 1px 3px rgba(120,90,20,.1)}
-.rb-fill{position:absolute;inset:0;transform-origin:left center;transform:scaleX(0);background:linear-gradient(180deg,#ffd766,#f5a524);
-  transition:transform .5s cubic-bezier(.22,.9,.28,1)}
-.rb-seg.on .rb-fill{transform:scaleX(1)}
-.rb-seg.over .rb-fill{background:linear-gradient(180deg,#c4b5fd,#8b5cf6)}
-.rb-seg.on{box-shadow:0 3px 10px rgba(245,165,36,.26),inset 0 1px 3px rgba(120,90,20,.06)}
-.rb-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.63rem;font-weight:900;font-style:normal;color:#8a6a1e;opacity:0;transition:opacity .3s}
-.rb-seg.on .rb-num{opacity:.75;color:#6b4c00}
-.reward-ticks{position:relative;height:16px}
-.reward-ticks span{position:absolute;top:0;transform:translateX(-50%);font-size:.61rem;font-weight:800;color:#a2947a;white-space:nowrap}
-.reward-ticks span.first{transform:none}
-.reward-ticks span.last{transform:translateX(-100%)}
+/* 하나의 연속된 보상 시간 막대 (2026-11-26 개편)
+   · 30분 칸으로 쪼개지 않는다. 0분 ~ 4시간(240분) 목표까지 한 줄로 부드럽게 채운다.
+   · 4시간을 넘기면 막대는 가득 찬 채 보라색이 되고, 큰 숫자가 실제 시간을 보여 준다. */
+.reward-track{position:relative;margin:12px 0 0;height:34px;border-radius:999px;background:#efe9de;
+  overflow:hidden;box-shadow:inset 0 2px 5px rgba(120,90,20,.14)}
+.reward-fill{position:absolute;inset:0;transform-origin:left center;transform:scaleX(0);border-radius:999px;
+  background:linear-gradient(90deg,#ffd766 0%,#f8b12f 55%,#f59e0b 100%);
+  box-shadow:0 2px 10px rgba(245,165,36,.32);transition:transform .55s cubic-bezier(.22,.9,.28,1)}
+.reward-fill::after{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0) 58%)}
+.reward-track.full .reward-fill{background:linear-gradient(90deg,#a78bfa 0%,#8b5cf6 60%,#7c3aed 100%);
+  box-shadow:0 2px 12px rgba(139,92,246,.34)}
+.reward-scale{position:relative;height:15px;margin-top:5px}
+.reward-scale span{position:absolute;top:0;transform:translateX(-50%);font-size:.61rem;font-weight:800;color:#a2947a;white-space:nowrap}
+.reward-scale span.first{transform:none}
+.reward-scale span.last{transform:translateX(-100%)}
+.reward-goal{margin:3px 0 0;font-size:.72rem;font-weight:850;color:#a8916a;letter-spacing:-.01em}
+.reward-track.full ~ .reward-goal{color:#7c3aed}
 .reward-base{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:.79rem;font-weight:800;color:#8a7a58}
 .reward-base.ok{color:#0a7a42}
 .reward-base .rb-e{font-size:1rem;line-height:1}
@@ -804,7 +809,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
   .reward-top h3{font-size:.86rem}
   .bonus-btn{min-height:64px;font-size:1rem}
   .bonus-minus{flex-basis:60px;width:60px}
-  .rb-seg{height:28px}
+  .reward-track{height:30px}
   .spend-btn{min-height:58px;font-size:.92rem}
   .reward-cap{font-size:.69rem}
 }
@@ -823,8 +828,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
 .bh-total .u{font-size:1.15rem;font-weight:900;color:#b07a00}
 .bh-total small{font-size:.92rem;font-weight:850;color:#9b8a63;margin-left:6px}
 .bh-cap{margin:6px 0 0;font-size:.74rem;font-weight:800;color:#a8916a;letter-spacing:-.01em}
-.bank-hero .reward-bar{margin:13px 0 5px}
-.bank-hero .rb-seg{height:36px}
+.bank-hero .reward-track{margin:13px 0 0}
 .bh-chips{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:11px}
 .bh-chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #f0e5cd;border-radius:999px;
   padding:5px 10px;font-size:.73rem;font-weight:850;color:#8a7450;white-space:nowrap}
@@ -832,7 +836,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
   font-size:.75rem;font-weight:900;color:#a5761c;letter-spacing:-.01em;transition:background .16s}
 .bh-go:active{background:#fdf1d6}
 @media (max-width:620px){
-  .bank-hero .rb-seg{height:30px}
+  .bank-hero .reward-track{height:32px}
   .bh-go{margin-left:0;width:100%;min-height:44px}
 }
 
@@ -1022,6 +1026,45 @@ body.theme-rian .rw-tip{background:#fffdf4;border-color:#ffe6c9;color:#8a6a3a}
 body.theme-rian .modal-box{background:linear-gradient(170deg,#fffdfa,#fff6f6)}
 body.theme-rian .celebrate .box{background:linear-gradient(165deg,#fffdfa,#fff3f9);border-color:#ffd2e6}
 
+/* ---------- 오늘의 어린이집 급식 (누리애뜰어린이집 · 행복반) ---------- */
+body.theme-rian .meal-card{background:linear-gradient(160deg,#fffdfd,#fff6fa 88%);border-color:#ffe1ef}
+body.theme-rian .meal-card .card-head{margin-bottom:10px}
+body.theme-rian .meal-sub{color:#b8446f;background:#fff0f6;border-color:#ffd6e7}
+body.theme-rian .meal-empty{background:#fff8fb;border-color:#ffd9e9}
+body.theme-rian .meal-empty b{color:#a03a63}
+body.theme-rian .meal-empty span{color:#a4808f}
+body.theme-rian .meal-next{background:#fff;border-color:#ffe4ef;color:#7d6472}
+body.theme-rian .meal-next b{color:#c2507a}
+body.theme-rian .dish{border-color:#ffe3ef;box-shadow:0 4px 12px rgba(200,120,160,.09);color:#3f2f36}
+body.theme-rian .dish.main{background:linear-gradient(135deg,#fff8fb,#ffe9f2);border-color:#ffcfe1}
+body.theme-rian .meal-updated{color:#b79aa7}
+
+.rm-rows{display:flex;flex-direction:column;gap:9px}
+.rm-row{display:flex;align-items:flex-start;gap:9px}
+.rm-tag{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;
+  font-size:.74rem;font-weight:900;letter-spacing:-.01em;white-space:nowrap;
+  padding:6px 10px;border-radius:11px;
+  background:#fff1f7;border:1px solid #ffd9e8;color:#a63c66;
+}
+.rm-row.lunch .rm-tag{background:linear-gradient(135deg,#fff3f8,#ffdfec);border-color:#ffc9dd;color:#a83360;font-size:.8rem}
+.rm-tag .t{font-size:.64rem;font-weight:800;color:#c58ba3;margin-left:2px}
+.rm-items{display:flex;flex-wrap:wrap;gap:6px;min-width:0;flex:1 1 auto}
+.rm-item{
+  display:inline-flex;align-items:center;gap:5px;
+  background:#fff;border:1.5px solid #ffe3ef;border-radius:11px;
+  padding:6px 10px;font-size:.84rem;font-weight:850;color:#3f2f36;line-height:1.25;
+  box-shadow:0 3px 9px rgba(200,120,160,.07);
+}
+.rm-row.lunch .rm-item{background:linear-gradient(135deg,#fffafc,#fff0f7);border-color:#ffd3e3;font-size:.9rem;padding:7px 11px}
+.rm-item .e{font-size:1rem;line-height:1}
+.rm-empty-note{margin:9px 0 0;font-size:.74rem;font-weight:800;color:#b08a9b;line-height:1.5}
+@media (max-width:620px){
+  .rm-row{flex-direction:column;gap:6px}
+  .rm-item{font-size:.8rem;padding:5px 9px}
+  .rm-row.lunch .rm-item{font-size:.84rem;padding:6px 9px}
+}
+
 </style>
 </head>
 <body class="theme-rian">
@@ -1090,6 +1133,17 @@ body.theme-rian .celebrate .box{background:linear-gradient(165deg,#fffdfa,#fff3f
     </section>
 
     <!-- (개편: 상단 시계·히어로 배지와 중복되던 카운트 카드는 제거) -->
+
+    <section class="card meal-card" id="rianMealCard" aria-labelledby="rianMealTitle" style="margin-top:14px">
+      <div class="card-head">
+        <h2 id="rianMealTitle">🍚 오늘의 어린이집 밥</h2>
+        <span class="meal-sub" id="rianMealPill">불러오는 중…</span>
+      </div>
+      <div class="meal-body" id="rianMealBody"></div>
+      <div class="meal-foot">
+        <span class="meal-updated" id="rianMealNote">누리애뜰어린이집 · 행복반</span>
+      </div>
+    </section>
 
     <section class="card hangul-card" id="hangulCard" aria-labelledby="hangulTitle">
       <div class="hg-top">
@@ -2125,11 +2179,141 @@ $('#hangulSay') && $('#hangulSay').addEventListener('click', e => { e.stopPropag
 $('#hangulStage') && $('#hangulStage').addEventListener('click', () => speakHangul());
 $('#hangulStage') && $('#hangulStage').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); speakHangul(); } });
 
+/* ============================================================
+   오늘의 어린이집 밥 — 누리애뜰어린이집(행복반)
+   출처: 키즈노트 [식단표](그날 선생님이 올린 일별 메뉴)
+         + 원 공지 「2026년 11월 식단표」(2026-10-30 월간 계획표)
+   · 일별 등록이 있는 날(11/2~11/26)은 그날 올라온 실제 메뉴
+   · 11/27·11/30은 일별 등록 전이라 월간 계획표 메뉴
+   · 12월 식단표는 아직 원에서 올리지 않음
+   ============================================================ */
+const MEAL_PLAN_DAYS = { '2026-11-27': 1, '2026-11-30': 1 };
+const MEAL = {
+  '2026-11-02': ['떠먹는요구르트', ['쌀밥', '갈은건새우열무된장국', '치즈달걀말이', '우엉채조림', '백김치'], '들깨칼국수'],
+  '2026-11-03': ['배', ['쌀밥', '들깨미역국', '소불고기', '잡채', '백김치'], '롤케이크 우유'],
+  '2026-11-04': ['씨리얼 우유', ['해물볶음밥', '부추장국', '푸실리샐러드', '백김치'], '찐단호박 두유'],
+  '2026-11-05': ['사과 치즈', ['쌀밥', '갈은북엇국', '돈육장조림', '근대나물', '백김치'], '감자채전'],
+  '2026-11-06': ['미숫가루우유', ['잡곡밥', '순두부백탕', '닭살데리야끼볶음', '오이무침', '백김치'], '카스테라 보리차'],
+  '2026-11-09': ['떠먹는요구르트', ['쌀밥', '청국장찌개', '제육볶음', '사과상추무침', '백김치'], '로제스파게티'],
+  '2026-11-10': ['배 우유', ['잡곡밥', '콩나물국', '순살고등어조림', '시금치나물', '백김치'], '치킨너겟'],
+  '2026-11-11': ['곡물스낵 우유', ['소보로채소비빔밥', '맑은미역국', '떡갈비구이', '백김치'], '찐감자 두유'],
+  '2026-11-12': ['단감 치즈', ['쌀밥', '아욱된장국', '영양찜닭', '도토리묵', '백김치'], '참치주먹밥'],
+  '2026-11-13': ['샤인머스캣', ['잡곡밥', '맑은육개장', '잔멸치조림', '애호박나물', '백김치'], '소보로빵 우유'],
+  '2026-11-16': ['떠먹는요구르트', ['쌀밥', '숙주당면국', '소고기청경채볶음', '새송이버섯나물', '백김치'], '감자수제비'],
+  '2026-11-17': ['단감', ['잡곡밥', '유부된장국', '오리불고기', '얼갈이나물무침', '백김치'], '팬케이크 우유'],
+  '2026-11-18': ['샤인머스캣 우유', ['돈육짜장덮밥', '달걀국', '콘샐러드', '백김치'], '찐고구마 두유'],
+  '2026-11-19': ['배 치즈', ['쌀밥', '우동면국', '생선까스', '양상추유자무침', '백김치'], '삼색납작김밥'],
+  '2026-11-20': ['미숫가루우유', ['잡곡밥', '무채맑은국', '돈육콩나물볶음', '브로콜리숙회', '백김치'], '크림빵 보리차'],
+  '2026-11-23': ['배 우유', ['쌀밥', '근대된장국', '소고기찹스테이크', '숙주나물무침', '백김치'], '비빔쌀국수'],
+  '2026-11-24': ['떠먹는요구르트', ['잡곡밥', '맑은콩나물국', '돼지불고기', '김구이', '백김치'], '찐만두 양념장'],
+  '2026-11-25': ['쌀과자 우유', ['소고기감자영양밥', '양념장', '어묵국', '채소전', '백김치'], '찐달걀 두유'],
+  '2026-11-26': ['방울토마토 치즈', ['쌀밥', '청경채맑은국', '삼치단호박조림', '들깨모듬버섯볶음', '백김치'], '소고기우엉주먹밥'],
+  '2026-11-27': ['과일(단감)', ['잡곡밥(흑미)', '뼈없는감자탕', '달걀찜', '양배추된장무침', '백김치(깍두기)'], '빵(머핀) 우유'],
+  '2026-11-30': ['떠먹는요구르트', ['쌀밥', '소고기무국', '두부양념조림', '맛살채소볶음', '백김치(깍두기)'], '잔치국수']
+};
+
+function dishEmoji(s) {
+  const t = String(s || '');
+  const has = re => re.test(t);
+  if (has(/빵|케이크|카스테라|머핀|팬케이크|소보로|쿠키|과자|스낵/)) return '🍞';
+  if (has(/우유|두유|요구르트|요거트/)) return '🥛';
+  if (has(/밥/)) return '🍚';
+  if (has(/국수|수제비|스파게티|파스타|짜장|우동|당면|라면/)) return '🍜';
+  if (has(/탕|국|찌개|개장/)) return '🍲';
+  if (has(/김치|깍두기|나물|무침|샐러드|숙회|상추|브로콜리|양배추|묵/)) return '🥬';
+  if (has(/버섯/)) return '🍄';
+  if (has(/만두/)) return '🥟';
+  if (has(/달걀|계란/)) return '🥚';
+  if (has(/생선|고등어|삼치|멸치|까스|어묵|맛살/)) return '🐟';
+  if (has(/감자|고구마|단호박/)) return '🥔';
+  if (has(/치즈/)) return '🧀';
+  if (has(/김밥|주먹밥|김구이/)) return '🍙';
+  if (has(/떡갈비|닭|오리|불고기|스테이크|너겟|데리야끼|제육|돈육|돼지|소고기|찹|볶음|조림|찜|구이/)) return '🍖';
+  if (has(/떡/)) return '🍡';
+  if (has(/단감|사과|배|샤인머스캣|딸기|토마토|과일|포도|바나나/)) return '🍎';
+  if (has(/전/)) return '🍳';
+  if (has(/차|주스/)) return '🥤';
+  return '🍽️';
+}
+
+function mealItemsHTML(list) {
+  return list.map(function (s) {
+    return '<span class="rm-item"><span class="e">' + dishEmoji(s) + '</span>' + s + '</span>';
+  }).join('');
+}
+
+function mealKeyLabel(k) {
+  const d = keyToDate(k);
+  return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + DOW[d.getDay()] + '요일';
+}
+
+function nextMealKey(fromKey) {
+  const d = keyToDate(fromKey);
+  for (let i = 1; i <= 62; i++) {
+    const t = new Date(d.getFullYear(), d.getMonth(), d.getDate() + i);
+    const k = dk(t);
+    if (MEAL[k]) return k;
+  }
+  return null;
+}
+
+function renderRianMeal() {
+  const body = $('#rianMealBody');
+  const pill = $('#rianMealPill');
+  const note = $('#rianMealNote');
+  if (!body) return;
+  const now = simNow();
+  const key = dk(now);
+  const dow = now.getDay();
+  const info = MEAL[key] || null;
+  const fromPlan = !!MEAL_PLAN_DAYS[key];
+
+  pill.textContent = (now.getMonth() + 1) + '월 ' + now.getDate() + '일 ' + DOW[dow] + '요일';
+  pill.className = 'meal-sub';
+
+  if (info) {
+    body.innerHTML =
+      '<div class="rm-rows">'
+      + '<div class="rm-row"><span class="rm-tag">🌤 오전 간식</span>'
+      + '<div class="rm-items">' + mealItemsHTML([info[0]]) + '</div></div>'
+      + '<div class="rm-row lunch"><span class="rm-tag">🍚 점심</span>'
+      + '<div class="rm-items">' + mealItemsHTML(info[1]) + '</div></div>'
+      + '<div class="rm-row"><span class="rm-tag">🍪 오후 간식</span>'
+      + '<div class="rm-items">' + mealItemsHTML([info[2]]) + '</div></div>'
+      + '</div>'
+      + (fromPlan ? '<p class="rm-empty-note">선생님이 오늘 일별 식단을 올리기 전이라, 원에서 미리 올린 11월 식단표 계획대로 보여드려요.</p>' : '');
+    if (note) note.textContent = '누리애뜰어린이집 · 행복반 · ' + (fromPlan ? '11월 식단표(계획)' : '키즈노트 식단표');
+    return;
+  }
+
+  const off = (dow === 0 || dow === 6);
+  const nk = nextMealKey(key);
+  const nextHTML = nk
+    ? '<div class="meal-next">🍚 <b>다음 급식</b> · ' + mealKeyLabel(nk) + ' — ' + MEAL[nk][1].join(', ') + '</div>'
+    : '';
+  let title, sub, ico;
+  if (off) {
+    ico = '🏡';
+    title = '오늘은 어린이집 쉬는 날';
+    sub = (dow === 6 ? '토요일' : '일요일') + '은 집에서 쉬어요';
+  } else {
+    ico = '📭';
+    title = '오늘 식단표가 아직 안 올라왔어요';
+    sub = (now.getMonth() + 1) >= 12
+      ? ((now.getMonth() + 1) + '월 식단표는 원에서 아직 올리지 않았어요')
+      : '선생님이 올려주시면 여기에 보여드릴게요';
+  }
+  body.innerHTML = '<div class="meal-empty"><span class="e">' + ico + '</span><div><b>' + title
+    + '</b><span>' + sub + '</span></div></div>' + nextHTML;
+  if (note) note.textContent = '누리애뜰어린이집 · 행복반';
+}
+
 /* ---------------- 렌더 전체 ---------------- */
 function renderAll() {
   renderClock();
   renderCountdowns();
   renderRoutines();
+  renderRianMeal();
   renderHangul();
   renderCalendar();
   renderRewards();
@@ -2185,6 +2369,7 @@ window.__JRM = {
   rewards: REWARDS, simNow: simNow, doneCount: doneCount,
   hangul: { list: HANGUL, today: hgTodayIndex, current: hgCurrent, render: renderHangul, step: hgStep, offset: () => hgOffset, speak: speakHangul },
   routines: ROUTINES, RN: RN,
+  meal: { data: MEAL, of: k => MEAL[k] || null, next: nextMealKey, render: renderRianMeal, emoji: dishEmoji, planDays: MEAL_PLAN_DAYS },
   wx: { render: renderWeather, cat: outfitCat, icon: wxSimple }
 };
 })();
