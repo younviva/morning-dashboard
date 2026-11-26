@@ -1336,6 +1336,21 @@ body.theme-rian .meal-updated{color:#b79aa7}
   .tab-hero{max-width:1120px;margin-left:auto;margin-right:auto}
 }
 
+/* ---------- 스티커 정리 (되돌리기·초기화) ---------- */
+.sk-tools{display:flex;flex-wrap:wrap;gap:8px}
+.sk-tool{
+  flex:1 1 200px;min-height:54px;border-radius:16px;cursor:pointer;
+  border:2px solid #ffe2ee;background:#fff;font-weight:900;font-size:.92rem;color:#a8557d;
+  transition:transform .12s, background .2s, border-color .2s;
+}
+.sk-tool:hover{border-color:#ffc9dd;background:#fff8fc}
+.sk-tool:active{transform:scale(.97)}
+.sk-tool:disabled{opacity:.42;cursor:default;transform:none}
+.sk-tool.danger{color:#b3261e;border-color:#ffd9d6;background:#fffafa}
+.sk-tool.danger:hover{background:#fff4f3;border-color:#ffbfb8}
+.sk-tool.armed{background:#ffe9e7;border-color:#ff9f95;color:#9c120a;box-shadow:0 6px 16px rgba(200,40,30,.16)}
+.sk-tool-note{margin-top:10px;font-size:.74rem;font-weight:800;color:#b08a9b;line-height:1.5}
+
 </style>
 </head>
 <body class="theme-rian">
@@ -1618,6 +1633,18 @@ body.theme-rian .meal-updated{color:#b79aa7}
       <div class="sum-list" id="weekRecord"></div>
       <p class="rw-empty-note muted" id="storageWarn" hidden style="margin-top:10px"></p>
     </section>
+
+    <section class="card sticker-tools" style="margin-top:14px">
+      <div class="card-head">
+        <h2>🧹 스티커 정리</h2>
+        <span class="muted">잘못 붙었을 때만 써요</span>
+      </div>
+      <div class="sk-tools">
+        <button class="sk-tool" id="skUndo">↩️ 방금 스티커 1개 빼기</button>
+        <button class="sk-tool danger" id="skReset">🗑️ 스티커판 초기화</button>
+      </div>
+      <p class="sk-tool-note" id="skToolNote">방금 받은 스티커 하나를 뺄 수 있어요. 초기화는 두 번 눌러야 지워져요.</p>
+    </section>
   </section>
 </main>
 
@@ -1704,12 +1731,12 @@ const ROUTINES = [
 ];
 const RN = ROUTINES.length; /* 오늘의 루틴 단계 수 (7) */
 
-/* 스티커 12종 — 아침 루틴·놀이·동화로 하나씩 모은다 */
+/* 스티커 12종 — 아침 루틴·놀이·동화로 하나씩 모은다 (공주 → 리본으로 교체) */
 const STICKERS = [
-  { k: 'princess', e: '👸', n: '공주님' }, { k: 'crown', e: '👑', n: '왕관' },
+  { k: 'ribbon', e: '🎀', n: '리본' }, { k: 'crown', e: '👑', n: '왕관' },
   { k: 'unicorn', e: '🦄', n: '유니콘' }, { k: 'heart', e: '💗', n: '하트' },
   { k: 'rainbow', e: '🌈', n: '무지개' }, { k: 'rabbit', e: '🐰', n: '토끼' },
-  { k: 'star', e: '⭐', n: '별' }, { k: 'ribbon', e: '🎀', n: '리본' },
+  { k: 'star', e: '⭐', n: '별' }, { k: 'candy', e: '🍬', n: '사탕' },
   { k: 'blossom', e: '🌸', n: '벚꽃' }, { k: 'strawberry', e: '🍓', n: '딸기' },
   { k: 'fairy', e: '🧚', n: '요정' }, { k: 'moon', e: '🌙', n: '보름달' }
 ];
@@ -2865,11 +2892,66 @@ function updateStickerQuick() {
   const el = $('#todayStickerNum');
   if (el) el.textContent = todayStickers().length;
 }
+
+/* 저장된 스티커 중 지금 없는 종류(예전 공주 스티커)는 정리한다 */
+function sanitizeStickers() {
+  if (!state.stickers || typeof state.stickers !== 'object') state.stickers = {};
+  const known = {};
+  STICKERS.forEach(s => { known[s.k] = 1; });
+  let changed = false;
+  Object.keys(state.stickers).forEach(d => {
+    const arr = state.stickers[d];
+    if (!Array.isArray(arr)) { delete state.stickers[d]; changed = true; return; }
+    const keep = arr.filter(s => s && known[s.t]);
+    if (keep.length !== arr.length) changed = true;
+    if (keep.length) state.stickers[d] = keep;
+    else delete state.stickers[d];
+  });
+  if (changed) save();
+}
+
+/* 스티커 되돌리기 — 가장 마지막에 붙은 스티커 하나를 뺀다 */
+function lastStickerRef() {
+  const days = Object.keys(state.stickers || {}).sort();
+  for (let i = days.length - 1; i >= 0; i--) {
+    const arr = state.stickers[days[i]];
+    if (Array.isArray(arr) && arr.length) return { day: days[i], arr: arr };
+  }
+  return null;
+}
+function undoSticker() {
+  const ref = lastStickerRef();
+  if (!ref) { toast('뺄 스티커가 없어요'); return false; }
+  const st = ref.arr.pop();
+  if (!ref.arr.length) delete state.stickers[ref.day];
+  /* 놀이로 받은 스티커를 빼면 그 놀이는 다시 3번부터 (다시 받을 수 있게) */
+  if (st && typeof st.src === 'string' && st.src.indexOf('play:') === 0) {
+    delete state.playTaps[TODAY_KEY() + ':' + st.src.slice(5)];
+  }
+  save();
+  SFX.uncheck();
+  renderStickerTab();
+  renderPlayHints();
+  toast('↩️ ' + stickerOf(st.t).n + ' 스티커를 뺐어요');
+  return true;
+}
+function resetStickers() {
+  state.stickers = {};
+  state.playTaps = {};
+  save();
+  SFX.tap();
+  renderStickerTab();
+  renderStoryShelf();
+  renderPlayHints();
+  toast('🗑️ 스티커판을 비웠어요');
+}
 function renderStickerTab() {
   const today = todayStickers();
   const total = stickerTotal();
   const per = 20;
   const inBoard = (total > 0 && total % per === 0) ? per : (total % per);
+  const undoBtn = $('#skUndo');
+  if (undoBtn) undoBtn.disabled = total === 0;
 
   const tEl = $('#skToday'), totEl = $('#skTotal');
   if (!tEl) return;
@@ -3189,6 +3271,38 @@ function stopAuto() {
 $('#srSay') && $('#srSay').addEventListener('click', () => { storyAuto = false; renderStoryPage(); sayStoryPage(); });
 $('#srAuto') && $('#srAuto').addEventListener('click', () => { SFX.tap(); if (storyAuto) stopAuto(); else startAuto(); });
 
+/* 스티커 정리 — 되돌리기는 한 번, 초기화는 두 번 눌러야 지워진다 */
+let resetArmed = false;
+let resetTimer = null;
+const SK_TOOL_NOTE = '방금 받은 스티커 하나를 뺄 수 있어요. 초기화는 두 번 눌러야 지워져요.';
+function disarmReset() {
+  resetArmed = false;
+  clearTimeout(resetTimer);
+  const b = $('#skReset');
+  if (b) { b.classList.remove('armed'); b.textContent = '🗑️ 스티커판 초기화'; }
+  const n = $('#skToolNote');
+  if (n) n.textContent = SK_TOOL_NOTE;
+}
+$('#skUndo') && $('#skUndo').addEventListener('click', () => {
+  SFX.tap();
+  disarmReset();
+  undoSticker();
+});
+$('#skReset') && $('#skReset').addEventListener('click', () => {
+  const b = $('#skReset'), n = $('#skToolNote');
+  if (!resetArmed) {
+    resetArmed = true;
+    SFX.tap();
+    if (b) { b.classList.add('armed'); b.textContent = '⚠️ 정말 지울까요? 한 번 더 누르세요'; }
+    if (n) n.textContent = '5초 안에 한 번 더 누르면 오늘까지 모은 스티커가 모두 지워져요.';
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(disarmReset, 5000);
+    return;
+  }
+  disarmReset();
+  resetStickers();
+});
+
 document.addEventListener('click', e => {
   const t = e.target.closest ? e.target.closest('[data-hgtile],[data-story],[data-num],[data-animal],[data-color],[data-shape]') : null;
   if (!t) return;
@@ -3243,6 +3357,7 @@ function tick() {
 }
 
 /* ---------------- 시작 ---------------- */
+sanitizeStickers();
 paintAvatars();
 setSoundUI();
 renderAll();
@@ -3279,7 +3394,7 @@ window.__JRM = {
   hangul: { list: HANGUL, today: hgTodayIndex, current: hgCurrent, render: renderHangul, step: hgStep, offset: () => hgOffset, speak: speakHangul, grid: renderHangulGrid, select: hgSelect },
   routines: ROUTINES, RN: RN,
   tts: { say: speak, stop: stopSpeak, log: spokenLog },
-  sticker: { total: stickerTotal, today: todayStickers, counts: stickerCounts, award: awardSticker, render: renderStickerTab, list: STICKERS, src: stickerSrcLabel },
+  sticker: { total: stickerTotal, today: todayStickers, counts: stickerCounts, award: awardSticker, render: renderStickerTab, list: STICKERS, src: stickerSrcLabel, undo: undoSticker, reset: resetStickers, sanitize: sanitizeStickers },
   play: {
     render: renderPlay, hints: renderPlayHints, animals: PLAY_ANIMALS, colors: PLAY_COLORS, shapes: PLAY_SHAPES,
     setNum: n => { numN = n; renderNumbers(); }, setColor: i => { colI = i; renderShapeStage(); }, setShape: i => { shpI = i; renderShapeStage(); },
