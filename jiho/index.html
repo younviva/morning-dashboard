@@ -917,6 +917,117 @@ body.theme-rian .word-top h2{color:#7d2c53}
   .eng-next{font-size:.74rem}
 }
 
+/* ============ 📚 공부 탭 (2026-11-26) ============ */
+#view-study > .study-card{margin-top:0}
+#view-study .reward-box{margin-top:14px}
+.study-plan-card{margin-top:14px}
+.study-sched{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px;padding:9px 11px;border-radius:13px;background:#f4f9ff;border:1px dashed #cfe0fb}
+.ss-label{font-size:.72rem;font-weight:900;color:#4a7ad8;letter-spacing:-.01em}
+.ss-item{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #d7e7ff;border-radius:11px;padding:6px 10px;box-shadow:0 3px 10px rgba(47,107,255,.08)}
+.ss-item.cats{border-color:#cbeedb;background:#f7fdfa}
+.ss-e{font-size:1.05rem;line-height:1}
+.ss-t{display:flex;flex-direction:column;min-width:0}
+.ss-t b{font-size:.8rem;font-weight:900;color:#1f4fd8;letter-spacing:-.02em;word-break:keep-all}
+.ss-item.cats .ss-t b{color:#0a7442}
+.ss-item.none .ss-t b{color:#5b6b8a}
+.ss-t small{font-size:.66rem;font-weight:800;color:#8b98b0;word-break:keep-all}
+.splan{display:grid;gap:8px;grid-template-columns:repeat(7,minmax(0,1fr))}
+.sp-day{border:1px solid #e8effb;border-radius:13px;padding:8px 9px;background:#fff;min-width:0}
+.sp-day.today{border-color:#2f6bff;background:linear-gradient(165deg,#fff,#eff5ff);box-shadow:0 0 0 3px rgba(47,107,255,.12)}
+.sp-dow{display:flex;align-items:baseline;gap:4px;font-size:.78rem;font-weight:900;color:#2b3f63;margin-bottom:6px;flex-wrap:wrap}
+.sp-dow small{font-size:.62rem;font-weight:800;color:#93a0b8}
+.sp-dow em{font-size:.56rem;font-weight:900;color:#fff;background:#2f6bff;border-radius:999px;padding:1px 6px;font-style:normal}
+.sp-items{display:grid;gap:4px}
+.sp-it{display:block;font-size:.68rem;font-weight:800;color:#3a4a68;background:#f6f9ff;border-radius:7px;padding:3px 6px;line-height:1.3;word-break:keep-all}
+.sp-it.kr{background:#eef3ff;color:#2554d8}
+.sp-it.math{background:#f4efff;color:#6d43c8}
+.sp-it.read{background:#eefaf3;color:#0b7a45}
+.sp-it.eng{background:#fff6e6;color:#a56500}
+.sp-it.ivy{background:#e6f0ff;color:#1a46b8;box-shadow:inset 0 0 0 1px #d3e3ff}
+.sp-it.cats{background:#e9faf1;color:#0a7442;box-shadow:inset 0 0 0 1px #cbeedb}
+@media(max-width:899px){.splan{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.splan{grid-template-columns:1fr}}
+
+/* ============ 🏫 주간학습 탭 ============ */
+.week-head{align-items:center;gap:8px;flex-wrap:wrap}
+.week-range{font-size:.8rem;font-weight:900;color:#2b4a86;background:#eef4ff;border:1px solid #d9e6ff;border-radius:999px;padding:5px 11px;white-space:nowrap}
+.week-head .pill{margin-left:auto}
+.week-today{margin:2px 0 12px;padding:10px 12px;border-radius:13px;background:#fff8e6;border:1px dashed #ffdd95;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.wtp-t{font-size:.8rem;font-weight:900;color:#8a5a00}
+.wtp-v{font-size:.8rem;font-weight:800;color:#6b5225}
+.wtp-v b{color:#c47a00}
+.wtp-1{color:#3f5a8a;border-left:1px solid #f0dcae;padding-left:10px}
+.week-table-wrap{overflow-x:auto}
+.wt{width:100%;border-collapse:separate;border-spacing:4px;min-width:780px}
+.wt th,.wt td{vertical-align:top;text-align:left}
+.wt thead th{background:#f5f9ff;border-radius:10px;padding:8px;font-size:.78rem;color:#3a5480;font-weight:900}
+.wt thead th.today{background:#eaf2ff;box-shadow:inset 0 0 0 2px #2f6bff}
+.wt-dow{display:block;font-size:.95rem;font-weight:900;color:#1f4fd8}
+.wt thead th small{display:block;font-size:.66rem;color:#7d8ca8;font-weight:800;margin-top:1px}
+.wt-rowhead{width:80px;background:#fbfcff;border-radius:10px;padding:8px 6px;font-size:.74rem;color:#5b6b8a}
+.wt-rowhead b{display:block;font-weight:900;color:#2b3f63}
+.wt-rowhead small{display:block;font-size:.62rem;color:#93a0b8;font-weight:800;white-space:nowrap}
+.wt-corner{width:80px}
+.wt tbody td{background:#fff;border:1px solid #eaf1fc;border-radius:10px;padding:7px 8px}
+.wt tbody td.today{background:#f4f9ff;border-color:#bcd6ff;box-shadow:inset 0 0 0 1.5px #2f6bff}
+.wt-subj{display:inline-block;font-size:.62rem;font-weight:900;border-radius:6px;padding:2px 6px;margin-bottom:3px;background:#eef3ff;color:#2554d8}
+.wt-subj.kr{background:#eef3ff;color:#2554d8}
+.wt-subj.math{background:#f4efff;color:#6d43c8}
+.wt-subj.imag{background:#fff1f6;color:#c2196a}
+.wt-subj.self{background:#eef7f1;color:#237a52}
+.wt-subj.club{background:#eaf6f7;color:#0d6d78}
+.wt-subj.story{background:#fff7e6;color:#a56500}
+.wt-subj.int{background:#fff0e6;color:#b35400}
+.wt-txt{display:block;font-size:.72rem;font-weight:750;color:#2b3a57;line-height:1.4;word-break:keep-all}
+.wt-txt b{color:#1f4fd8}
+.wt-page{display:block;font-size:.64rem;font-weight:800;color:#93a0b8;margin-top:2px}
+.wt-am{font-size:1rem;margin-right:3px}
+.wt-none{color:#c3ccdd;font-weight:900}
+.week-days{display:none;gap:10px;grid-template-columns:1fr}
+@media(max-width:899px){
+  .week-table-wrap{display:none}
+  .week-days{display:grid}
+}
+.wd-card{border:1px solid #e7eefb;border-radius:14px;padding:10px 12px;background:#fff}
+.wd-card.today{border-color:#2f6bff;background:linear-gradient(165deg,#fff,#eff5ff);box-shadow:0 0 0 3px rgba(47,107,255,.12)}
+.wd-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.wd-head b{font-size:.95rem;font-weight:900;color:#1f4fd8}
+.wd-head span{font-size:.72rem;font-weight:800;color:#8b98b0}
+.wd-head em{font-size:.62rem;font-weight:900;color:#fff;background:#2f6bff;border-radius:999px;padding:2px 7px;font-style:normal}
+.wd-row{display:flex;gap:8px;padding:4px 0;border-top:1px dashed #eef3fc}
+.wd-row:first-of-type{border-top:0}
+.wd-k{flex:0 0 44px;font-size:.66rem;font-weight:900;color:#93a0b8}
+.wd-v{flex:1;min-width:0;font-size:.78rem;font-weight:750;color:#2b3a57;line-height:1.45;word-break:keep-all}
+.wd-v b{color:#1f4fd8;font-weight:900}
+.wd-v small{color:#93a0b8;font-weight:800;font-size:.68rem}
+.wd-v .wt-subj{margin-bottom:0;margin-right:3px}
+.week-note{font-size:.72rem;font-weight:750;color:#93a0b8;margin:10px 0 0}
+.notice-card{margin-top:14px}
+.notice-body{display:grid;gap:9px}
+.nt-item{display:flex;gap:8px;font-size:.8rem;line-height:1.5;color:#33405c}
+.nt-e{flex:0 0 auto;font-size:1rem;line-height:1.35}
+.nt-item b{font-weight:850;color:#22304d;display:block;word-break:keep-all}
+.nt-s{display:block;color:#5b6b8a;font-size:.76rem;margin-top:2px}
+.nt-star{color:#e08a00}
+.nt-rules{margin:4px 0 0;padding-left:20px;display:grid;gap:4px;font-size:.76rem;color:#4a5878;line-height:1.5;word-break:keep-all}
+/* 달력: 학교 학사일정 */
+.ecal-cell.has-ev{background:linear-gradient(170deg,#fffdf6,#fff8ea);border-color:#f6e6c4}
+.ecal-cell.has-ev.sun{background:#fffaf6}
+.ecal-cell.in-run{background:#fbfaf4;border-color:#f2ecd9}
+.ecal-cell.in-run .dnum{color:#a9a08a}
+.ecal-name.sch{color:#a05a00}
+.ecal-more{font-size:.6rem;font-weight:900;color:#a05a00;background:#fff2d8;border-radius:999px;padding:1px 5px}
+.ecal-next.sch{color:#8a5300;background:#fff8e8;border-color:#f5dfae}
+.ecal-next.sch b{color:#6d4200}
+
+/* 탭이 5개 — 좁은 화면에서는 한 줄에 다 보이게 두 줄로 접는다 */
+@media(max-width:560px){
+  body.theme-jiho .tabs{display:grid;grid-template-columns:repeat(6,1fr);border-radius:16px}
+  body.theme-jiho .tab{grid-column:span 2;justify-content:center;padding:8px 2px;font-size:.78rem}
+  body.theme-jiho .tab:nth-child(4){grid-column:2 / span 2}
+  body.theme-jiho .tab:nth-child(5){grid-column:4 / span 2}
+}
+
 </style>
 </head>
 <body class="theme-jiho">
@@ -930,8 +1041,10 @@ body.theme-rian .word-top h2{color:#7d2c53}
   </div>
 
   <nav class="tabs" role="tablist" aria-label="화면 선택">
-    <button class="tab active" role="tab" aria-selected="true" data-tab="jiho" id="tabjiho">🧱 지호 오늘</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="timetable" id="tabtimetable">📅 주간 시간표</button>
+    <button class="tab active" role="tab" aria-selected="true" data-tab="jiho" id="tabjiho">🌅 지호 오늘</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="study" id="tabstudy">📚 공부</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="week" id="tabweek">🏫 주간학습</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="timetable" id="tabtimetable">🗓️ 주간 시간표</button>
     <button class="tab" role="tab" aria-selected="false" data-tab="rewards" id="tabrewards">🏆 보상 도감</button>
   </nav>
 
@@ -946,7 +1059,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
 <div class="preview-flag" id="previewFlag">⏰ 미리보기 모드 · 시계가 08:10이에요</div>
 
 <main>
-  <!-- ================= 지호 오늘 ================= -->
+  <!-- ================= 지호 오늘 (아침 준비·등교) ================= -->
   <section class="view active" id="view-jiho" role="tabpanel" aria-labelledby="tabjiho">
 
     <div class="hero-grid grid2">
@@ -1000,8 +1113,73 @@ body.theme-rian .word-top h2{color:#7d2c53}
           <div class="prep-chips" id="jihoTodayPrep"></div>
         </div>
         <div class="week-note" id="jihoWeekPrep"></div>
-        <div class="eng-next" id="jihoEngNext"></div>
       </section>
+    </div>
+
+    <section class="card meal-card" id="mealCard" style="margin-top:14px">
+      <div class="card-head">
+        <h2>🍱 오늘의 급식 <span class="meal-sub">광명초</span></h2>
+        <span class="pill" id="mealCalPill">불러오는 중…</span>
+      </div>
+      <div class="meal-body" id="mealBody">
+        <div class="sk" style="height:32px;margin-bottom:8px"></div>
+        <div class="sk" style="height:32px"></div>
+      </div>
+      <div class="meal-foot">
+        <button class="meal-toggle" id="mealAllergyBtn" aria-expanded="false" aria-controls="mealAllergy">알레르기 정보 보기</button>
+        <button class="meal-refresh" id="mealRefresh" title="급식을 다시 불러옵니다">🔄 새로고침</button>
+        <span class="meal-updated" id="mealUpdated"></span>
+      </div>
+      <div class="meal-allergy" id="mealAllergy" hidden></div>
+    </section>
+
+  </section>
+
+  <!-- ================= 공부 (공부 일정·루틴·보상) ================= -->
+  <section class="view" id="view-study" role="tabpanel" aria-labelledby="tabstudy">
+
+    <article class="card study-card" id="studyCard" aria-labelledby="studyTitle">
+      <div class="study-head">
+        <h2 id="studyTitle">📚 오늘의 공부 루틴</h2>
+        <span class="dow" id="studyDow">목요일</span>
+        <span class="pill accent" id="studyPill">0 / 3 완료</span>
+      </div>
+
+      <div class="study-sched" id="studySched"></div>
+
+      <div class="study-grid" id="studyGrid"></div>
+      <div class="study-foot">
+        <span class="study-note">✅ 다 했으면 카드를 눌러 체크해요. 오늘 한 것만 초록색으로 바뀌어요.</span>
+        <button class="study-link" id="btnStudyPlan">🗓️ 이번 주 공부 계획 보기</button>
+      </div>
+    </article>
+
+    <div class="reward-box" id="rewardBox">
+      <div class="reward-top">
+        <h3>🏦 지호 보상 저금통</h3>
+        <span class="reward-day">오늘 모은 <b id="rewardTodayEarn">+0분</b></span>
+      </div>
+      <div class="reward-total" id="rewardTotal" aria-live="polite"><b id="rewardMin">0</b><span class="u">분</span><small id="rewardLong"></small><span class="reward-over" id="rewardOver" hidden></span></div>
+      <p class="reward-cap" id="rewardCap">지금 쓸 수 있는 시간이에요 · 오늘 안 쓴 시간은 내일도 그대로 남아요</p>
+      <div class="reward-bar" id="rewardBar" aria-hidden="true"></div>
+      <div class="reward-ticks" id="rewardTicks" aria-hidden="true"></div>
+      <div class="reward-base" id="rewardBase"><span class="rb-e">📚</span><span class="rb-t">공부 루틴을 모두 하면 +60분(1시간)</span></div>
+      <div class="bonus-list">
+        <div class="bonus-item">
+          <button class="bonus-btn" data-bonus-add="cats" aria-label="캣츠잉글리쉬 원서 읽기 30분 추가"><span class="be">📖</span><span class="bt">캣츠잉글리쉬 원서 읽기</span><b class="bp">+30분</b><span class="bc" data-bonus-count="cats">0</span></button>
+          <button class="bonus-minus" data-bonus-sub="cats" aria-label="캣츠잉글리쉬 원서 읽기 보상 30분 취소" disabled>−</button>
+        </div>
+        <div class="bonus-item">
+          <button class="bonus-btn" data-bonus-add="read" aria-label="독서 더 하기 30분 추가"><span class="be">📚</span><span class="bt">독서 더 하기</span><b class="bp">+30분</b><span class="bc" data-bonus-count="read">0</span></button>
+          <button class="bonus-minus" data-bonus-sub="read" aria-label="독서 더 하기 보상 30분 취소" disabled>−</button>
+        </div>
+      </div>
+      <div class="spend-row">
+        <button class="spend-btn" data-spend="30" aria-label="게임 시간 30분 쓰기">🎮 -30분 사용</button>
+        <button class="spend-btn" data-spend="60" aria-label="게임 시간 1시간 쓰기">🎮 -1시간 사용</button>
+        <button class="spend-undo" id="rewardUndo" hidden>↩️ 방금 쓴 시간 되돌리기</button>
+      </div>
+      <p class="reward-note" id="rewardNote">보너스는 누를 때마다 30분씩 쌓여요 · 쓴 만큼만 빠지고 나머지는 저금통에 남아요</p>
     </div>
 
     <div class="focus-row">
@@ -1061,64 +1239,43 @@ body.theme-rian .word-top h2{color:#7d2c53}
       </section>
     </div>
 
-    <article class="card study-card" id="studyCard" aria-labelledby="studyTitle">
-      <div class="study-head">
-        <h2 id="studyTitle">📚 오늘의 공부 루틴</h2>
-        <span class="dow" id="studyDow">목요일</span>
-        <span class="pill accent" id="studyPill">0 / 3 완료</span>
-      </div>
-      <div class="study-grid" id="studyGrid"></div>
-      <div class="study-foot">
-        <span class="study-note">✅ 다 했으면 카드를 눌러 체크해요. 오늘 한 것만 초록색으로 바뀌어요.</span>
-        <button class="study-link" data-goto="timetable">📅 주간 공부 계획 보기</button>
-      </div>
-
-      <div class="reward-box" id="rewardBox">
-        <div class="reward-top">
-          <h3>🏦 지호 보상 저금통</h3>
-          <span class="reward-day">오늘 모은 <b id="rewardTodayEarn">+0분</b></span>
-        </div>
-        <div class="reward-total" id="rewardTotal" aria-live="polite"><b id="rewardMin">0</b><span class="u">분</span><small id="rewardLong"></small><span class="reward-over" id="rewardOver" hidden></span></div>
-        <p class="reward-cap" id="rewardCap">지금 쓸 수 있는 시간이에요 · 오늘 안 쓴 시간은 내일도 그대로 남아요</p>
-        <div class="reward-bar" id="rewardBar" aria-hidden="true"></div>
-        <div class="reward-ticks" id="rewardTicks" aria-hidden="true"></div>
-        <div class="reward-base" id="rewardBase"><span class="rb-e">📚</span><span class="rb-t">공부 루틴을 모두 하면 +60분(1시간)</span></div>
-        <div class="bonus-list">
-          <div class="bonus-item">
-            <button class="bonus-btn" data-bonus-add="cats" aria-label="캣츠잉글리쉬 원서 읽기 30분 추가"><span class="be">📖</span><span class="bt">캣츠잉글리쉬 원서 읽기</span><b class="bp">+30분</b><span class="bc" data-bonus-count="cats">0</span></button>
-            <button class="bonus-minus" data-bonus-sub="cats" aria-label="캣츠잉글리쉬 원서 읽기 보상 30분 취소" disabled>−</button>
-          </div>
-          <div class="bonus-item">
-            <button class="bonus-btn" data-bonus-add="read" aria-label="독서 더 하기 30분 추가"><span class="be">📚</span><span class="bt">독서 더 하기</span><b class="bp">+30분</b><span class="bc" data-bonus-count="read">0</span></button>
-            <button class="bonus-minus" data-bonus-sub="read" aria-label="독서 더 하기 보상 30분 취소" disabled>−</button>
-          </div>
-        </div>
-        <div class="spend-row">
-          <button class="spend-btn" data-spend="30" aria-label="게임 시간 30분 쓰기">🎮 -30분 사용</button>
-          <button class="spend-btn" data-spend="60" aria-label="게임 시간 1시간 쓰기">🎮 -1시간 사용</button>
-          <button class="spend-undo" id="rewardUndo" hidden>↩️ 방금 쓴 시간 되돌리기</button>
-        </div>
-        <p class="reward-note" id="rewardNote">보너스는 누를 때마다 30분씩 쌓여요 · 쓴 만큼만 빠지고 나머지는 저금통에 남아요</p>
-      </div>
-    </article>
-
-    <section class="card meal-card" id="mealCard" style="margin-top:14px">
+    <section class="card study-plan-card" id="studyPlanCard" aria-labelledby="studyPlanTitle">
       <div class="card-head">
-        <h2>🍱 오늘의 급식 <span class="meal-sub">광명초</span></h2>
-        <span class="pill" id="mealCalPill">불러오는 중…</span>
+        <h2 id="studyPlanTitle">🗓️ 이번 주 공부 계획</h2>
+        <span class="muted">문제집 루틴 + 영어 수업</span>
       </div>
-      <div class="meal-body" id="mealBody">
-        <div class="sk" style="height:32px;margin-bottom:8px"></div>
-        <div class="sk" style="height:32px"></div>
-      </div>
-      <div class="meal-foot">
-        <button class="meal-toggle" id="mealAllergyBtn" aria-expanded="false" aria-controls="mealAllergy">알레르기 정보 보기</button>
-        <button class="meal-refresh" id="mealRefresh" title="급식을 다시 불러옵니다">🔄 새로고침</button>
-        <span class="meal-updated" id="mealUpdated"></span>
-      </div>
-      <div class="meal-allergy" id="mealAllergy" hidden></div>
+      <div class="splan" id="studyPlanGrid"></div>
+      <div class="tt-note eng-note">💻 아이비 화상영어는 <b>매주 목요일 집에서</b>, 🐱 캣츠잉글리쉬 라이브클래스는 <b>2주에 한 번 수요일</b>이에요.</div>
     </section>
 
+  </section>
+
+  <!-- ================= 주간학습 ================= -->
+  <section class="view" id="view-week" role="tabpanel" aria-labelledby="tabweek">
+    <section class="card week-card" id="weekCard" aria-labelledby="weekTitle">
+      <div class="card-head week-head">
+        <h2 id="weekTitle">🏫 주간학습안내</h2>
+        <span class="week-range" id="weekRange">11월 23일 ~ 11월 27일 · 16주</span>
+        <span class="pill accent" id="weekTodayPill">오늘은 목요일</span>
+      </div>
+      <div class="week-today" id="weekTodayPrep"></div>
+      <div class="week-table-wrap">
+        <table class="wt" id="weekTable">
+          <thead><tr id="weekTableHead"></tr></thead>
+          <tbody id="weekTableBody"></tbody>
+        </table>
+      </div>
+      <div class="week-days" id="weekDays"></div>
+      <p class="week-note" id="weekNote"></p>
+    </section>
+
+    <section class="card notice-card" id="weekNoticeCard">
+      <div class="card-head">
+        <h2>📮 가정통신</h2>
+        <span class="muted">광주광명초등학교 · 16주</span>
+      </div>
+      <div class="notice-body" id="weekNotice"></div>
+    </section>
   </section>
 
   <!-- ================= 주간 시간표 ================= -->
@@ -1137,23 +1294,22 @@ body.theme-rian .word-top h2{color:#7d2c53}
 
     <section class="card">
       <div class="card-head">
-        <h2>📅 이번 주 시간표</h2>
+        <h2>📅 이번 주 생활 시간표</h2>
         <span class="muted">노란 배지 = 그날 챙길 준비물</span>
       </div>
       <div class="tt-wrap">
         <table class="tt" id="jihoTable">
           <thead><tr id="jihoTableHead"></tr></thead>
-          <tbody><tr id="jihoTableRow"></tr><tr id="jihoStudyRow"></tr></tbody>
+          <tbody><tr id="jihoTableRow"></tr></tbody>
         </table>
       </div>
-      <div class="tt-note">💡 방과후 주산은 월요일, 피아노는 수·금요일이에요. 📚 공부 칸은 집에 와서 하는 숙제 같은 공부 루틴이에요.</div>
-      <div class="tt-note eng-note">💻 아이비 화상영어는 <b>매주 목요일 집에서</b>, 🐱 캣츠잉글리쉬 라이브클래스는 <b>2주에 한 번 수요일</b>이에요.</div>
+      <div class="tt-note">💡 방과후 주산은 월요일, 피아노는 수·금요일이에요. 공부 루틴과 영어 수업은 「📚 공부」 탭에 모아 두었어요.</div>
     </section>
 
     <section class="card ecal-card" id="jihoCalCard">
       <div class="card-head">
         <h2>🗓️ 이번 달 일정</h2>
-        <span class="muted">영어 수업만 모아 보여 줘요</span>
+        <span class="muted">학교 학사일정만 보여 줘요</span>
       </div>
       <div class="ecal-head">
         <span class="ecal-month" id="jihoCalTitle">2026년 11월</span>
@@ -1165,8 +1321,8 @@ body.theme-rian .word-top h2{color:#7d2c53}
       </div>
       <div class="ecal-grid" id="ecalGrid"></div>
       <div class="ecal-legend">
-        <span class="lg">💻 매주 목 아이비 화상영어</span>
-        <span class="lg">🐱 격주 수 캣츠 라이브클래스</span>
+        <span class="lg">🏫 학교 학사일정 (경기도교육청 NEIS)</span>
+        <span class="lg">🎓 행사·방학식</span>
       </div>
       <div class="ecal-foot" id="ecalFoot"></div>
     </section>
@@ -1186,7 +1342,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
       <div class="bh-chips">
         <span class="bh-chip" id="rwBankToday">오늘 +0분</span>
         <span class="bh-chip" id="rwBankUsed">지금까지 0분 사용</span>
-        <button class="bh-go" data-goto="jiho">📚 오늘 탭에서 적립하기</button>
+        <button class="bh-go" data-goto="study">📚 공부 탭에서 적립하기</button>
       </div>
     </section>
 
@@ -1249,7 +1405,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
     <div class="set-actions">
       <button class="btn-primary" data-close="1">닫기</button>
     </div>
-    <p class="set-note">이 파일은 인터넷 없이도 열립니다. 날씨와 급식만 인터넷이 필요하고, 나머지(시간표·루틴·보상)는 모두 이 파일 안에서 동작해요. 급식은 경기도교육청 나이스(NEIS) 공개 데이터에서 광주광명초등학교 중식으로 가져와요.</p>
+    <p class="set-note">이 파일은 인터넷 없이도 열립니다. 날씨·급식·학사일정만 인터넷이 필요하고, 나머지(시간표·루틴·보상·주간학습)는 모두 이 파일 안에서 동작해요. 급식과 학사일정은 경기도교육청 나이스(NEIS) 공개 데이터에서 광주광명초등학교 자료로 가져와요.</p>
   </div>
 </div>
 
@@ -1281,7 +1437,7 @@ const AVATAR = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGB
 function paintAvatars() { $$('img[data-avatar]').forEach(el => { if (el.getAttribute('src') !== AVATAR) el.src = AVATAR; }); }
 
 const LS = 'jrm.jiho.v3';
-const TABS = ['jiho', 'timetable', 'rewards'];
+const TABS = ['jiho', 'study', 'week', 'timetable', 'rewards'];
 
 const ROUTINES = [
   { k: 'meal',  name: '아침 먹기',   hint: '든든하게 냠냠' },
@@ -1324,7 +1480,8 @@ function engItems(d) {
   if (isLiveDay(d)) out.push(CATS_LIVE);
   return out;
 }
-function dayItems(d) { return (JIHO_WEEK[d.getDay()] || { items: [] }).items.concat(engItems(d)); }
+/* 생활 일정(등교·방과후·학원)만 — 문제집 공부와 영어 수업은 「📚 공부」 탭에 모아 둔다 */
+function lifeItems(d) { return (JIHO_WEEK[d.getDay()] || { items: [] }).items; }
 function nextLiveDay(from) {
   const base = startOfDay(from || simNow());
   for (let i = 0; i < 400; i++) {
@@ -1358,6 +1515,80 @@ const STUDY = {
   6: [st('eng', '캣츠잉글리쉬', '🐱')],
   0: [st('eng', '캣츠잉글리쉬', '🐱')]
 };
+
+/* ---------------- 주간학습안내 (학교에서 받은 그 주 자료를 그대로) ----------------
+   새 주 자료가 오면 WEEKPLANS 맨 앞에 한 덩어리만 추가하면 된다.
+   · dow: 0=일 … 6=토 / morning: [이모지, 이름, 준비물] / p: 1~5교시(수업 없으면 null) */
+const WEEK_PERIODS = [
+  ['1교시', '9:00~9:40'], ['2교시', '9:50~10:30'], ['3교시', '10:40~11:20'],
+  ['4교시', '11:30~12:10'], ['5교시', '13:00~13:40']
+];
+const WEEKPLANS = [{
+  week: 16, from: '2026-11-23', to: '2026-11-27',
+  days: [
+    {
+      dow: 1, md: '11월 23일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '국어', c: 'kr', t: '배울 내용을 살펴볼 수 있다', n: '(2/2)', p: '214-217쪽' },
+        { s: '상상 1-2', c: 'imag', t: '(즐) 7마법사놀이 가위바위보 술래잡기', p: '68-69 · 70-71쪽' },
+        { s: '동아리', c: 'club', t: '나의 책 소개하기', n: '(동아리활동)' },
+        { s: '동아리', c: 'club', t: '동아리 전시회', n: '(동아리활동)' },
+        { s: '상상 1-2', c: 'imag', t: '(슬) 3주제 수업 만들기', p: '86-87쪽' }
+      ]
+    },
+    {
+      dow: 2, md: '11월 24일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '수학', c: 'math', t: '수 배열에서 규칙을 찾아볼까요', p: '116-117 (74-75)쪽' },
+        { s: '상상 1-2', c: 'imag', t: '(즐) 4놀이 수업 만들기', p: '88-89쪽' },
+        { s: '국어', c: 'kr', t: '무엇을 설명하는지 생각하며 글을 읽을 수 있다', n: '(1/2)', p: '218-219 (82-83)쪽' },
+        { s: '자율', c: 'self', t: '아플 때에는', n: '(자율활동)' },
+        { s: '상상 1-2', c: 'imag', t: '(전담) (바) 5안전 수업 만들기', p: '90-91쪽' }
+      ]
+    },
+    {
+      dow: 3, md: '11월 25일', morning: ['📌', '나침반 5분 안전교육', '8:50~'], p: [
+        { s: '국어', c: 'kr', t: '무엇을 설명하는지 생각하며 글을 읽을 수 있다', n: '(2/2)', p: '218-219 (82-83)쪽' },
+        { s: '자율', c: 'self', t: '보건실 이용을 바르게' },
+        { s: '상상 1-2', c: 'imag', t: '(바) 지금 여기 나의 이야기', p: '92-93쪽' },
+        { s: '이야기 1-2', c: 'story', t: '(슬) 지금 여기 우리 이야기', n: '(1/2)', p: '6-7쪽' },
+        null
+      ]
+    },
+    {
+      dow: 4, md: '11월 26일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '통합', c: 'int', t: '◆겨울체인지◆ 전통놀이', n: '-윷놀이-' },
+        { s: '통합', c: 'int', t: '◆겨울체인지◆ 전통놀이', n: '-윷놀이-' },
+        { s: '통합', c: 'int', t: '◆겨울체인지◆ 전통놀이', n: '-막대제기 만들기-' },
+        { s: '통합', c: 'int', t: '◆겨울체인지◆ 전통놀이', n: '-막대제기 만들기-' },
+        { s: '통합', c: 'int', t: '◆겨울체인지◆ 전통놀이', n: '-공기놀이-' }
+      ]
+    },
+    {
+      dow: 5, md: '11월 27일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '자율', c: 'self', t: '◆겨울체인지◆ 전통놀이', n: '-비석치기-' },
+        { s: '자율', c: 'self', t: '◆겨울체인지◆ 전통놀이', n: '-비석치기-' },
+        { s: '통합', c: 'int', t: '◆겨울체인지◆ 전통놀이', n: '-딱지치기-' },
+        { s: '통합', c: 'int', t: '◆겨울체인지◆ 전통놀이', n: '-딱지치기-' },
+        null
+      ]
+    }
+  ],
+  notice: {
+    items: [
+      { e: '⏰', t: '1교시 수업시간은 9시입니다. 수업시간에 지각하지 않도록 시간을 잘 확인하여 등교하도록 합니다.' },
+      { e: '😷', t: '가을, 겨울 갑자기 추워지면 감기 등 질병이 발생하고 있습니다.', s: '기침이 나는 경우 ‘마스크’를 착용하고 등교합니다.' },
+      { e: '🛡️', t: '학교폭력을 예방하고 즐거운 학교생활을 위해서 가정에서도 꼭 지도해 주세요.', star: true }
+    ],
+    rules: [
+      '친구의 몸과 물건을 함부로 만지지 않습니다.',
+      '친구를 놀리거나 때리지 않고 사이좋게 지내며 화장실에서 장난치지 않습니다.',
+      '교실, 복도, 화장실에서 뛰지 않고 질서를 잘 지켜 안전하게 생활합니다.',
+      '계단에서는 오른쪽으로 걸어서 다니고 뛰어내리지 않습니다.',
+      '수업 시간에 소리를 지르거나 돌아다니지 않습니다. 친구의 공부를 방해하는 행동입니다.',
+      '보건실, 도서실 등 다른 곳에 갈 때는 선생님의 허락을 받고 이동합니다.',
+      '친구의 좋은 점을 칭찬하고 바르고 고운 말을 사용합니다.'
+    ]
+  }
+}];
 
 /* ---------------- 오늘의 영단어 (초등 필수 기초 100단어 · 하루 1개) ---------------- */
 const VOCAB = [
@@ -1755,7 +1986,9 @@ function goTab(name) {
     t.setAttribute('aria-selected', on ? 'true' : 'false');
   });
   $$('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
-  if (name === 'timetable') renderTable();
+  if (name === 'study') { renderStudy(); renderReward(false); renderStudyPlan(); }
+  if (name === 'week') renderWeek();
+  if (name === 'timetable') { renderTable(); renderCalendar(); const nb = calBase(); loadSchoolSchedule(nb.y, nb.m); }
   if (name === 'rewards') { renderRewards(); renderWeekRecord(); renderBankHero(); }
   try { history.replaceState(null, '', '#' + name); } catch (e) {}
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1816,8 +2049,53 @@ function renderStudy() {
   if (items.length < 3) html += '<div class="study-rest"><span class="si-ico">🌤️</span><span>주말엔 영어 하나만! 천천히 해도 괜찮아요.</span></div>';
   grid.innerHTML = html;
   grid.classList.toggle('single', items.length === 1);
+  renderStudySched();
   renderReward();
 }
+
+/* 오늘의 공부 일정(영어 수업) — 공부 탭의 맨 위에 보여 준다 */
+function renderStudySched() {
+  const box = $('#studySched');
+  if (!box) return;
+  const now = simNow();
+  const cls = engItems(now);
+  if (cls.length) {
+    box.innerHTML = '<span class="ss-label">📌 오늘의 수업</span>' + cls.map(it =>
+      '<span class="ss-item ' + it.c + '"><span class="ss-e">' + it.e + '</span><span class="ss-t"><b>' + it.n + '</b><small>' + (it.note || '') + '</small></span></span>'
+    ).join('');
+  } else {
+    const nl = nextLiveDay(now);
+    const gap = nl ? Math.round((startOfDay(nl) - startOfDay(now)) / DAY_MS) : 0;
+    box.innerHTML = '<span class="ss-item none"><span class="ss-e">💻</span><span class="ss-t"><b>오늘은 영어 수업이 없어요</b><small>화상영어는 매주 목요일' +
+      (nl && nl.getDay() === 3 ? ' · 🐱 다음 라이브 ' + fmtMD(nl) + '(' + DOW[nl.getDay()] + ') · ' + gap + '일 뒤' : '') +
+      '</small></span></span>';
+  }
+}
+
+/* 이번 주 공부 계획 — 문제집 루틴 + 영어 수업 */
+function renderStudyPlan() {
+  const grid = $('#studyPlanGrid');
+  if (!grid) return;
+  const now = simNow(), today = startOfDay(now).getTime();
+  const order = [1, 2, 3, 4, 5, 6, 0];
+  grid.innerHTML = order.map(d => {
+    const dt = weekDate(now, d);
+    const on = startOfDay(dt).getTime() === today;
+    const items = (STUDY[d] || []).map(it => {
+      const sub = SUBJ[it.s] || { label: it.s, cls: '' };
+      return '<span class="sp-it ' + sub.cls + '">' + it.e + ' ' + it.n + '</span>';
+    });
+    const eng = engItems(dt).map(it => '<span class="sp-it ' + it.c + '">' + it.e + ' ' + it.n + '</span>');
+    return '<div class="sp-day' + (on ? ' today' : '') + '">'
+      + '<span class="sp-dow">' + DOW[d] + ' <small>' + (dt.getMonth() + 1) + '/' + dt.getDate() + '</small>' + (on ? '<em>오늘</em>' : '') + '</span>'
+      + '<div class="sp-items">' + items.join('') + eng.join('') + '</div></div>';
+  }).join('');
+}
+$('#btnStudyPlan') && $('#btnStudyPlan').addEventListener('click', () => {
+  SFX.tap();
+  const c = $('#studyPlanCard');
+  if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 function toggleStudy(idx, ev) {
   const arr = todayStudy();
   if (idx < 0 || idx >= arr.length) return;
@@ -2205,11 +2483,6 @@ function renderClock() {
   const sub = [];
   sub.push('<div class="mini-stat"><b>' + (c.over ? '출발!' : c.remainMin + '분') + '</b><span>' + (c.over ? '08:30 지났어요' : '출발까지') + '</span></div>');
   sub.push('<div class="mini-stat"><b>' + doneCount() + '/4</b><span>아침 루틴</span></div>');
-  const sItems = todayStudyItems();
-  if (sItems.length) {
-    const sd = studyDoneCount();
-    sub.push('<div class="mini-stat' + (sd === sItems.length ? ' ok' : '') + '"><b>' + sd + '/' + sItems.length + '</b><span>공부 루틴</span></div>');
-  }
   sub.push('<div class="mini-stat"><b>' + w.items[0].e + '</b><span>' + w.items[0].n + '</span></div>');
   if (w.prep.length) sub.push('<div class="mini-stat"><b>🎒 ' + w.prep.length + '</b><span>오늘 준비물</span></div>');
   $('#clockSub').innerHTML = sub.join('');
@@ -2268,18 +2541,9 @@ function renderJihoToday() {
   $('#jihoTodayDow').textContent = DOW[dow] + '요일';
   const flag = $('#jihoPrepFlag');
   flag.hidden = !w.prep.length;
-  const items = dayItems(now);
-  const flow = items.map(it => '<div class="sched-step' + (it.c === 'ivy' || it.c === 'cats' ? ' eng-step' : '') + '"><span class="e">' + it.e + '</span><div><b>' + it.n + '</b><small>' + (it.note || (it.c === 'jusan' ? '방과후' : (it.c === 'piano' ? '학원' : (it.c === 'rest' ? '온종일' : '학원')))) + '</small></div></div>');
+  const items = lifeItems(now);
+  const flow = items.map(it => '<div class="sched-step"><span class="e">' + it.e + '</span><div><b>' + it.n + '</b><small>' + (it.note || (it.c === 'jusan' ? '방과후' : (it.c === 'piano' ? '학원' : (it.c === 'rest' ? '온종일' : '학원')))) + '</small></div></div>');
   $('#jihoTodayFlow').innerHTML = flow.join('<span class="sched-arrow">→</span>');
-  const nl = nextLiveDay(now);
-  const engNext = $('#jihoEngNext');
-  if (engNext) {
-    if (!nl) engNext.textContent = '💻 매주 목요일 아이비 화상영어 · 🐱 캣츠 라이브클래스는 2주에 한 번';
-    else {
-      const gap = Math.round((startOfDay(nl) - startOfDay(now)) / DAY_MS);
-      engNext.textContent = '💻 목요일마다 아이비 화상영어 · 🐱 캣츠 라이브클래스 ' + (gap === 0 ? '오늘!' : fmtMD(nl) + '(' + DOW[nl.getDay()] + ') · ' + gap + '일 뒤');
-    }
-  }
   $('#jihoTodayPrep').innerHTML = w.prep.length
     ? w.prep.map(p => '<span class="prep-chip"><span class="e">' + p.e + '</span>' + p.n + '</span>').join('')
     : '<span class="prep-none">👍 오늘은 준비물이 없어요. 가방만 챙기면 끝!</span>';
@@ -2296,36 +2560,154 @@ function renderTable() {
   ).join('');
   const cells = order.map(d => {
     const w = JIHO_WEEK[d];
-    let acts = w.items.map(i => '<span class="a ' + (i.c || '') + '">' + i.e + ' ' + i.n + '</span>').join('');
-    if (d === 4) acts += '<span class="a ivy">💻 아이비 화상영어</span>';
-    if (d === 3) {
-      const wd = weekDate(now, 3);
-      if (isLiveDay(wd)) acts += '<span class="a cats">🐱 캣츠 라이브클래스</span>';
-      else {
-        const nl = nextLiveDay(wd);
-        acts += '<span class="tt-next">🐱 다음 라이브 ' + (nl ? fmtMD(nl) : '') + '</span>';
-      }
-    }
+    const acts = w.items.map(i => '<span class="a ' + (i.c || '') + '">' + i.e + ' ' + i.n + '</span>').join('');
     const prep = w.prep.map(p => '<div class="tt-prep">' + p.e + ' ' + p.n + '</div>').join('');
     return '<td class="' + (d === now.getDay() ? 'today' : '') + '"><div class="tt-act">' + acts + '</div>' + prep + '</td>';
   }).join('');
   $('#jihoTableRow').innerHTML = '<th>지호 🧱</th>' + cells;
-  renderStudyRow();
 }
 
-function renderStudyRow() {
-  const row = $('#jihoStudyRow');
-  if (!row) return;
-  const order = [1, 2, 3, 4, 5, 6, 0];
-  const now = simNow();
-  row.innerHTML = '<th>📚 공부</th>' + order.map(d => {
-    const w = STUDY[d] || [];
-    const chips = w.map(it => '<span class="tt-st ' + (SUBJ[it.s] ? SUBJ[it.s].cls : '') + '">' + it.e + ' ' + it.n + '</span>').join('');
-    return '<td class="' + (d === now.getDay() ? 'today' : '') + '"><div class="tt-stwrap">' + chips + '</div></td>';
-  }).join('');
+/* ---------------- 이번 달 일정 달력 (학교 학사일정만) ----------------
+   문제집 공부와 영어 수업은 「📚 공부」 탭으로 옮겼고, 달력에는 NEIS 학사일정만 둔다.
+   · 매주 반복되는 '토요휴업일'은 달력이 이미 토요일을 보여 주므로 생략한다. */
+const SCH_API = 'https://open.neis.go.kr/hub/SchoolSchedule?Type=json&pIndex=1&pSize=100'
+  + '&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7692007';
+const SCH_CACHE = 'jrm.jiho.sch.v1';
+const SCH_TTL = 6 * 60 * 60 * 1000;
+const SCH_SKIP = { '토요휴업일': true };
+let schEvents = {};   /* 'YYYY-MM-DD' -> [{ n: 이름, k: 종류 }] */
+let schState = {};    /* 'YYYY-MM' -> 'loading' | 'ok' | 'fail' */
+
+function schKey(ymd) { return ymd.slice(0, 4) + '-' + ymd.slice(4, 6) + '-' + ymd.slice(6, 8); }
+function schParseRows(rows) {
+  const out = {};
+  (rows || []).forEach(r => {
+    const ymd = String(r.AA_YMD || '');
+    if (!/^\d{8}$/.test(ymd)) return;
+    const name = String(r.EVENT_NM || '').trim();
+    if (!name || SCH_SKIP[name]) return;
+    const key = schKey(ymd);
+    const list = out[key] || (out[key] = []);
+    if (!list.some(x => x.n === name)) list.push({ n: name, k: String(r.SBTR_DD_SC_NM || '') });
+  });
+  return out;
+}
+function schEmoji(name, kind) {
+  if (/방학/.test(name)) return '🏖️';
+  if (/졸업|입학/.test(name)) return '🎓';
+  if (/체험|현장|소풍|수학여행/.test(name)) return '🚌';
+  if (/운동회|체육/.test(name)) return '🏃';
+  if (/신정|설날|추석|어린이날|공휴/.test(name) || kind === '공휴일') return '🎉';
+  return '🏫';
+}
+function schShort(name) { return name.length > 7 ? name.slice(0, 6) + '…' : name; }
+function schCacheRead() {
+  try {
+    const c = JSON.parse(localStorage.getItem(SCH_CACHE) || 'null');
+    if (c && c.months && typeof c.months === 'object') return c;
+  } catch (e) {}
+  return { months: {} };
+}
+function schCacheWrite(c) { try { localStorage.setItem(SCH_CACHE, JSON.stringify(c)); } catch (e) {} }
+function schMerge(ev) { Object.keys(ev).forEach(k => { schEvents[k] = ev[k]; }); }
+
+/* NEIS open API는 한 번에 5건까지만 주므로 pIndex로 이어 받는다 */
+function schFetchPage(from, to, idx) {
+  const url = SCH_API + '&pIndex=' + idx + '&pSize=100&AA_FROM_YMD=' + from + '&AA_TO_YMD=' + to;
+  return fetchJSON(url).then(function (j) {
+    const pack = (j.SchoolSchedule || [])[0];
+    const res = pack && pack.head && pack.head[1] && pack.head[1].RESULT ? pack.head[1].RESULT : null;
+    const rows = ((j.SchoolSchedule || [])[1] || {}).row || [];
+    if (!rows.length && res && res.CODE && res.CODE !== 'INFO-000' && res.CODE !== 'INFO-200') {
+      throw new Error(res.CODE + ' ' + (res.MESSAGE || ''));
+    }
+    const total = (pack && pack.head && pack.head[0] && parseInt(pack.head[0].list_total_count, 10)) || rows.length;
+    return { rows: rows, total: total };
+  });
+}
+/* NEIS는 한 번에 5건까지만 주고 pIndex를 무시하므로,
+   받은 마지막 날짜 다음 날부터 이어서 받아 그 달 자료를 모두 모은다. */
+function schFetchRange(from, to, acc, depth) {
+  const got = acc || [];
+  const dep = depth || 0;
+  return schFetchPage(from, to, 1).then(function (r) {
+    got.push.apply(got, r.rows);
+    if (r.rows.length < 5 || got.length >= r.total || dep >= 30) return got;
+    const last = String(r.rows[r.rows.length - 1].AA_YMD || '');
+    if (!/^\d{8}$/.test(last)) return got;
+    const nx = new Date(+last.slice(0, 4), +last.slice(4, 6) - 1, +last.slice(6, 8) + 1);
+    const nf = '' + nx.getFullYear() + p2(nx.getMonth() + 1) + p2(nx.getDate());
+    if (nf > to) return got;
+    return schFetchRange(nf, to, got, dep + 1);
+  });
 }
 
-/* ---------------- 이번 달 일정 달력 (영어 수업) ---------------- */
+const schAhead = {};      /* 이미 '다음 달'까지 확인한 달 */
+let schAheadLeft = 2;     /* 빈 달이 이어질 때 앞으로 내다보는 횟수 제한 */
+
+function loadSchoolSchedule(y, m) {
+  const mk = y + '-' + p2(m + 1);
+  const from = '' + y + p2(m + 1) + '01';
+  const end = new Date(y, m + 1, 0);
+  const to = '' + y + p2(m + 1) + p2(end.getDate());
+  const cache = schCacheRead();
+  const hit = cache.months[mk];
+  if (hit && hit.at && (Date.now() - hit.at) < SCH_TTL && Array.isArray(hit.rows)) {
+    schMerge(schParseRows(hit.rows));
+    schState[mk] = 'ok';
+    renderCalendar();
+    schLookAhead(y, m, mk);
+    return;
+  }
+  if (schState[mk] === 'loading') return;
+  schState[mk] = 'loading';
+  renderCalendar();
+  schFetchRange(from, to).then(function (rows) {
+    const c = schCacheRead();
+    c.months[mk] = { at: Date.now(), rows: rows };
+    schCacheWrite(c);
+    schMerge(schParseRows(rows));
+    schState[mk] = 'ok';
+    renderCalendar();
+    schLookAhead(y, m, mk);
+  }).catch(function () {
+    schState[mk] = 'fail';
+    renderCalendar();
+  });
+}
+/* 이 달에 남은 일정이 없으면 다음 달까지 한 번 내다봐서 '다음 학교 일정'을 채운다 */
+function schLookAhead(y, m, mk) {
+  if (schAhead[mk]) return;
+  schAhead[mk] = true;
+  if (nextSchEvent(TODAY_KEY()) || schAheadLeft <= 0) return;
+  schAheadLeft--;
+  const nx = new Date(y, m + 1, 1);
+  loadSchoolSchedule(nx.getFullYear(), nx.getMonth());
+}
+const SCH_RUN = /방학/;
+function schHasEvent(key, name) { return (schEvents[key] || []).some(x => x.n === name); }
+function schShiftKey(key, delta) {
+  const p = key.split('-').map(Number);
+  return dk(new Date(p[0], p[1] - 1, p[2] + delta));
+}
+function schRunInfo(key, name) {
+  let s = key, e = key;
+  while (schHasEvent(schShiftKey(s, -1), name) && s > '2000-01-01') s = schShiftKey(s, -1);
+  while (schHasEvent(schShiftKey(e, 1), name) && e < '2100-12-31') e = schShiftKey(e, 1);
+  return { s: s, e: e };
+}
+function schTitle(it) {
+  if (!it.run || it.run.s === it.run.e) return it.n;
+  const a = it.run.s.split('-').map(Number), b = it.run.e.split('-').map(Number);
+  return it.n + ' · ' + (a[1]) + '월 ' + a[2] + '일 ~ ' + (b[1]) + '월 ' + b[2] + '일';
+}
+function nextSchEvent(fromKey) {
+  const keys = Object.keys(schEvents).filter(k => k >= fromKey && schEvents[k] && schEvents[k].length).sort();
+  if (!keys.length) return null;
+  const p = keys[0].split('-').map(Number);
+  return { key: keys[0], ev: schEvents[keys[0]][0], dt: new Date(p[0], p[1] - 1, p[2]) };
+}
+
 let calMonth = null; /* { y, m } — null 이면 이번 달을 따라간다 */
 function calBase() {
   const n = simNow();
@@ -2336,11 +2718,12 @@ function calShift(k) {
   const d = new Date(b.y, b.m + k, 1);
   calMonth = { y: d.getFullYear(), m: d.getMonth() };
   renderCalendar();
+  loadSchoolSchedule(calMonth.y, calMonth.m);
 }
 function renderCalendar() {
   const grid = $('#ecalGrid');
   if (!grid) return;
-  const b = calBase(), y = b.y, m = b.m;
+  const b = calBase(), y = b.y, m = b.m, mk = y + '-' + p2(m + 1);
   const title = $('#jihoCalTitle');
   if (title) title.textContent = y + '년 ' + (m + 1) + '월';
   const todayKey = dk(simNow());
@@ -2349,42 +2732,152 @@ function renderCalendar() {
   const pad = new Date(y, m, 1).getDay();
   for (let i = 0; i < pad; i++) cells += '<div class="ecal-cell blank"></div>';
   const days = new Date(y, m + 1, 0).getDate();
+  let count = 0;
   for (let d = 1; d <= days; d++) {
     const dt = new Date(y, m, d), key = dk(dt);
-    const ev = engItems(dt);
+    const ev = schEvents[key] || [];
+    /* 방학처럼 여러 날 이어지는 일정은 시작일에만 표시하고, 기간은 배경으로 은은하게 */
+    const shown = [], runDay = [];
+    ev.forEach(it => {
+      if (SCH_RUN.test(it.n)) {
+        const r = schRunInfo(key, it.n);
+        if (r.s === key) shown.push({ n: it.n, k: it.k, run: r });
+        else runDay.push(it);
+      } else shown.push(it);
+    });
+    count += shown.length;
     const cls = ['ecal-cell'];
     if (dt.getDay() === 0) cls.push('sun');
     if (dt.getDay() === 6) cls.push('sat');
     if (key === todayKey) cls.push('today');
-    const evs = ev.map(it => '<span class="ecal-ev" title="' + it.n + '">' + it.e + '</span>').join('');
-    const names = ev.map(it => '<span class="ecal-name ' + it.c + '">' + (it.c === 'ivy' ? '화상영어' : '라이브') + '</span>').join('');
+    if (shown.length) cls.push('has-ev');
+    if (runDay.length && !shown.length) cls.push('in-run');
+    const list = shown.slice(0, 2);
+    const evs = list.map(it => '<span class="ecal-ev" title="' + escHTML(schTitle(it)) + '">' + schEmoji(it.n, it.k) + '</span>').join('')
+      + (shown.length > 2 ? '<span class="ecal-more">+' + (shown.length - 2) + '</span>' : '');
+    const names = list.map(it => '<span class="ecal-name sch" title="' + escHTML(schTitle(it)) + '">' + escHTML(schShort(it.n)) + '</span>').join('');
     cells += '<div class="' + cls.join(' ') + '" data-d="' + key + '"><span class="dnum">' + d + '</span>' +
       '<span class="ecal-evs">' + evs + '</span><span class="ecal-names">' + names + '</span></div>';
   }
   grid.innerHTML = dow + cells;
 
-  /* 이번 달 몇 번 하는지 + 다음 라이브클래스 */
-  let ivy = 0, live = 0;
-  for (let d = 1; d <= days; d++) {
-    const dt = new Date(y, m, d);
-    if (dt.getDay() === 4) ivy++;
-    if (isLiveDay(dt)) live++;
-  }
-  const nl = nextLiveDay(simNow());
   const foot = $('#ecalFoot');
   if (foot) {
-    const todayLive = isLiveDay(simNow());
-    const after = todayLive ? nextLiveDay(new Date(startOfDay(simNow()).getTime() + DAY_MS)) : nl;
-    const gap = after ? Math.round((startOfDay(after) - startOfDay(simNow())) / DAY_MS) : 0;
-    const nextTxt = after ? (todayLive
-      ? '<span class="ecal-next">🐱 오늘 라이브클래스! 다음은 <b>' + fmtMD(after) + '(' + DOW[after.getDay()] + ')</b> · ' + gap + '일 뒤</span>'
-      : '<span class="ecal-next">다음 라이브클래스 <b>' + fmtMD(after) + '(' + DOW[after.getDay()] + ')</b> · ' + gap + '일 뒤</span>') : '';
-    foot.innerHTML = '<span class="ecal-sum">이번 달 · 💻 화상영어 ' + ivy + '회 · 🐱 라이브클래스 ' + live + '회</span>' + nextTxt;
+    let html = '';
+    const monthStart = dk(new Date(y, m, 1));
+    const next = nextSchEvent(monthStart > todayKey ? monthStart : todayKey);
+    const nextTxt = next ? '<span class="ecal-next sch">🏫 다음 일정 <b>' + fmtMD(next.dt) + '(' + DOW[next.dt.getDay()] + ')</b> ' + escHTML(next.ev.n) + '</span>' : '';
+    if (schState[mk] === 'loading') html = '<span class="ecal-sum">학사일정을 불러오는 중…</span>';
+    else if (schState[mk] === 'fail') html = '<span class="ecal-sum">학사일정을 불러오지 못했어요 · 인터넷 연결을 확인해 주세요</span>';
+    else if (!count) html = '<span class="ecal-sum">이 달엔 학교 행사가 없어요 · 매주 토요휴업일은 빼고 보여 줘요</span>' + nextTxt;
+    else html = '<span class="ecal-sum">이번 달 · 학교 일정 ' + count + '개</span>' + nextTxt;
+    foot.innerHTML = html;
   }
 }
 $('#ecalPrev') && $('#ecalPrev').addEventListener('click', () => calShift(-1));
 $('#ecalNextM') && $('#ecalNextM').addEventListener('click', () => calShift(1));
-$('#ecalToday') && $('#ecalToday').addEventListener('click', () => { calMonth = null; renderCalendar(); });
+$('#ecalToday') && $('#ecalToday').addEventListener('click', () => { calMonth = null; renderCalendar(); const nb = calBase(); loadSchoolSchedule(nb.y, nb.m); });
+
+/* ---------------- 주간학습안내 (🏫 주간학습 탭) ---------------- */
+function weekPlanFor(now) {
+  const key = dk(now);
+  let pick = null;
+  WEEKPLANS.forEach(function (w) { if (key >= w.from && key <= w.to) pick = w; });
+  if (pick) return { plan: pick, current: true };
+  const past = WEEKPLANS.filter(function (w) { return w.to <= key; }).sort(function (a, b) { return a.to < b.to ? 1 : -1; })[0];
+  return { plan: past || WEEKPLANS[0], current: false };
+}
+function weekDateOf(w, d) {
+  const p = w.from.split('-').map(Number);
+  const base = new Date(p[0], p[1] - 1, p[2]);
+  const cur = base.getDay() === 0 ? 7 : base.getDay();
+  const target = d === 0 ? 7 : d;
+  const t = new Date(base.getTime() + (target - cur) * DAY_MS);
+  t.setHours(0, 0, 0, 0);
+  return t;
+}
+function wpCellHTML(it, on) {
+  const cls = on ? ' class="today"' : '';
+  if (!it) return '<td' + cls + '><span class="wt-none">—</span></td>';
+  return '<td' + cls + '><span class="wt-subj ' + it.c + '">' + it.s + '</span>'
+    + (it.t ? '<span class="wt-txt">' + it.t + (it.n ? ' <b>' + it.n + '</b>' : '') + '</span>' : '')
+    + (it.p ? '<span class="wt-page">' + it.p + '</span>' : '') + '</td>';
+}
+function renderWeek() {
+  const head = $('#weekTableHead'), body = $('#weekTableBody');
+  if (!head || !body) return;
+  const now = simNow();
+  const cur = weekPlanFor(now);
+  const w = cur.plan;
+  if (!w) return;
+  const todayKey = dk(now);
+  const dayKey = d => dk(weekDateOf(w, d.dow));
+
+  const range = $('#weekRange');
+  if (range) range.textContent = fmtMD(weekDateOf(w, 1)) + ' ~ ' + fmtMD(weekDateOf(w, 5)) + ' · ' + w.week + '주';
+
+  /* 오늘 요일 강조 */
+  const isToday = d => dayKey(d) === todayKey;
+  const todayDay = w.days.filter(isToday)[0] || null;
+  const pill = $('#weekTodayPill');
+  if (pill) {
+    pill.textContent = todayDay ? '오늘은 ' + DOW[todayDay.dow] + '요일' : (cur.current ? '이번 주 자료' : '지난 주 자료');
+    pill.classList.toggle('warn', !todayDay);
+  }
+
+  /* 오늘 아침 준비물 */
+  const tp = $('#weekTodayPrep');
+  if (tp) {
+    if (todayDay) {
+      const m0 = todayDay.morning || [];
+      tp.innerHTML = '<b class="wtp-t">🎒 오늘(' + DOW[todayDay.dow] + ') 아침</b>'
+        + '<span class="wtp-v">' + (m0[0] || '') + ' ' + (m0[1] || '') + ' · <b>' + (m0[2] || '') + '</b></span>'
+        + (todayDay.p[0] ? '<span class="wtp-v wtp-1">1교시 ' + todayDay.p[0].s + ' · ' + todayDay.p[0].t + (todayDay.p[0].n ? ' ' + todayDay.p[0].n : '') + '</span>' : '');
+    } else {
+      tp.innerHTML = '<b class="wtp-t">📅 ' + fmtMD(weekDateOf(w, 1)) + ' ~ ' + fmtMD(weekDateOf(w, 5)) + ' 자료예요</b>'
+        + '<span class="wtp-v">이번 주 주간학습안내가 오면 그 주 자료로 바뀝니다.</span>';
+    }
+  }
+
+  /* 표 (넓은 화면) */
+  head.innerHTML = '<th class="wt-corner">구분</th>' + w.days.map(d =>
+    '<th class="' + (isToday(d) ? 'today' : '') + '"><span class="wt-dow">' + DOW[d.dow] + '</span><small>' + d.md + '</small></th>'
+  ).join('');
+  let rows = '<tr><th class="wt-rowhead">아침활동</th>' + w.days.map(d => {
+    const m0 = d.morning || [];
+    return '<td class="' + (isToday(d) ? 'today' : '') + '"><span class="wt-am">' + (m0[0] || '') + '</span><span class="wt-txt">' + (m0[1] || '') + '</span>' + (m0[2] ? '<span class="wt-page">' + m0[2] + '</span>' : '') + '</td>';
+  }).join('') + '</tr>';
+  rows += WEEK_PERIODS.map((pp, i) => '<tr><th class="wt-rowhead"><b>' + pp[0] + '</b><small>' + pp[1] + '</small></th>'
+    + w.days.map(d => wpCellHTML(d.p ? d.p[i] : null, isToday(d))).join('') + '</tr>').join('');
+  body.innerHTML = rows;
+
+  /* 날짜별 카드 (좁은 화면) */
+  const cards = $('#weekDays');
+  if (cards) {
+    cards.innerHTML = w.days.map(d => '<div class="wd-card' + (isToday(d) ? ' today' : '') + '">'
+      + '<div class="wd-head"><b>' + DOW[d.dow] + '요일</b><span>' + d.md + '</span>' + (isToday(d) ? '<em>오늘</em>' : '') + '</div>'
+      + '<div class="wd-row"><span class="wd-k">아침</span><span class="wd-v">' + (d.morning ? d.morning.join(' ') : '—') + '</span></div>'
+      + WEEK_PERIODS.map((pp, i) => {
+        const it = d.p ? d.p[i] : null;
+        return '<div class="wd-row"><span class="wd-k">' + pp[0] + '</span><span class="wd-v">'
+          + (it ? '<i class="wt-subj ' + it.c + '">' + it.s + '</i> ' + it.t + (it.n ? ' <b>' + it.n + '</b>' : '') + (it.p ? ' <small>' + it.p + '</small>' : '') : '<span class="wt-none">—</span>')
+          + '</span></div>';
+      }).join('') + '</div>').join('');
+  }
+
+  const note = $('#weekNote');
+  if (note) note.textContent = '📌 학교에서 받은 ' + w.week + '주 주간학습안내를 그대로 옮겼어요 · 새 주 자료가 오면 이 탭을 업데이트해요.';
+
+  /* 가정통신 */
+  const nt = $('#weekNotice');
+  if (nt) {
+    const items = (w.notice && w.notice.items) || [];
+    const rules = (w.notice && w.notice.rules) || [];
+    nt.innerHTML = items.map(it => '<div class="nt-item"><span class="nt-e">' + it.e + '</span><div><b>' + it.t + (it.star ? ' <span class="nt-star">★</span>' : '') + '</b>'
+      + (it.s ? '<span class="nt-s">' + it.s + '</span>' : '') + '</div></div>').join('')
+      + (rules.length ? '<ol class="nt-rules">' + rules.map(r => '<li>' + r + '</li>').join('') + '</ol>' : '');
+  }
+}
 
 /* ---------------- 루틴 카드 ---------------- */
 function routineCardHTML(i) {
@@ -3050,9 +3543,11 @@ function renderAll() {
   renderJihoToday();
   renderRoutines();
   renderStudy();
+  renderStudyPlan();
   renderWord();
   renderTable();
   renderCalendar();
+  renderWeek();
   renderRewards();
   renderWeekRecord();
   renderHanja();
@@ -3080,6 +3575,7 @@ setAffirm(false);
 renderAll();
 loadWeather(false);
 loadMeal(false);
+loadSchoolSchedule(simNow().getFullYear(), simNow().getMonth());
 if (!storageOk) {
   const w = $('#storageWarn');
   if (w) { w.hidden = false; w.textContent = '⚠️ 이 브라우저에서는 파일 저장이 막혀 있어요. 화면을 닫으면 오늘 체크와 모은 배지가 초기화돼요.'; }
@@ -3107,13 +3603,17 @@ window.__JRM = {
   hanja: { list: HANJA, today: hanjaTodayIndex, current: hanjaCurrent, render: renderHanja, step: hanjaStep, offset: () => hanjaOffset },
   setPreview: v => { preview = v; previewBase = Date.now(); renderAll(); },
   toggle: i => toggleRoutine(i), renderAll: renderAll, rewards: REWARDS, JIHO_WEEK: JIHO_WEEK,
-  study: { items: todayStudyItems, done: todayStudy, count: studyDoneCount, render: renderStudy, toggle: toggleStudy, map: STUDY },
+  study: { items: todayStudyItems, done: todayStudy, count: studyDoneCount, render: renderStudy, toggle: toggleStudy, map: STUDY,
+           sched: renderStudySched, plan: renderStudyPlan, classes: engItems },
+  week: { plans: WEEKPLANS, current: () => weekPlanFor(simNow()), render: renderWeek, periods: WEEK_PERIODS, dateOf: weekDateOf },
+  cal: { events: () => schEvents, state: () => schState, load: loadSchoolSchedule, parse: schParseRows, skip: SCH_SKIP, base: calBase, shift: calShift },
+  life: lifeItems,
   reward: { todayEarn: rewardTodayEarn, balance: bankBalance, bank: bankData, spend: spendBank, undo: undoSpend,
             bonus: todayBonus, add: addBonus, render: renderReward, base: BASE_REWARD_MIN, step: BONUS_STEP_MIN, defs: BONUS_DEFS, steps: SPEND_STEPS },
   word: { list: VOCAB, today: wordTodayIndex, current: wordCurrent, render: renderWord, speak: speakWord },
   simNow: simNow, doneCount: doneCount,
   eng: { ivy: IVY, live: CATS_LIVE, isLiveDay: isLiveDay, next: nextLiveDay, items: engItems,
-         dayItems: dayItems, weekDate: weekDate, render: renderCalendar, shift: calShift, start: LIVE_START,
+         life: lifeItems, weekDate: weekDate, render: renderCalendar, shift: calShift, start: LIVE_START,
          reset: () => { calMonth = null; renderCalendar(); } }
 };
 })();
