@@ -1280,7 +1280,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
     <section class="card week-card" id="weekCard" aria-labelledby="weekTitle">
       <div class="card-head week-head">
         <h2 id="weekTitle">🏫 학교 주간학습안내</h2>
-        <span class="week-range" id="weekRange">11월 23일 ~ 11월 27일 · 16주</span>
+        <span class="week-range" id="weekRange">11월 30일 ~ 12월 4일 · 17주</span>
         <span class="pill accent" id="weekTodayPill">오늘은 목요일</span>
       </div>
       <div class="week-today" id="weekTodayPrep"></div>
@@ -1297,7 +1297,7 @@ body.theme-rian .word-top h2{color:#7d2c53}
     <section class="card notice-card" id="weekNoticeCard">
       <div class="card-head">
         <h2>📮 가정통신</h2>
-        <span class="muted">광주광명초등학교 · 16주</span>
+        <span class="muted">광주광명초등학교 · 17주</span>
       </div>
       <div class="notice-body" id="weekNotice"></div>
     </section>
@@ -1553,6 +1553,70 @@ const WEEK_PERIODS = [
   ['4교시', '11:30~12:10'], ['5교시', '13:00~13:40']
 ];
 const WEEKPLANS = [{
+  week: 17, from: '2026-11-30', to: '2026-12-04',
+  days: [
+    {
+      dow: 1, md: '11월 30일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '상상 1-2', c: 'imag', t: '(즐) 8임금님 모시기 놀이', p: '72-73쪽' },
+        { s: '국어', c: 'kr', t: '글을 읽고 새롭게 안 점을 말할 수 있다', n: '(1/2)', p: '220-223 (82-83)쪽' },
+        { s: '국어', c: 'kr', t: '글을 읽고 새롭게 안 점을 말할 수 있다', n: '(2/2)', p: '220-223 (82-83)쪽' },
+        { s: '수학', c: 'math', t: '수 배열표에서 규칙을 찾아볼까요', p: '118-119 (76-77)쪽' },
+        { s: '이야기 1-2', c: 'story', t: '(전담) 도서관에 왔어요', p: '74-75쪽' }
+      ]
+    },
+    {
+      dow: 2, md: '12월 1일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '국어', c: 'kr', t: '겪은 일을 정리하는 방법을 안다', n: '(1/3)', p: '224-230 (84-85)쪽' },
+        { s: '수학', c: 'math', t: '규칙을 여러 가지 방법으로 나타내 볼까요', p: '120-121 (78-79)쪽' },
+        { s: '이야기 1-2', c: 'story', t: '온마을 학교 : 마술수업' },
+        { s: '이야기 1-2', c: 'story', t: '온마을 학교 : 마술수업' },
+        { s: '자율', c: 'self', t: '컴퓨터를 사용하는 올바른 자세를 알고 눈을 보호하는 방법 말하기', p: '-' }
+      ]
+    },
+    {
+      dow: 3, md: '12월 2일', morning: ['📌', '나침반 5분 안전교육', '8:50~'], p: [
+        { s: '국어', c: 'kr', t: '겪은 일을 정리하는 방법을 안다', n: '(2/3)', p: '224-230 (84-85)쪽' },
+        { s: '자율', c: 'self', t: '영상을 통해 가정폭력에 대하여 알아보기', p: '-' },
+        { s: '이야기 1-2', c: 'story', t: '(즐) 7소원 전시회', n: '(1/2)', p: '30-31쪽' },
+        { s: '이야기 1-2', c: 'story', t: '(즐) 7소원 전시회', n: '(2/2)', p: '30-31쪽' },
+        null
+      ]
+    },
+    {
+      dow: 4, md: '12월 3일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '국어', c: 'kr', t: '겪은 일을 정리하는 방법을 안다', n: '(3/3)', p: '224-230 (84-85)쪽' },
+        { s: '국어', c: 'kr', t: '겪은일이 잘 드러나는 글을 쓸 수 있다', n: '(1/2)', p: '231-233 (84-85)쪽' },
+        { s: '이야기 1-2', c: 'story', t: '온마을 학교 : 마술수업' },
+        { s: '이야기 1-2', c: 'story', t: '온마을 학교 : 마술수업' },
+        { s: '수학', c: 'math', t: '수학이랑 확인해요', p: '122-123 (80)쪽' }
+      ]
+    },
+    {
+      dow: 5, md: '12월 4일', morning: ['📖', '아침독서', '그림책 1권 준비'], p: [
+        { s: '국어', c: 'kr', t: '겪은일이 잘 드러나는 글을 쓸 수 있다', n: '(2/2)', p: '231-233 (84-85)쪽' },
+        { s: '이야기 1-2', c: 'story', t: '(즐) 9그림으로 그려 봐', n: '(2/2)', p: '34-35쪽' },
+        { s: '이야기 1-2', c: 'story', t: '(즐) 9그림으로 그려 봐', n: '(2/2)', p: '34-35쪽' },
+        { s: '이야기 1-2', c: 'story', t: '(즐) 10이야기를 들려줄게', n: '(2/2)', p: '36-37쪽' },
+        null
+      ]
+    }
+  ],
+  notice: {
+    items: [
+      { e: '📘', t: '주간학습안내표 진도는 수업 상황에 따라 바뀔 수 있습니다.' },
+      { e: '⏰', t: '종업식(겨울 방학식) 안내', s: '2026년 12월 24일 (목) · 종업식 날짜를 확인해 일정에 참고하세요. 종업식(방학식) 전후로 현장체험학습 신청서를 제출할 예정이면 미리 선생님께 말씀드려야 합니다.', star: true },
+      { e: '🧤', t: '[ 겨울철 안전교육 ]' }
+    ],
+    rules: [
+      '날이 추워지니 겉옷 입고 다니기(저체온증 방지)',
+      '핫팩 사용 시 맨살에 붙이지 않으며 내용물 뜯지 않기',
+      '목도리는 너무 길게 늘어뜨리지 않고 차 문틈이나 엘리베이터에 끼지 않게 조심하기',
+      '주머니에 손 넣고 다니지 않기',
+      '눈싸움 할 때, 눈 안에 다른 것(돌 등) 넣어서 던지지 않기',
+      '맨손으로 차가운 얼음이나 눈 오래 만지지 않기(동상 위험)'
+    ]
+  }
+}, {
   week: 16, from: '2026-11-23', to: '2026-11-27',
   days: [
     {
@@ -2802,6 +2866,10 @@ function weekPlanFor(now) {
   let pick = null;
   WEEKPLANS.forEach(function (w) { if (key >= w.from && key <= w.to) pick = w; });
   if (pick) return { plan: pick, current: true };
+  /* 이번 주 자료가 없으면(주말) 다음 주 자료를 먼저 보여 준다 — 주말에 다음 주를 미리 확인할 수 있게 */
+  const next = WEEKPLANS.filter(function (w) { return w.from > key; })
+    .sort(function (a, b) { return a.from < b.from ? -1 : 1; })[0];
+  if (next) return { plan: next, current: false, upcoming: true };
   const past = WEEKPLANS.filter(function (w) { return w.to <= key; }).sort(function (a, b) { return a.to < b.to ? 1 : -1; })[0];
   return { plan: past || WEEKPLANS[0], current: false };
 }
@@ -2839,7 +2907,8 @@ function renderWeek() {
   const todayDay = w.days.filter(isToday)[0] || null;
   const pill = $('#weekTodayPill');
   if (pill) {
-    pill.textContent = todayDay ? '오늘은 ' + DOW[todayDay.dow] + '요일' : (cur.current ? '이번 주 자료' : '지난 주 자료');
+    pill.textContent = todayDay ? '오늘은 ' + DOW[todayDay.dow] + '요일'
+      : (cur.upcoming ? '다음 주 자료' : (cur.current ? '이번 주 자료' : '지난 주 자료'));
     pill.classList.toggle('warn', !todayDay);
   }
 
@@ -2851,6 +2920,9 @@ function renderWeek() {
       tp.innerHTML = '<b class="wtp-t">🎒 오늘(' + DOW[todayDay.dow] + ') 아침</b>'
         + '<span class="wtp-v">' + (m0[0] || '') + ' ' + (m0[1] || '') + ' · <b>' + (m0[2] || '') + '</b></span>'
         + (todayDay.p[0] ? '<span class="wtp-v wtp-1">1교시 ' + todayDay.p[0].s + ' · ' + todayDay.p[0].t + (todayDay.p[0].n ? ' ' + todayDay.p[0].n : '') + '</span>' : '');
+    } else if (cur.upcoming) {
+      tp.innerHTML = '<b class="wtp-t">📅 다음 주 ' + fmtMD(weekDateOf(w, 1)) + ' ~ ' + fmtMD(weekDateOf(w, 5)) + ' 자료예요</b>'
+        + '<span class="wtp-v">월요일부터 이 자료로 수업해요.</span>';
     } else {
       tp.innerHTML = '<b class="wtp-t">📅 ' + fmtMD(weekDateOf(w, 1)) + ' ~ ' + fmtMD(weekDateOf(w, 5)) + ' 자료예요</b>'
         + '<span class="wtp-v">이번 주 주간학습안내가 오면 그 주 자료로 바뀝니다.</span>';
